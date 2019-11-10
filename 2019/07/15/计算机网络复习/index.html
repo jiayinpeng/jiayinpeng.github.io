@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">12508
+				<span class="words">11642
 				</span>
 			
 		</div>
@@ -133,94 +133,6 @@
 			
 					<h3 id="概论："><a href="#概论：" class="headerlink" title="概论："></a>概论：</h3><h4 id="计算机网络定义："><a href="#计算机网络定义：" class="headerlink" title="计算机网络定义："></a>计算机网络定义：</h4><p>​      计算机网络是指将地理位置不同的具有独立功能的多台计算机及其外部设备，线路连接起来，在网络操作系统，网络管理软件及网络通信协议的管理和协调下，实现资源共享和信息传递的计算机系统。</p>
 <a id="more"></a>
-<!-- TOC -->
-
-<pre><code>- [概论：](#概论)
-    - [计算机网络定义：](#计算机网络定义)
-    - [整体结构](#整体结构)
-    - [计算机网络功能：](#计算机网络功能)
-    - [互联网特点：连通性和共享](#互联网特点连通性和共享)
-    - [互联网的组成：](#互联网的组成)
-    - [计算机网络的类别：](#计算机网络的类别)
-- [计算机网络性能指标：](#计算机网络性能指标)
-- [计算机网络体系结构：](#计算机网络体系结构)
-    - [网络协议的三要素：](#网络协议的三要素)</code></pre><ul>
-<li><a href="#物理层">物理层</a><pre><code>- [物理层的作用：](#物理层的作用)
-- [物理层的主要任务描述为确定与传输媒体的接口有关的一些特性：](#物理层的主要任务描述为确定与传输媒体的接口有关的一些特性)
-- [码元：代表不同离散数值的基本波形](#码元代表不同离散数值的基本波形)
-- [常用编码方式：](#常用编码方式)
-- [基本的带通调制方法：](#基本的带通调制方法)</code></pre><ul>
-<li><a href="#正交振幅调制qam">正交振幅调制QAM</a></li>
-<li><a href="#信道的极限容量">信道的极限容量：</a><ul>
-<li><a href="#传输媒体">传输媒体：</a></li>
-</ul>
-</li>
-<li><a href="#信道复用">信道复用：</a></li>
-</ul>
-</li>
-<li><a href="#数据链路层">数据链路层</a><ul>
-<li><a href="#三个基本功能">三个基本功能：</a><ul>
-<li><a href="#点对点协议ppp">点对点协议——PPP</a></li>
-<li><a href="#csmacd协议---载波监听-多点接入碰撞检测">CSMA/CD协议   载波监听 多点接入/碰撞检测</a></li>
-<li><a href="#以太网的信道利用率">以太网的信道利用率</a></li>
-<li><a href="#以太网的mac帧">以太网的MAC帧</a></li>
-<li><a href="#在数据链路层扩展以太网">在数据链路层扩展以太网</a></li>
-<li><a href="#广播域和广播风暴">广播域和广播风暴</a></li>
-<li><a href="#虚拟局域网vlan">虚拟局域网VLAN</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#网络层">网络层</a><pre><code>- [虚拟互连网络](#虚拟互连网络)</code></pre><ul>
-<li><a href="#ip数据报的格式">IP数据报的格式</a></li>
-<li><a href="#分类ip地址">分类IP地址</a></li>
-<li><a href="#划分子网">划分子网</a><ul>
-<li><a href="#子网掩码">子网掩码</a></li>
-</ul>
-</li>
-<li><a href="#无分类编制cidr">无分类编制CIDR</a><ul>
-<li><a href="#地址解析协议arp">地址解析协议ARP</a></li>
-<li><a href="#网际控制报文协议icmp">网际控制报文协议ICMP</a></li>
-</ul>
-</li>
-<li><a href="#路由选择协议">路由选择协议</a><ul>
-<li><a href="#内部网关协议rip">内部网关协议RIP</a></li>
-<li><a href="#内部网关协议ospf">内部网关协议OSPF</a></li>
-<li><a href="#外部网关协议bgp">外部网关协议BGP</a></li>
-</ul>
-</li>
-<li><a href="#ipv6">IPv6</a><ul>
-<li><a href="#多播">多播</a></li>
-<li><a href="#网络地址转换nat">网络地址转换NAT</a></li>
-<li><a href="#虚拟专用网vpn">虚拟专用网VPN</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#运输层">运输层</a><ul>
-<li><a href="#用户数据报协议udp">用户数据报协议UDP</a><pre><code>- [**主要特点：**](#主要特点)</code></pre></li>
-<li><a href="#传输控制协议tcp">传输控制协议TCP</a><pre><code>- [**主要特点：**](#主要特点-1)</code></pre><ul>
-<li><a href="#tcp可靠传输的实现"><strong>TCP可靠传输的实现：</strong></a><ul>
-<li><a href="#超时重传时间的选择">超时重传时间的选择：</a></li>
-</ul>
-</li>
-<li><a href="#tcp连接的建立和释放"><strong>TCP连接的建立和释放：</strong></a></li>
-<li><a href="#拥塞控制方法"><strong>拥塞控制方法：</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#应用层">应用层</a><ul>
-<li><a href="#域名系统dns">域名系统DNS</a></li>
-<li><a href="#文件传输协议ftp">文件传输协议FTP</a></li>
-<li><a href="#远程终端协议telnet">远程终端协议TELNET</a></li>
-<li><a href="#万维网www">万维网WWW</a></li>
-<li><a href="#电子邮件">电子邮件</a></li>
-<li><a href="#动态主机配置协议dhcp">动态主机配置协议DHCP</a></li>
-</ul>
-</li>
-</ul>
-<!-- /TOC -->
 
 <h4 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h4><p><img src="https://s2.ax1x.com/2019/11/09/MmtLJH.png" alt></p>
 <h4 id="计算机网络功能："><a href="#计算机网络功能：" class="headerlink" title="计算机网络功能："></a>计算机网络功能：</h4><p>实现资源共享，实现数据信息的快速传递，提高可靠性，提供负载均衡与分布式处理能力，集中管理以及综合信息服务</p>
