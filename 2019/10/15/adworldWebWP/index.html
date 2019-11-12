@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">2273
+				<span class="words">2298
 				</span>
 			
 		</div>
@@ -131,7 +131,9 @@
 		
 
 			
-					<h3 id="0x01-Cat"><a href="#0x01-Cat" class="headerlink" title="0x01 Cat"></a>0x01 Cat</h3><h3 id="0x02-ics-05"><a href="#0x02-ics-05" class="headerlink" title="0x02 ics-05"></a>0x02 ics-05</h3><p>打开页面查看源码，发现”index.php”，进入后发现”?page=index”</p>
+					<p>####攻防世界Web进阶区部分WriteUp</p>
+<a id="more"></a>
+<h3 id="0x01-Cat"><a href="#0x01-Cat" class="headerlink" title="0x01 Cat"></a>0x01 Cat</h3><h3 id="0x02-ics-05"><a href="#0x02-ics-05" class="headerlink" title="0x02 ics-05"></a>0x02 ics-05</h3><p>打开页面查看源码，发现”index.php”，进入后发现”?page=index”</p>
 <p><img src="https://i.postimg.cc/nh2ZbTHj/3.png" alt></p>
 <p>尝试使用“page=php://filter”读取文件</p>
 <figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">index</span>.php?page=php://<span class="keyword">filter</span>/<span class="keyword">read</span>=convert.base64-encode/resource=<span class="keyword">index</span>.php</span><br></pre></td></tr></table></figure>
