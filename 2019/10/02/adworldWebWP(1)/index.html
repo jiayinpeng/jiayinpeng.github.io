@@ -208,29 +208,29 @@
 <h3 id="0x06-Training-WWW-Robots"><a href="#0x06-Training-WWW-Robots" class="headerlink" title="0x06 Training-WWW-Robots"></a>0x06 Training-WWW-Robots</h3><p>打开页面，提示robots.txt，访问/robots.txt, 提示/fl0g.php，访问即可得到flag</p>
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/kgq9pLdP/2.png" class="lazyload"></p>
 <h3 id="0x07-NaNNaNNaNNaN-Batman"><a href="#0x07-NaNNaNNaNNaN-Batman" class="headerlink" title="0x07  NaNNaNNaNNaN-Batman"></a>0x07  NaNNaNNaNNaN-Batman</h3><p>下载附件，使用010editor打开，内容为</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5C9.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/hjZtDcQG/9.png" class="lazyload"></p>
 <p>发现是html脚本语言，修改文件后缀为html并使用浏览器打开后是一个输入框，将得到的代码整理后为</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">function $()&#123;</span><br><span class="line"><span class="keyword">var</span> e=document.getElementById(<span class="string">"c"</span>).value;</span><br><span class="line"><span class="keyword">if</span>(e.length==<span class="number">16</span>)</span><br><span class="line">	<span class="keyword">if</span>(e.match(/^be0f23/)!=<span class="keyword">null</span>)</span><br><span class="line">		<span class="keyword">if</span>(e.match(/<span class="number">233</span>ac/)!=<span class="keyword">null</span>)</span><br><span class="line">			<span class="keyword">if</span>(e.match(/e98aa$/)!=<span class="keyword">null</span>)</span><br><span class="line">				<span class="keyword">if</span>(e.match(/c7be9/)!=<span class="keyword">null</span>)&#123;</span><br><span class="line">					<span class="keyword">var</span> t=[<span class="string">"fl"</span>,<span class="string">"s_a"</span>,<span class="string">"i"</span>,<span class="string">"e&#125;"</span>];</span><br><span class="line">					<span class="keyword">var</span> n=[<span class="string">"a"</span>,<span class="string">"_h0l"</span>,<span class="string">"n"</span>];</span><br><span class="line">					<span class="keyword">var</span> r=[<span class="string">"g&#123;"</span>,<span class="string">"e"</span>,<span class="string">"_0"</span>];</span><br><span class="line">					<span class="keyword">var</span> i=[<span class="string">"it'"</span>,<span class="string">"_"</span>,<span class="string">"n"</span>];</span><br><span class="line">					<span class="keyword">var</span> s=[t,n,r,i];</span><br><span class="line">					<span class="keyword">for</span>(<span class="keyword">var</span> o=<span class="number">0</span>;o&lt;<span class="number">13</span>;++o)&#123;</span><br><span class="line">						document.write(s[o%<span class="number">4</span>][<span class="number">0</span>]);s[o%<span class="number">4</span>].splice(<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">	             document.write(<span class="string">'&lt;input id="c"&gt;&lt;button οnclick=$()&gt;Ok&lt;/button&gt;'</span>);</span><br><span class="line">				delete</span><br></pre></td></tr></table></figure>
 
 <p>将关键代码放到控制台执行即可</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5C10.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/L5r4PDTK/10.png" class="lazyload"></p>
 <h3 id="0x08-bug"><a href="#0x08-bug" class="headerlink" title="0x08 bug"></a>0x08 bug</h3><p>注册账号后登陆，点击manage时提示不是admin，在首页<strong>Findpwd</strong>页面可以修改密码，使用bp抓包后修改username的值为admin即可成功修改admin的密码</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5C11.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/C15w6Xrp/11.png" class="lazyload"></p>
 <p>使用admin账号登陆，点击manage提示“IP Not allowed！”，尝试使用bp抓包修改X-Forwarded-For为127.0.0.1，即可查看manage页面</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5C12.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/zXgGNmzJ/12.png" class="lazyload"></p>
 <p>查看源码存在提示</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.php?module=filemanage&amp;do=???--&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>通过filemanage可以猜测do=upload，尝试访问</p>
 <figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line"><span class="built_in">index</span>.php?<span class="keyword">module</span>=filemanage&amp;<span class="keyword">do</span>=upload</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5C13.PNG" class="lazyload"></p>
-<p>上传php文件，提示“It is a php！”，上传png/jpg文件提示“You know what I want！”，上传png使用bp把内容修改为php代码，提示<img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5C14.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/fRQTTHyY/13.png" class="lazyload"></p>
+<p>上传php文件，提示“It is a php！”，上传png/jpg文件提示“You know what I want！”，上传png使用bp把内容修改为php代码，提示<img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/K87cKn3w/14.png" class="lazyload"></p>
 <p>再次尝试将文件内容修改为html语言</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">'php'</span>&gt;</span><span class="actionscript">system(<span class="string">"ls"</span>);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>依然不能上传，查看wp，我们需要把文件后缀改为”<strong>.php5</strong>“(不知道什么原理)，再次上传，即可获得flag</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5C15.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/q7jkw4LG/15.png" class="lazyload"></p>
 <h3 id="0x09-FlatScience"><a href="#0x09-FlatScience" class="headerlink" title="0x09 FlatScience"></a>0x09 FlatScience</h3><p>尝试robots.txt，发现存在两个页面</p>
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/CxwQmYXd/23.png" class="lazyload"></p>
 <p>admin.php无论如何输入都没有什么反馈</p>
