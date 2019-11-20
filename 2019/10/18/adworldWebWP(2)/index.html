@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">6150
+				<span class="words">6162
 				</span>
 			
 		</div>
@@ -226,39 +226,39 @@
 <figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">/<span class="keyword">profile</span>.wtf?<span class="keyword">user</span>=jlvfK</span><br></pre></td></tr></table></figure>
 
 <p>在admin的帖子页面抓包使用admin用户登陆即可找到第一段flag</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C14.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/htPRp38M/14.png" class="lazyload"></p>
 <p>第二段flag的获取有些难度，参考了wp</p>
 <p>因wtf 不是常规的网页文件，故寻找解析 wtf 文件的代码</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C15.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/T1MX0dQW/15.png" class="lazyload"></p>
 <p>格式化代码：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">max_page_include_depth=<span class="number">64</span></span><br><span class="line">page_include_depth=<span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">include_page</span> </span>&#123;</span><br><span class="line">    <span class="comment"># include_page &lt;pathname&gt;</span></span><br><span class="line">    local pathname=$<span class="number">1</span></span><br><span class="line">    local cmd=<span class="string">""</span></span><br><span class="line">    [[ <span class="string">"$&#123;pathname:(-4)&#125;"</span> = <span class="string">'.wtf'</span> ]];</span><br><span class="line">    local can_execute=$?;</span><br><span class="line">    page_include_depth=$(($page_include_depth+<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">if</span> [[ $page_include_depth -lt $max_page_include_depth ]]</span><br><span class="line">    then</span><br><span class="line">        local line;</span><br><span class="line">        <span class="keyword">while</span> read -r line; <span class="keyword">do</span></span><br><span class="line">            <span class="comment"># check if we're in a script line or not ($ at the beginning implies script line)</span></span><br><span class="line">            <span class="comment"># also, our extension needs to be .wtf</span></span><br><span class="line">            [[ <span class="string">"$"</span> = <span class="string">"$&#123;line:0:1&#125;"</span> &amp;&amp; $&#123;can_execute&#125; = <span class="number">0</span> ]];</span><br><span class="line">            is_script=$?;</span><br><span class="line"></span><br><span class="line">            <span class="comment"># execute the line.</span></span><br><span class="line">            <span class="keyword">if</span> [[ $is_script = <span class="number">0</span> ]]</span><br><span class="line">            then</span><br><span class="line">                cmd+=$<span class="string">'\n'</span><span class="string">"$&#123;line#"</span>$<span class="string">"&#125;"</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">if</span> [[ -n $cmd ]]</span><br><span class="line">                then</span><br><span class="line">                    <span class="keyword">eval</span> <span class="string">"$cmd"</span> || log <span class="string">"Error during execution of $&#123;cmd&#125;"</span>;</span><br><span class="line">                    cmd=<span class="string">""</span></span><br><span class="line">                fi</span><br><span class="line">                <span class="keyword">echo</span> $line</span><br><span class="line">            fi</span><br><span class="line">        done &lt; $&#123;pathname&#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;p&gt;Max include depth exceeded!&lt;p&gt;"</span></span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>网站能够解析并执行wtf文件，我们可以上传可执行的wtf文件从而getshell</p>
 <p>继续审计代码，发现reply函数</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C16.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/cH8Sfg7S/16.png" class="lazyload"></p>
 <p>格式化代码：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function reply &#123;</span><br><span class="line">    local post_id=$1;</span><br><span class="line">    local username=$2;</span><br><span class="line">    local text=$3;</span><br><span class="line">    local hashed=$(hash_username &quot;$&#123;username&#125;&quot;);</span><br><span class="line"></span><br><span class="line">    curr_id=$(for d in posts/$&#123;post_id&#125;/*; do basename $d; done | sort -n | tail -n 1);</span><br><span class="line">    next_reply_id=$(awk &apos;&#123;print $1+1&#125;&apos; &lt;&lt;&lt; &quot;$&#123;curr_id&#125;&quot;);</span><br><span class="line">    next_file=(posts/$&#123;post_id&#125;/$&#123;next_reply_id&#125;);</span><br><span class="line">    echo &quot;$&#123;username&#125;&quot; &gt; &quot;$&#123;next_file&#125;&quot;;</span><br><span class="line">    echo &quot;RE: $(nth_line 2 &lt; &quot;posts/$&#123;post_id&#125;/1&quot;)&quot; &gt;&gt; &quot;$&#123;next_file&#125;&quot;;</span><br><span class="line">    echo &quot;$&#123;text&#125;&quot; &gt;&gt; &quot;$&#123;next_file&#125;&quot;;</span><br><span class="line"></span><br><span class="line">    # add post this is in reply to to posts cache</span><br><span class="line">    echo &quot;$&#123;post_id&#125;/$&#123;next_reply_id&#125;&quot; &gt;&gt; &quot;users_lookup/$&#123;hashed&#125;/posts&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>回复功能的后台代码，注意到 <strong>“echo “${username}” &gt; “${next_file}”;”</strong> ，这段代码把用户的用户名写入了回复的内容里，并且回复是存放在<strong>“users_lookup”</strong>目录中</p>
 <p>注册一个用户名为 <strong>“${find,/,-iname,get_flag2}”</strong> 的用户，写入后门</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C17.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/gkpW60nC/17.png" class="lazyload"></p>
 <p><strong>%09</strong>为水平制表符，必须添加，不然后台会把我们的后门当做目录去解析</p>
 <p>写入成功后访问后门</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C18.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/zvCYPsP2/18.png" class="lazyload"></p>
 <p>可以看到flag2的目录，继续注册一个新用户 <strong>“$/usr/bin/get_flag2”</strong> ，写入后门然后访问即可获得第二段flag</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C19.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/bYkPJnN0/19.png" class="lazyload"></p>
 <h3 id="0x06-baby-web"><a href="#0x06-baby-web" class="headerlink" title="0x06 baby_web"></a>0x06 baby_web</h3><p>题目提示：想想初始页面是哪个</p>
 <p>打开页面，url为 <strong>“/1.php”</strong> ，抓包修改为 <strong>“/index.php”</strong> ，头部信息中藏有flag</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C20.png" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/kXydNdSB/20.png" class="lazyload"></p>
 <h3 id="0x07-Web-php-include"><a href="#0x07-Web-php-include" class="headerlink" title="0x07 Web_php_include"></a>0x07 Web_php_include</h3><p>打开页面为一段php代码：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">echo</span> $_GET[<span class="string">'hello'</span>];</span><br><span class="line">$page=$_GET[<span class="string">'page'</span>];</span><br><span class="line"><span class="keyword">while</span> (strstr($page, <span class="string">"php://"</span>)) &#123;</span><br><span class="line">    $page=str_replace(<span class="string">"php://"</span>, <span class="string">""</span>, $page);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">include</span>($page);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>使用GET方法传入“$page”参数，strstr()函数判断“$page”中是否存在“php://”，若存在替换为空</p>
 <p>strstr()函数对大小写敏感，可以使用大写绕过，尝试使用“php://input”上传一段php代码</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C21.PNG" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/9fD5jRn7/21.png" class="lazyload"></p>
 <p>可以看到成功执行，发现flag文件，构造php代码读取flag文件即可</p>
-<p><img src="/images/placeholder.png" alt data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CDesktop%5C%E7%BD%91%E5%AE%89demo%5Cwp%5Cadworld2%5C22.PNG" class="lazyload"></p>
-<h3 id="0x08"><a href="#0x08" class="headerlink" title="0x08"></a>0x08</h3>  	
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/0yWR3dcv/22.png" class="lazyload"></p>
+<h3 id="0x08-i-got-id-200"><a href="#0x08-i-got-id-200" class="headerlink" title="0x08 i-got-id-200"></a>0x08 i-got-id-200</h3>  	
 					
 	  </div>     
 	  
