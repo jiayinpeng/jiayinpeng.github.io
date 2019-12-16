@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">8153
+				<span class="words">8051
 				</span>
 			
 		</div>
@@ -260,7 +260,7 @@
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/0yWR3dcv/22.png" class="lazyload"></p>
 <h3 id="0x08-i-got-id-200"><a href="#0x08-i-got-id-200" class="headerlink" title="0x08 i-got-id-200"></a>0x08 i-got-id-200</h3><p>Files页面可以上传文件，随便上传一个，回显出文件内容</p>
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/8CCrGBVH/23.png" class="lazyload"></p>
-<p>网站使用perl写的，perl上传的代码：参考[BlackHatAsia2016](<a href="https://www.blackhat.com/docs/asia-16/materials/asia-16-Rubin-The-Perl-Jam-2-The-Camel-Strikes-Back的Perl漏洞" target="_blank" rel="noopener">https://www.blackhat.com/docs/asia-16/materials/asia-16-Rubin-The-Perl-Jam-2-The-Camel-Strikes-Back的Perl漏洞</a></p>
+<p>网站使用perl写的，perl上传的代码：参考<a href="https://www.blackhat.com/docs/asia-16/materials/asia-16-Rubin-The-Perl-Jam-2-The-Camel-Strikes-Back" target="_blank" rel="noopener">BlackHatAsia2016</a>的Perl漏洞</p>
 <figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">my</span> $cgi= CGI-&gt;new;</span><br><span class="line"><span class="keyword">if</span> ( $cgi-&gt;upload( ‘file‘ ) )</span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">my</span> $file= $cgi-&gt;param( ‘file‘ );</span><br><span class="line">     <span class="keyword">while</span> ( &lt;$file&gt; )&#123; </span><br><span class="line">             <span class="keyword">print</span> <span class="string">"$_"</span>; </span><br><span class="line">         &#125; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>upload()</strong>函数用于检查“file”参数是否为上传的文件 </p>

