@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">1409
+				<span class="words">3215
 				</span>
 			
 		</div>
@@ -167,7 +167,14 @@
 <p>读取即可</p>
 <p><code>{{''.__class__.__mro__[2].__subclasses__()[40]('fl4g').read()}}</code></p>
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/j2QQHD5Q/7.png" class="lazyload"></p>
-<h3 id="0x02-Zhuanxv"><a href="#0x02-Zhuanxv" class="headerlink" title="0x02 Zhuanxv"></a>0x02 Zhuanxv</h3>  	
+<h3 id="0x02-Web-php-wrong-nginx-config"><a href="#0x02-Web-php-wrong-nginx-config" class="headerlink" title="0x02 Web_php_wrong_nginx_config"></a>0x02 Web_php_wrong_nginx_config</h3><p><code>robots.txt</code>处提示：</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">User-agent</span>: *Disallow:</span><br><span class="line"></span><br><span class="line"><span class="attribute">hint.php</span></span><br><span class="line"><span class="attribute">Hack.php</span></span><br></pre></td></tr></table></figure>
+
+<p>访问 <code>hint.php</code>，提示 <code>配置文件也许有问题呀：/etc/nginx/sites-enabled/site.conf</code></p>
+<p>访问 <code>hack.php</code>，抓包</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">                        server &#123;</span><br><span class="line">    listen <span class="number">8080</span>; <span class="comment">## listen for ipv4; this line is default and implied</span></span><br><span class="line">    listen [::]:<span class="number">8080</span>; <span class="comment">## listen for ipv6</span></span><br><span class="line"></span><br><span class="line">    root /<span class="keyword">var</span>/www/html;</span><br><span class="line">    index index.php index.html index.htm;</span><br><span class="line">    port_in_redirect off;</span><br><span class="line">    server_name _;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Make site accessible from http://localhost/</span></span><br><span class="line">    <span class="comment">#server_name localhost;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># If block for setting the time for the logfile</span></span><br><span class="line">    <span class="keyword">if</span> ($time_iso8601 ~ <span class="string">"^(\d&#123;4&#125;)-(\d&#123;2&#125;)-(\d&#123;2&#125;)"</span>) &#123;</span><br><span class="line">       set $year $<span class="number">1</span>;</span><br><span class="line">       set $month $<span class="number">2</span>;</span><br><span class="line">       set $day $<span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># Disable sendfile as per https://docs.vagrantup.com/v2/synced-folders/virtualbox.html</span></span><br><span class="line">    sendfile off;</span><br><span class="line"></span><br><span class="line">        set $http_x_forwarded_for_filt $http_x_forwarded_for;</span><br><span class="line">        <span class="keyword">if</span> ($http_x_forwarded_for_filt ~ ([<span class="number">0</span><span class="number">-9</span>]+\.[<span class="number">0</span><span class="number">-9</span>]+\.[<span class="number">0</span><span class="number">-9</span>]+\.)[<span class="number">0</span><span class="number">-9</span>]+) &#123;</span><br><span class="line">                set $http_x_forwarded_for_filt $<span class="number">1</span>???;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Add stdout logging</span></span><br><span class="line"></span><br><span class="line">    access_log /<span class="keyword">var</span>/log/nginx/$hostname-access-$year-$month-$day.log openshift_log;</span><br><span class="line">    error_log /<span class="keyword">var</span>/log/nginx/error.log info;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        <span class="comment"># First attempt to serve request as file, then</span></span><br><span class="line">        <span class="comment"># as directory, then fall back to index.html</span></span><br><span class="line">        try_files $uri $uri/ /index.php?q=$uri&amp;$args;</span><br><span class="line">        server_tokens off;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#error_page 404 /404.html;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    error_page <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /<span class="number">50</span>x.html;</span><br><span class="line">    location = /<span class="number">50</span>x.html &#123;</span><br><span class="line">        root /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files $uri $uri/ /index.php?q=$uri&amp;$args;</span><br><span class="line">        fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">        fastcgi_pass unix:/<span class="keyword">var</span>/run/php/php5<span class="number">.6</span>-fpm.sock;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_param SCRIPT_NAME $fastcgi_script_name;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        <span class="keyword">include</span> fastcgi_params;</span><br><span class="line">        fastcgi_param REMOTE_ADDR $http_x_forwarded_for;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\. &#123;</span><br><span class="line">            log_not_found off;</span><br><span class="line">            deny all;</span><br><span class="line">    &#125;</span><br><span class="line">    location /web-img &#123;</span><br><span class="line">        alias /images/;</span><br><span class="line">        autoindex on;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~* \.(ini|docx|pcapng|doc)$ &#123;  </span><br><span class="line">         deny all;  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">include</span> /<span class="keyword">var</span>/www/nginx[.]conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  	
 					
 	  </div>     
 	  
@@ -235,6 +242,14 @@
       
     </div>
     <div class="link">
+      
+      <a href="/2019/12/18/%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6%E4%B9%8BRSA/" class="link-wrap">
+        <strong class="caption">newer</strong>
+        
+        <span class="title">
+          公钥密码之RSA及python实现
+        </span>
+      </a>
       
     </div>
   </nav>
