@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">2103
+				<span class="words">2365
 				</span>
 			
 		</div>
@@ -197,12 +197,15 @@
 </ul>
 </li>
 </ol>
-<h4 id="同模攻击"><a href="#同模攻击" class="headerlink" title="同模攻击"></a>同模攻击</h4><ul>
+<h4 id="共模攻击"><a href="#共模攻击" class="headerlink" title="共模攻击"></a>共模攻击</h4><ul>
 <li>m为明文，两用户的公钥分别为e<sub>1</sub>和e<sub>2</sub>，且互素，共同的模数n，两个密文分别为c<sub>1</sub>和c<sub>2</sub></li>
 <li>攻击者知道n，e<sub>1</sub>，e<sub>2</sub>，c<sub>1</sub>和c<sub>2</sub></li>
 <li>恢复明文m：由欧几里得算法可找出r和s满足 <strong>re<sub>1</sub>+se<sub>2</sub>=1</strong>，假定r是负数，那么 <strong>(c<sub>1</sub><sup>-1</sup>)<sup>-r</sup> c<sub>2</sub><sup>s</sup> = m<sup>re<sub>1</sub>+se<sub>2</sub></sup> = m mod n</strong></li>
 <li>无需私钥d即可获得明文m</li>
 </ul>
+<p>共模攻击脚本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> invert</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gongmogongji</span><span class="params">(n, c1, c2, e1, e2)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> b == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> a, <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            x, y = egcd(b, a % b)</span><br><span class="line">            <span class="keyword">return</span> y, x - (a // b) * y</span><br><span class="line">    s = egcd(e1, e2)</span><br><span class="line">    s1 = s[<span class="number">0</span>]</span><br><span class="line">    s2 = s[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 求模反元素</span></span><br><span class="line">    <span class="keyword">if</span> s1 &lt; <span class="number">0</span>:</span><br><span class="line">        s1 = - s1</span><br><span class="line">        c1 = invert(c1, n)</span><br><span class="line">    <span class="keyword">elif</span> s2 &lt; <span class="number">0</span>:</span><br><span class="line">        s2 = - s2</span><br><span class="line">        c2 = invert(c2, n)</span><br><span class="line">    m = pow(c1, s1, n) * pow(c2, s2, n) % n</span><br><span class="line">    <span class="keyword">return</span> m</span><br></pre></td></tr></table></figure>
+
 <p>防御：使用RSA公钥加密的通信中，不同用户的密钥不能有相同的模值</p>
 <h4 id="低加密指数攻击"><a href="#低加密指数攻击" class="headerlink" title="低加密指数攻击"></a>低加密指数攻击</h4><p>小的公钥e可以加快加密的速度，但过小的公钥易受到攻击</p>
 <ul>
