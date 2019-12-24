@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  密码学复习 |   SunSh1ne❤️ </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>  
+  <body>   
+    
+      <header class="header-wrapper">
+
+  <nav class="inner">
+    <div class="title">
+      <a href="/">
+        <img class="logo" src="/images/logo.png">
+      </a>
+    </div>
+
+    <ul class="menu">
+      
+      
+      <li class="item">
+        <a class="link" id="menu-home" href="/">
+          <i class="iconfont icon-home">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-archives" href="/archives">
+          <i class="iconfont icon-archives">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-tags" href="/tags">
+          <i class="iconfont icon-tags">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-about" href="/about">
+          <i class="iconfont icon-about">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-search">
+          <i class="iconfont icon-search">
+        </i></a>
+        
+
+        
+      
+    </li></ul>
+  </nav>
+</header>
+
+<header class="mobile-header-wrapper">
+  <i id="mobile-toggle" class="iconfont icon-menu mobile-toggle"></i>
+</header>   
+
+      <div class="container">       
+          
+          
+            <div class="container-inner">  
+          
+
+          <article class="post slideDownMin">
+  
+	
+<div class="header">
+		<p class="title">	
+			密码学复习
+		</p>
+		<div class="info">	
+			<time>
+				12月 23, 2019
+			</time>
+
+			
+			
+				<i class="iconfont icon-words"></i>
+				<span class="words">2188
+				</span>
+			
+		</div>
+</div> 
+	
+
+    <script type="text/x-mathjax-config">
+        var post = document.getElementsByClassName("post")[0];  
+        MathJax.Hub.Config({
+            showProcessingMessages: false,
+            messageStyle: "none",    
+            tex2jax: {
+                inlineMath:  [ ["$", "$"] , ["\\(","\\)"]],
+                displayMath: [ ["$$","$$"] , ["\\[","\\]"]],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+            },
+            "HTML-CSS": {            
+                showMathMenu: false
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub,post]);
+    </script>
+    <style>.MathJax{outline:0;}</style>
+
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.2/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+ 
+
+	  <div class="typo post-content ">
+
+		
+
+			
+					<p>密码学的基本思想是伪装信息，使未授权者不能理解它的含义<br>密码系统的安全性不应该取决于不易改变的算法，而应取决于可随时改变的密钥</p>
+<a id="more"></a>
+
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>信息安全的目标：</p>
+<ol>
+<li>机密性：保证信息部泄露给非授权的用户和实体</li>
+<li>完整性：保证信息处于保持完整或为受损的状态，防止对信息特性和状态的中断，窃取篡改，伪造</li>
+<li>可用性：授权用户按需随时访问所需信息而不被非法拒绝</li>
+<li>认证性：确保消息的来源，可分为<strong>消息认证</strong>和<strong>实体认证</strong></li>
+<li>不可否认性：保障用户无法在事后否认曾经对消息的生成、签发、接收</li>
+</ol>
+<p>密码体制，也称密码系统，5部分组成：</p>
+<ul>
+<li>明文空间 M</li>
+<li>密文空间 C</li>
+<li>密钥空间 K，加密密钥 K<sub>e</sub> 和解密密钥 K<sub>d</sub></li>
+<li>加密算法 E，M–&gt;C 的加密变换</li>
+<li>解密算法 D，C–&gt;M 的解密变换</li>
+</ul>
+<p>根据密码分析者对明文、密文等数据资源的掌握程度，可以将密码分析攻击分为以下几种：</p>
+<ul>
+<li>惟密文攻击 -被动攻击  密码分析者仅能根据<strong>截获的密文</strong>进行分析，以得出明文或密钥（破译难度最大）穷举和统计分析都是惟密文攻击</li>
+<li>已知明文攻击 -被动攻击  密码分析者除了有截获的密文外，还有一些已知的<strong>明文–密文对</strong>来破译密码</li>
+<li>选择明文攻击 -主动攻击  密码分析者除得到一些“明文-密文对”外，还可以选择<strong>加密的明文</strong>，并获得<strong>相应的密文</strong>  攻击者短暂控制加密机</li>
+<li>选择密文攻击 -主动攻击  密码分析者可以<strong>选择一些密文</strong>，并获得<strong>相应的明文</strong> 攻击者控制解密机，多用于攻击<strong>公钥密码体制</strong></li>
+<li>选择文本攻击 -主动攻击  密码分析者同时控制加密机和解密机</li>
+</ul>
+<p>密码体制安全性</p>
+<ul>
+<li>无条件安全（理论安全性）  即使密码分析者具有无限的计算能力，密码体制也不能被攻破</li>
+<li>计算安全性  攻破一个密码体制的最好算法用现在或将来可得到的资源不能再足够长的时间内破译</li>
+<li>可证明安全性（规约安全性）  密码体制的安全和一个问题是相关的</li>
+</ul>
+<h3 id="古典密码体制"><a href="#古典密码体制" class="headerlink" title="古典密码体制"></a>古典密码体制</h3><p>置换密码，对符号重新排序，明文字符集保持不变，但<strong>顺序被打乱</strong>，栅栏加密</p>
+<p>代换密码，用一个符号代替另一个符号</p>
+<h4 id="单表代换"><a href="#单表代换" class="headerlink" title="单表代换"></a>单表代换</h4><p>凯撒密码</p>
+<ul>
+<li>加密：c = (m + k) mod 26</li>
+<li>解密：m = (c - k) mod 26</li>
+</ul>
+<p>乘数密码</p>
+<ul>
+<li>加密：c = (m * k) mod q</li>
+<li>解密：m = (c * k<sup>-1</sup>) mod q</li>
+</ul>
+<p>仿射密码</p>
+<ul>
+<li>选取 k_1，k_2 两个参数，其中gcd(k_1,26)=1</li>
+<li>加密：c = K_1 * m + K_2 mod 26<ul>
+<li>k_1 = 1 时，移位密码</li>
+<li>K_2 = 1 时，乘数密码<ul>
+<li>解密：m = (c - k_2) * k_1<sup>-1</sup> mod 26</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="多表代换："><a href="#多表代换：" class="headerlink" title="多表代换："></a>多表代换：</h4><p> Playfair密码</p>
+<ul>
+<li>思想:双字母转换</li>
+<li>密钥:5×5矩阵（由一个关键词构造）I/J视为相同</li>
+</ul>
+<p>一次一密：每个明文字母都采用不同的替换表或密钥进行加密</p>
+<p>维吉尼亚密码</p>
+<ul>
+<li>26 * 26的方阵</li>
+<li>密钥：k = k1k2k3……kn</li>
+<li>明文：m = m1m2m3……mn</li>
+<li>加密：ci = mi + ki mod 26</li>
+<li>解密：mi = ci - ki mod 26</li>
+</ul>
+<p>希尔密码</p>
+<ul>
+<li>密钥：k = n * n 可逆矩阵，明文m和密文c均为<strong>n维向量</strong></li>
+<li>加密：c = k * m mod 26</li>
+<li>解密：m = k<sup>-1</sup> * c mod 26</li>
+<li>k<sup>-1</sup> 为k在模26上的逆矩阵</li>
+</ul>
+<p>单表替换密码分析：穷举分析 统计特性（字母出现的频率）<br>多表替换密码分析</p>
+<ul>
+<li>确定密钥长度 即确定使用的加密表个数<ul>
+<li>Kasiski测试法</li>
+<li>重合指数法</li>
+</ul>
+</li>
+<li>确定具体的密钥字<ul>
+<li>重合互指数</li>
+</ul>
+</li>
+</ul>
+<h3 id="序列密码"><a href="#序列密码" class="headerlink" title="序列密码"></a>序列密码</h3><p>使用<strong>随机序列（密钥流）</strong>与明文序列<strong>按位叠加</strong>产生密文，用同一随机序列与密文序列叠加来恢复明文</p>
+<p>密钥流的要求：</p>
+<ol>
+<li>极大的周期  真正的随机序列时非周期的，但算法产生的序列都是周期道德</li>
+<li>良好的统计特性  随机序列有均匀的<strong>游程分布</strong><ul>
+<li>游程：序列中相同符号的连续段，前后均为不同符号，如 <code>0111000010</code> 有长为3的1游程，长为4的0游程，长为1的1游程</li>
+<li>一般要求周期内满足<strong>同样长度</strong>的<code>0游程</code>和<code>1游程</code>的个数相等或近似相等</li>
+</ul>
+</li>
+<li>很好的线性复杂度  不能用级数较小的线性反馈移位寄存器近似代替</li>
+<li>用统计方法由密钥序列提取密钥生成器结构或种子密钥在计算上不可行</li>
+</ol>
+<h4 id="线性反馈移位寄存器LFSR"><a href="#线性反馈移位寄存器LFSR" class="headerlink" title="线性反馈移位寄存器LFSR"></a>线性反馈移位寄存器LFSR</h4><p>GF(2)上的一个n级反馈移位寄存器由n个二元存储器和一个反馈函数 f(a<sub>1</sub>a<sub>2</sub>……a<sub>n</sub>) 组成</p>
+<ul>
+<li>每个存储器成为移位寄存器的一级</li>
+<li>在任意时刻，这些级的内容构成该LFSR的<strong>状态</strong>，n维向量共有2<sup>n</sup>种可能的状态</li>
+<li>初始状态为0，则其状态恒为0，初始状态非0，则其后续状态不会为0</li>
+<li>n级LFSR的状态周期 ≤ 2<sup>n</sup>-1</li>
+<li>选择合适反馈函数可使周期达到最大 2<sup>n</sup>-1，周期达到最大的序列称为<strong>m序列</strong></li>
+</ul>
+<p>LFSR示例：<br><img src="https://i.postimg.cc/XYDsschv/lllfsr.png" alt></p>
+<h4 id="m-序列密码的破译"><a href="#m-序列密码的破译" class="headerlink" title="m-序列密码的破译"></a>m-序列密码的破译</h4><p>Golomb对伪随机周期序列提出的3个随机性公设：</p>
+<ul>
+<li>在一个周期内，0和1的个数相差至多为1，即{a<sub>i</sub>}中0和1出现的概率基本相同</li>
+<li>在一个周期内，长为1的游程占游程总数的1/2，长为2的游程占总数的1/2<sup>2</sup>，长为i的游程占总数的1/2<sup>i</sup>，且等长的游程中0游程和1游程的个数相等 即<code>0和1在序列的每一位置出现的概率相同</code></li>
+<li>异相自相关函数是一个常数，即<code>通过对序列与其平移后的序列相比较，不能给出其他任何信息</code></li>
+</ul>
+<p>常见流密码算法</p>
+<ol>
+<li>RC4 – 基于<strong>非线性数组变换</strong>的序列密码，以一个足够大的数组为基础，对其进行非线性变换，产生非线性的密钥流序列</li>
+<li>A5 – 由3个<strong>长度不同的线性移位寄存器</strong>组成，A(19位)，B(22位)，C(23位)，移位由时钟控制，遵循<strong>择多</strong>原则，即从每个寄存器中取出一个中间位，3个数中占多位的寄存器参加移位，其余的不移位</li>
+</ol>
+<h3 id="分组密码"><a href="#分组密码" class="headerlink" title="分组密码"></a>分组密码</h3><h3 id="Hash函数"><a href="#Hash函数" class="headerlink" title="Hash函数"></a>Hash函数</h3><h3 id="消息认证码"><a href="#消息认证码" class="headerlink" title="消息认证码"></a>消息认证码</h3><h3 id="公钥密码"><a href="#公钥密码" class="headerlink" title="公钥密码"></a>公钥密码</h3><h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3>  	
+					
+	  </div>     
+	  
+
+	<div class="bottom">
+  <div class="other">
+    <div class="meta">
+      
+
+      
+      <i class="iconfont icon-tag"></i>
+      <a class="tag-link" href="/tags/Course-Review/" rel="tag">-Course Review</a>
+      
+    </div>
+
+    <div class="operate">
+      
+      <span class="text">Share</span>
+      <ul class="share">
+	   			             
+        <li class="iconfont 
+		icon-share-qq 
+		-mob-share-qq 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weixin 
+		-mob-share-weixin 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weibo 
+		-mob-share-weibo 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-facebook 
+		-mob-share-facebook 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-twitter 
+		-mob-share-twitter 
+		item"></li>		
+   	   
+</ul>	
+
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+      
+    </div>
+  </div>
+
+
+  
+  <nav class="nav">
+    <div class="link">
+      
+      <a href="/2019/12/20/md5-python/" class="link-wrap">
+        <strong class="caption">older</strong>
+        
+        <span class="title">
+          哈希函数之MD5及python实现
+        </span>
+      </a>
+      
+    </div>
+    <div class="link">
+      
+    </div>
+  </nav>
+  
+</div> 
+	
+<div class="comment">
+
+    
+
+    <div id="comment">
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src="//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#comment',
+            notify: false,
+            verify: false,
+            app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+            app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',
+            path: window.location.pathname,
+            avatar: 'mm',
+            guest_info: ['nick', 'mail']
+        });
+    </script>
+    
+</div>	
+</article>
+
+          </div> 
+      </div>            
+    
+        <i id="toTop" class="iconfont icon-backtotop"></i>
+
+  
+    <div class="none" id="search">
+    <div class="header">
+        <input type="text" placeholder="输入你想搜索的" id="search-input" class="input">
+        
+        <i id="search-cancel" class="iconfont icon-cancel"></i>
+    </div>
+
+    <div id="search-result" class="result"></div>
+</div>
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon" src="/images/favicon.png">  
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>
+        
+    
+
+
+
+     
+    
+
+
+<footer class="footer">
+	<div class="inner">
+		<div class="copyright">
+			&copy;
+			
+			2019
+			SunSh1ne
+
+			<br>
+			By <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>
+		</div>
+	</div>
+</footer>   
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
