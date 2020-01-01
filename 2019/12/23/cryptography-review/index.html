@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">2188
+				<span class="words">8465
 				</span>
 			
 		</div>
@@ -134,10 +134,10 @@
 					<p>密码学的基本思想是伪装信息，使未授权者不能理解它的含义<br>密码系统的安全性不应该取决于不易改变的算法，而应取决于可随时改变的密钥</p>
 <a id="more"></a>
 
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>信息安全的目标：</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>信息安全的目标：</p>
 <ol>
-<li>机密性：保证信息部泄露给非授权的用户和实体</li>
-<li>完整性：保证信息处于保持完整或为受损的状态，防止对信息特性和状态的中断，窃取篡改，伪造</li>
+<li>机密性：保证信息不泄露给非授权的用户和实体</li>
+<li>完整性：保证信息处于保持完整或为受损的状态，防止对信息特性和状态的中断，窃取，篡改，伪造</li>
 <li>可用性：授权用户按需随时访问所需信息而不被非法拒绝</li>
 <li>认证性：确保消息的来源，可分为<strong>消息认证</strong>和<strong>实体认证</strong></li>
 <li>不可否认性：保障用户无法在事后否认曾经对消息的生成、签发、接收</li>
@@ -150,7 +150,7 @@
 <li>加密算法 E，M–&gt;C 的加密变换</li>
 <li>解密算法 D，C–&gt;M 的解密变换</li>
 </ul>
-<p>根据密码分析者对明文、密文等数据资源的掌握程度，可以将密码分析攻击分为以下几种：</p>
+<p>根据密码分析者对明文、密文等数据资源的掌握程度，可以将<strong>密码分析攻击</strong>分为以下几种：</p>
 <ul>
 <li>惟密文攻击 -被动攻击  密码分析者仅能根据<strong>截获的密文</strong>进行分析，以得出明文或密钥（破译难度最大）穷举和统计分析都是惟密文攻击</li>
 <li>已知明文攻击 -被动攻击  密码分析者除了有截获的密文外，还有一些已知的<strong>明文–密文对</strong>来破译密码</li>
@@ -164,9 +164,9 @@
 <li>计算安全性  攻破一个密码体制的最好算法用现在或将来可得到的资源不能再足够长的时间内破译</li>
 <li>可证明安全性（规约安全性）  密码体制的安全和一个问题是相关的</li>
 </ul>
-<h3 id="古典密码体制"><a href="#古典密码体制" class="headerlink" title="古典密码体制"></a>古典密码体制</h3><p>置换密码，对符号重新排序，明文字符集保持不变，但<strong>顺序被打乱</strong>，栅栏加密</p>
+<h2 id="古典密码体制"><a href="#古典密码体制" class="headerlink" title="古典密码体制"></a>古典密码体制</h2><p>置换密码，对符号重新排序，明文字符集保持不变，但<strong>顺序被打乱</strong>，栅栏加密</p>
 <p>代换密码，用一个符号代替另一个符号</p>
-<h4 id="单表代换"><a href="#单表代换" class="headerlink" title="单表代换"></a>单表代换</h4><p>凯撒密码</p>
+<h3 id="单表代换"><a href="#单表代换" class="headerlink" title="单表代换"></a>单表代换</h3><p>凯撒密码</p>
 <ul>
 <li>加密：c = (m + k) mod 26</li>
 <li>解密：m = (c - k) mod 26</li>
@@ -176,7 +176,7 @@
 <li>加密：c = (m * k) mod q</li>
 <li>解密：m = (c * k<sup>-1</sup>) mod q</li>
 </ul>
-<p>仿射密码</p>
+<p>仿射密码  密钥空间：φ(m)*(m-1)</p>
 <ul>
 <li>选取 k_1，k_2 两个参数，其中gcd(k_1,26)=1</li>
 <li>加密：c = K_1 * m + K_2 mod 26<ul>
@@ -188,7 +188,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="多表代换："><a href="#多表代换：" class="headerlink" title="多表代换："></a>多表代换：</h4><p> Playfair密码</p>
+<h3 id="多表代换："><a href="#多表代换：" class="headerlink" title="多表代换："></a>多表代换：</h3><p> Playfair密码</p>
 <ul>
 <li>思想:双字母转换</li>
 <li>密钥:5×5矩阵（由一个关键词构造）I/J视为相同</li>
@@ -209,7 +209,8 @@
 <li>解密：m = k<sup>-1</sup> * c mod 26</li>
 <li>k<sup>-1</sup> 为k在模26上的逆矩阵</li>
 </ul>
-<p>单表替换密码分析：穷举分析 统计特性（字母出现的频率）<br>多表替换密码分析</p>
+<p>单表替换密码分析：穷举分析 统计特性（字母出现的频率）</p>
+<p>多表替换密码分析</p>
 <ul>
 <li>确定密钥长度 即确定使用的加密表个数<ul>
 <li>Kasiski测试法</li>
@@ -221,10 +222,10 @@
 </ul>
 </li>
 </ul>
-<h3 id="序列密码"><a href="#序列密码" class="headerlink" title="序列密码"></a>序列密码</h3><p>使用<strong>随机序列（密钥流）</strong>与明文序列<strong>按位叠加</strong>产生密文，用同一随机序列与密文序列叠加来恢复明文</p>
+<h2 id="序列密码"><a href="#序列密码" class="headerlink" title="序列密码"></a>序列密码</h2><p>使用<strong>随机序列（密钥流）</strong>与明文序列<strong>按位叠加</strong>产生密文，用同一随机序列与密文序列叠加来恢复明文</p>
 <p>密钥流的要求：</p>
 <ol>
-<li>极大的周期  真正的随机序列时非周期的，但算法产生的序列都是周期道德</li>
+<li>极大的周期  真正的随机序列是非周期的，但算法产生的序列都是周期的</li>
 <li>良好的统计特性  随机序列有均匀的<strong>游程分布</strong><ul>
 <li>游程：序列中相同符号的连续段，前后均为不同符号，如 <code>0111000010</code> 有长为3的1游程，长为4的0游程，长为1的1游程</li>
 <li>一般要求周期内满足<strong>同样长度</strong>的<code>0游程</code>和<code>1游程</code>的个数相等或近似相等</li>
@@ -233,7 +234,7 @@
 <li>很好的线性复杂度  不能用级数较小的线性反馈移位寄存器近似代替</li>
 <li>用统计方法由密钥序列提取密钥生成器结构或种子密钥在计算上不可行</li>
 </ol>
-<h4 id="线性反馈移位寄存器LFSR"><a href="#线性反馈移位寄存器LFSR" class="headerlink" title="线性反馈移位寄存器LFSR"></a>线性反馈移位寄存器LFSR</h4><p>GF(2)上的一个n级反馈移位寄存器由n个二元存储器和一个反馈函数 f(a<sub>1</sub>a<sub>2</sub>……a<sub>n</sub>) 组成</p>
+<h3 id="线性反馈移位寄存器LFSR"><a href="#线性反馈移位寄存器LFSR" class="headerlink" title="线性反馈移位寄存器LFSR"></a>线性反馈移位寄存器LFSR</h3><p>GF(2)上的一个n级反馈移位寄存器由n个二元存储器和一个反馈函数 f(a<sub>1</sub>a<sub>2</sub>……a<sub>n</sub>) 组成</p>
 <ul>
 <li>每个存储器成为移位寄存器的一级</li>
 <li>在任意时刻，这些级的内容构成该LFSR的<strong>状态</strong>，n维向量共有2<sup>n</sup>种可能的状态</li>
@@ -242,7 +243,8 @@
 <li>选择合适反馈函数可使周期达到最大 2<sup>n</sup>-1，周期达到最大的序列称为<strong>m序列</strong></li>
 </ul>
 <p>LFSR示例：<br><img src="https://i.postimg.cc/XYDsschv/lllfsr.png" alt></p>
-<h4 id="m-序列密码的破译"><a href="#m-序列密码的破译" class="headerlink" title="m-序列密码的破译"></a>m-序列密码的破译</h4><p>Golomb对伪随机周期序列提出的3个随机性公设：</p>
+<h3 id="m-序列密码的破译"><a href="#m-序列密码的破译" class="headerlink" title="m-序列密码的破译"></a>m-序列密码的破译</h3><p>假设破译者已知2n对明-密文对，即可确定反馈多项式的系数，以及LFSR接下来的状态<br>示例：<br><img src="https://i.postimg.cc/Bnv6c7mL/1.png" alt><br>可得密钥序列的递推关系为k<sub>i+5</sub> = k<sub>i</sub> + k<sub>i+3</sub></p>
+<p>Golomb对伪随机周期序列提出的3个随机性公设：</p>
 <ul>
 <li>在一个周期内，0和1的个数相差至多为1，即{a<sub>i</sub>}中0和1出现的概率基本相同</li>
 <li>在一个周期内，长为1的游程占游程总数的1/2，长为2的游程占总数的1/2<sup>2</sup>，长为i的游程占总数的1/2<sup>i</sup>，且等长的游程中0游程和1游程的个数相等 即<code>0和1在序列的每一位置出现的概率相同</code></li>
@@ -253,7 +255,352 @@
 <li>RC4 – 基于<strong>非线性数组变换</strong>的序列密码，以一个足够大的数组为基础，对其进行非线性变换，产生非线性的密钥流序列</li>
 <li>A5 – 由3个<strong>长度不同的线性移位寄存器</strong>组成，A(19位)，B(22位)，C(23位)，移位由时钟控制，遵循<strong>择多</strong>原则，即从每个寄存器中取出一个中间位，3个数中占多位的寄存器参加移位，其余的不移位</li>
 </ol>
-<h3 id="分组密码"><a href="#分组密码" class="headerlink" title="分组密码"></a>分组密码</h3><h3 id="Hash函数"><a href="#Hash函数" class="headerlink" title="Hash函数"></a>Hash函数</h3><h3 id="消息认证码"><a href="#消息认证码" class="headerlink" title="消息认证码"></a>消息认证码</h3><h3 id="公钥密码"><a href="#公钥密码" class="headerlink" title="公钥密码"></a>公钥密码</h3><h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3>  	
+<h2 id="分组密码"><a href="#分组密码" class="headerlink" title="分组密码"></a>分组密码</h2><p>分组密码特点：速度快，安全性较高，易于标准化和便于软硬件实现</p>
+<p>分组密码的设计要求：</p>
+<ul>
+<li>分组长度足够大</li>
+<li>密钥量足够大</li>
+<li>密码变换要足够复杂</li>
+<li>加密和解密运算简单</li>
+<li>无数据扩展和压缩</li>
+</ul>
+<p>分组密码的设计思想：</p>
+<ol>
+<li>扩散（移位）：密钥或明文的每一比特影响密文的许多比特变化，以便隐蔽明文的统计特性（雪崩效应）</li>
+<li>混淆（替代）：密钥和明文以及密文之间的依赖关系尽可能的复杂化，以防通过统计分析法进行破译</li>
+</ol>
+<h3 id="数据加密标准DES"><a href="#数据加密标准DES" class="headerlink" title="数据加密标准DES"></a>数据加密标准DES</h3><p>DES算法描述：</p>
+<ul>
+<li><strong>明文分组和密文分组均为64bit，有效密钥56bit</strong></li>
+<li>由<strong>初始置换，16轮迭代，逆初始置换</strong>组成</li>
+<li>DES的加解密算法相同，只是解密子密钥和加密子密钥的<strong>使用顺序相反</strong></li>
+</ul>
+<p>加密：</p>
+<ul>
+<li>L<del>0</del>R<del>0</del> = IP &lt;64位明文&gt;</li>
+<li>L<del>i</del> = R<del>i-1</del>                      i =1~15</li>
+<li>R<del>i</del> = L<del>i-1</del> ⊕ F(R<del>i-1</del>,K<del>i</del>)    i =1~15</li>
+<li>L<del>16</del> = L<del>15</del> ⊕ F(R<del>15</del>,K<del>16</del>)</li>
+<li>R<del>16</del> = R<del>15</del></li>
+<li>IP^-1^(L<del>0</del>R<del>0</del>) = 密文</li>
+</ul>
+<p>解密：</p>
+<ul>
+<li>L<del>16</del>R<del>16</del> = IP &lt;64位密文&gt;</li>
+<li>L<del>i-1</del> = R<del>i</del>                   i = 16~2</li>
+<li>R<del>i-1</del> = L<del>i</del> ⊕ F(R<del>i</del>,K<del>i</del>)   i = 16~2</li>
+<li>L<del>0</del> = L<del>1</del> ⊕ F(R<del>1</del>,K<del>1</del>)</li>
+<li>R<del>0</del> = R<del>1</del></li>
+<li>IP^-1^(L<del>0</del>R<del>0</del>) = 明文</li>
+</ul>
+<p>加密流程图：<br><img src="https://i.postimg.cc/T39SD2SM/wgaegood.png" alt></p>
+<h4 id="初始置换IP和初始逆置换-1"><a href="#初始置换IP和初始逆置换-1" class="headerlink" title="初始置换IP和初始逆置换-1"></a>初始置换IP和初始逆置换<sup>-1</sup></h4><p>在第一轮迭代之前进行，将原明文块的位进行换位操作</p>
+<h4 id="16轮迭代"><a href="#16轮迭代" class="headerlink" title="16轮迭代"></a>16轮迭代</h4><p>在每轮迭代中，64位的中间结果被分成左右两部分，且作为相互独立的32位数据进行处理。每轮迭代的输入是上轮的结果 L<sub>i-1</sub> 和 R<sub>i-1</sub></p>
+<p><img src="https://i.postimg.cc/BbhwRbc5/dieadi.png" alt></p>
+<h4 id="F函数"><a href="#F函数" class="headerlink" title="F函数"></a>F函数</h4><h5 id="E盒-扩展置换"><a href="#E盒-扩展置换" class="headerlink" title="E盒-扩展置换"></a>E盒-扩展置换</h5><p>将32bit扩展为48bit，每个输入分组的4位作为6位输出分组的中间4位，6位输出分组中的第1、6位分别由相邻两个4位分组的最外面两位扩散进入到本分组</p>
+<p>扩展示例：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">01</span> <span class="number">02</span> <span class="number">03</span> <span class="number">04</span> --&gt; <span class="number">32</span> | <span class="number">01</span> <span class="number">02</span> <span class="number">03</span> <span class="number">04</span> | <span class="number">05</span></span><br><span class="line"><span class="number">05</span> <span class="number">06</span> <span class="number">07</span> <span class="number">08</span> --&gt; <span class="number">04</span> | <span class="number">05</span> <span class="number">06</span> <span class="number">07</span> <span class="number">08</span> | <span class="number">09</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="密钥加"><a href="#密钥加" class="headerlink" title="密钥加"></a>密钥加</h5><p>E盒扩展得到的48位输出与子密钥𝐾𝑖进行异或运算</p>
+<h5 id="S盒"><a href="#S盒" class="headerlink" title="S盒"></a>S盒</h5><p>由8个S盒构成，每个S盒都是6bit的输入，4bit的输出</p>
+<p>示例：输入<code>b1b2b3b4b5b6=110011</code>，查找S盒，行：<code>b1b6=11=3</code>，列：<code>b2b3b4b5=1001=9</code>，查找<strong>3对应的行</strong>和<strong>9对应的列</strong>的数值</p>
+<p>良好的非线性，输出与全部输入有关</p>
+<h5 id="P盒"><a href="#P盒" class="headerlink" title="P盒"></a>P盒</h5><p>P置换对8个S盒的输出进行变换，查表置换</p>
+<h4 id="子密钥生成"><a href="#子密钥生成" class="headerlink" title="子密钥生成"></a>子密钥生成</h4><p>DES子密钥是从初始密钥(种子密钥)产生的，种子密钥𝐾为64位，其中有8位用于奇偶校验，因此DES的密钥实际上只有<strong>56位</strong></p>
+<h4 id="DES的安全性"><a href="#DES的安全性" class="headerlink" title="DES的安全性"></a>DES的安全性</h4><p>DES安全性的主要争议：</p>
+<ul>
+<li>对DES的S盒、迭代次数、密钥长度等设计准则的争议</li>
+<li>DES存在一些弱密钥和半弱密钥</li>
+<li>DES的56位密钥无法抵抗穷举攻击</li>
+<li>DES代数结构存在互补对称性</li>
+</ul>
+<p>主要安全问题</p>
+<ol>
+<li><p>互补性：c = E<del>k</del>(m)则 $  \overline{c} = E<del>\overline{k}</del> (\overline{m})$，成为算法上的互补性，互补性使DES再选择明文攻击下所需的==工作量减半==，由 2^56^ 变为 2^55^</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/DZc8rpJ0/gaogas.jpg" class="lazyload"></p>
+</li>
+</ol>
+<ol start="2">
+<li><p>多重DES：</p>
+<ul>
+<li>2DES可用中间相遇攻击使复杂度由2^112^减小到2^57^，<strong>中间相遇攻击</strong>：将所有的明文加密一次后的结果放到一张表中，使用密钥解密一次密文后得到的结果与表中结果相比较，牺牲空间换取时间</li>
+</ul>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/Pr7NQwxW/tahavool.jpg" class="lazyload"></p>
+</li>
+<li><p>三重DES：</p>
+<ul>
+<li>EEE3   3 x 56</li>
+<li>EDE3   3 x 56</li>
+<li>EEE2   2 x 56</li>
+<li>EDE2   2 x 56</li>
+</ul>
+</li>
+</ol>
+<h3 id="高级加密标准AES"><a href="#高级加密标准AES" class="headerlink" title="高级加密标准AES"></a>高级加密标准AES</h3><p>分组长度128bit，密钥长度可以为1258bit，192bit，256bit，一般使用<strong>密钥长度128bit，迭代轮数为10轮</strong></p>
+<p>AES的处理单位时字节，128bit的明文分组和输入密钥都被分为16个字节，一般明文分组用以字节为单位的正方形矩阵描述，称为<strong>状态矩阵</strong>，算法的每一轮中，状态矩阵的内容不断发生变化，最后的结果作为密文输出</p>
+<p>AES的加解密流程：解密时加密的逆过程</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/05FCXZVj/ases.png" class="lazyload"></p>
+<p>AES每轮由4个阶段组成：（第一轮开始前异或原始密钥，最后一轮不执行列混合）</p>
+<ul>
+<li><p><strong>字节代换</strong></p>
+</li>
+<li><p><strong>行移位</strong></p>
+</li>
+<li><p><strong>列混合</strong></p>
+</li>
+<li><p><strong>轮密钥加</strong></p>
+</li>
+</ul>
+<h4 id="字节代换（S盒）"><a href="#字节代换（S盒）" class="headerlink" title="字节代换（S盒）"></a>字节代换（S盒）</h4><p>简单的查表，16x16字节组成的矩阵，每个元素的内容是一个字节的值</p>
+<h4 id="行移位"><a href="#行移位" class="headerlink" title="行移位"></a>行移位</h4><p>左循环移位，第0行不变，第1行左移1个字节，第2行左移2个字节</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/D0X1KkxZ/zuodeyire.png" class="lazyload"></p>
+<h4 id="列混合"><a href="#列混合" class="headerlink" title="列混合"></a>列混合</h4><p>对一个状态<strong>逐列</strong>进行变换，将每列视为有限域GF(2^8^)上的一个多项式</p>
+<p>乘法：</p>
+<ul>
+<li><p>乘 0x01，不变</p>
+</li>
+<li><p>乘 0x02：</p>
+<ul>
+<li>最高位为0，直接左移一位</li>
+<li>最高位为1，左移一位后与<code>0001 1011</code>异或</li>
+</ul>
+</li>
+<li><p>乘 0x03，<code>0000 0011</code>= <code>0000 0010</code>⊕<code>0000 0001</code></p>
+</li>
+</ul>
+<p>示例：（模多项式m(x)=x^8^+x^4^+x^3^+x+1）</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/R0wrqNqQ/colcedmo.png" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/bJLB2bPb/cooldemo.png" class="lazyload"></p>
+<h4 id="轮密钥加"><a href="#轮密钥加" class="headerlink" title="轮密钥加"></a>轮密钥加</h4><p>将轮密钥与状态按比特异或</p>
+<h4 id="密钥扩展"><a href="#密钥扩展" class="headerlink" title="密钥扩展"></a>密钥扩展</h4><p>包括两个部分：<strong>密钥扩展</strong>和<strong>轮密钥选取</strong></p>
+<p>首先将种子密钥输入到4x4矩阵中，每列组成一个字，w[0]，w[1]，w[2]，w[3]</p>
+<p>对 w 数组扩展40个新列构成44列的密钥数组</p>
+<ul>
+<li>若 i 不是4的倍数，那么 w[i] = w[i-4] ⊕ w[i-1]</li>
+<li>若 i 是4的倍数，那么w[i] = w[i-4] ⊕ T (w[i-1])</li>
+</ul>
+<p>T函数，由字循环、字代替和轮常量异或组成</p>
+<ul>
+<li>字循环：将一个字的4个字节循环左移一个字节</li>
+<li>字节代换：对字循环的结果使用S盒进行字节代换</li>
+<li>轮常量异或：将前两步的几个同轮常量 Rcon[j] (轮数)进行异或</li>
+</ul>
+<h3 id="典型分组密码"><a href="#典型分组密码" class="headerlink" title="典型分组密码"></a>典型分组密码</h3><h4 id="IDEA算法"><a href="#IDEA算法" class="headerlink" title="IDEA算法"></a>IDEA算法</h4><p>明文分组长度<strong>64bit</strong>，密钥长度<strong>128bit</strong>，迭代<strong>8轮</strong>，构成<strong>64bit</strong>的密文块</p>
+<h4 id="SMS4密码算法"><a href="#SMS4密码算法" class="headerlink" title="SMS4密码算法"></a><strong>SMS4</strong>密码算法</h4><p>分组长度<strong>128比特</strong>，密钥长度<strong>128比特</strong>，加密算法与密钥扩展算法都采用<strong>32轮非线性迭代结构</strong></p>
+<h3 id="分组密码的工作模式"><a href="#分组密码的工作模式" class="headerlink" title="分组密码的工作模式"></a>分组密码的工作模式</h3><ol>
+<li>电子密码本模式（ECB）</li>
+</ol>
+<p>加解密：</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/MXksRYns/ecbsd.png" class="lazyload"></p>
+<p>特点：并行计算，速度快，<strong>相同密钥作用下，相同明文加密后将产生相同密文，易于暴露明文的固有格式和统计特性</strong></p>
+<p>密文中数据出了错，解密时会使得相对应的整个明文分组解密错误，但不会影响其他密文块解密</p>
+<ol start="2">
+<li>密码分组链接模式（CBC）</li>
+</ol>
+<p>加密：</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/h47RJyw1/cbcbcbccb.png" class="lazyload"></p>
+<p>解密：</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/N00WQpmT/scscscsbc.png" class="lazyload"></p>
+<p>CBC的传播错误</p>
+<ul>
+<li><p><strong>明文有一分组有错</strong>，会使以后的密文组都受影响，但经解密后，除原来有误的一组外，其后各组明文都正确地恢复</p>
+</li>
+<li><p>若传送过程中<strong>某组密文组出错时</strong>，则该组恢复的明文和下一组恢复数据出错。再后面的组将不受影响</p>
+</li>
+</ul>
+<ol start="3">
+<li>密码反馈模式（CFB）</li>
+</ol>
+<p>加解密：</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/V6q9pcvF/efgzg.jpg" class="lazyload"></p>
+<p>CFB的优点：自同步能力强，可以处理任意长度的消息</p>
+<p>CFB的缺点：</p>
+<ul>
+<li><p>明文某一组中有错，使以后的密文组都受影响，但经解密后，除原有误的一组外，其后各组都正确地恢复</p>
+</li>
+<li><p>密文里的一位错误会引起明文的一个单独错误，此错误进入移位寄存器，导致密文成为无用信息，直到该错误从移位寄存器中移出</p>
+</li>
+</ul>
+<ol start="4">
+<li>输出反馈模式（OFB）</li>
+</ol>
+<p>特点：</p>
+<ul>
+<li>无错误传播</li>
+<li>失去同步是致命的，移位寄存器需要同步</li>
+<li>对密文的篡改难以检测</li>
+</ul>
+<ol start="4">
+<li>计数器模式（CTR）</li>
+</ol>
+<p>特点：</p>
+<ul>
+<li>随机访问特性：可以随机的对任意一个密文分组进行解密，对该密文分组的处理与其它密文无关</li>
+<li>高效率：能并行处理; 可以提前进行预处理，这也可以极大的提高处理效率</li>
+<li>可以处理任意长度的数据，而且加解密过程<strong>仅涉及加密运算</strong>，不涉及解密运算，因此不用实现解密算法</li>
+</ul>
+<h2 id="Hash函数"><a href="#Hash函数" class="headerlink" title="Hash函数"></a>Hash函数</h2><p>Hash函数的性质：</p>
+<ul>
+<li>可应用于任意长度的消息</li>
+<li>固定长度的输出</li>
+<li>对任意给定消息 x，计算 H(x) 比较容易，软硬件均可实现</li>
+<li><strong>单向性</strong>（抗原像性），已知 H(x) 找到 x 在计算上是不可行的</li>
+<li>抗弱碰撞性，对任意给定x，找到 y≠x 且 H(x)=H(y) 在计算上是不可行的</li>
+<li>抗强碰撞性，找到任意满足 H(x)=H(y) 的偶对 (x,y) 在计算上是不可行的</li>
+</ul>
+<p>Hash函数架构</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/XJYhVM7K/jiegzaga.png" class="lazyload"></p>
+<h3 id="数据填充"><a href="#数据填充" class="headerlink" title="数据填充"></a>数据填充</h3><p>填充消息，使消息长度<strong>模512 = 448</strong></p>
+<ul>
+<li>如果消息长度模512恰好等于448，则增加512个填充比特，即<strong>填充的个数位1~512</strong></li>
+<li>填充方法：第1比特为1，其余全部为0</li>
+<li>补足长度，将一个表示<strong>数据原始长度</strong>的64bit数补在最后，512比特按32比特分为16组</li>
+<li>最终消息长度为512bit的整数倍</li>
+</ul>
+<h3 id="MD5算法"><a href="#MD5算法" class="headerlink" title="MD5算法"></a>MD5算法</h3><p>分组长度为<strong>512bit</strong>，输出<strong>128bit</strong>的消息摘要</p>
+<p>共4轮，每轮16步</p>
+<h3 id="SHA1算法"><a href="#SHA1算法" class="headerlink" title="SHA1算法"></a>SHA1算法</h3><p>分组长度为<strong>512bit</strong>，输出<strong>160bit</strong>的消息摘要，有更强的抗穷举能力</p>
+<p>共4轮，每轮20步</p>
+<h3 id="MD5安全性"><a href="#MD5安全性" class="headerlink" title="MD5安全性"></a>MD5安全性</h3><p>攻击者的目标：找到两个不停的消息映射为同一杂凑值</p>
+<p>对Hash函数的基本攻击方法</p>
+<ol>
+<li>穷举攻击：</li>
+</ol>
+<ul>
+<li>最典型的方法是<strong>生日攻击</strong>：给定初值 H<sub>0</sub>，寻找M’ ≠ M，使 h(M’) = H<sub>0</sub>，MD5算法抗密码分析的能力较弱，生日攻击所需代价是试验2^64^个消息</li>
+</ul>
+<ol start="2">
+<li>密码分析法：依赖于Hash函数的结构和代数性质分析，采用针对Hash函数弱性质的方法进行攻击，<strong>中间相遇攻击</strong>，<strong>修正分组攻击</strong>和<strong>差分攻击</strong></li>
+</ol>
+<h3 id="消息认证码"><a href="#消息认证码" class="headerlink" title="消息认证码"></a>消息认证码</h3><p>消息认证码（MAC）是一种消息认证技术，利用消息和双方共享的密钥通过认证函数来生成一个固定长度的数据块，并将该数据块附加在消息后  –带密钥的Hash函数</p>
+<h4 id="基于DES的消息认证码"><a href="#基于DES的消息认证码" class="headerlink" title="基于DES的消息认证码"></a>基于DES的消息认证码</h4><p>采用DES运算的密码分组链接模式（CBC），初始向量为0</p>
+<p>需要认证的数据分为连续的64bit分组</p>
+<h4 id="基于Hash的认证码"><a href="#基于Hash的认证码" class="headerlink" title="基于Hash的认证码"></a>基于Hash的认证码</h4><p>HMAC：将散列函数嵌入到消息认证码的构造过程中</p>
+<p>在安全协议SSL和IPSec中使用HMAC实现消息认证功能</p>
+<p>对消息认证码的穷举攻击比对使用相同长度密钥的加密算法的穷举攻击更困难</p>
+<p>应用：</p>
+<p>通信双方A和B有一个共享密钥K。当A有要发往B的消息时，发送方A利用共享密钥K计算MAC，然后将消息和MAC一起发往预定的接收者B</p>
+<p>在接收端B，使用相同的密钥K对收到的消息执行相同的计算并得出新的MAC，将收到的MAC与计算得出的MAC进行比较</p>
+<ul>
+<li><p>如果相同，则消息的确来自A，且没有被更改过</p>
+</li>
+<li><p>如果不同，丢弃消息</p>
+</li>
+</ul>
+<h2 id="公钥密码"><a href="#公钥密码" class="headerlink" title="公钥密码"></a>公钥密码</h2><h3 id="单向陷门函数"><a href="#单向陷门函数" class="headerlink" title="单向陷门函数"></a>单向陷门函数</h3><ol>
+<li>正向计算容易，已知密钥 P 和消息 M，容易计算 C = f<sub>p</sub> (M)</li>
+<li>不知道密钥 S 的情况下，反向计算不可行，即只知道 C，不知道 S，计算 M = f<sup>-1</sup>(M)不可行</li>
+<li>知道密钥 S 的情况下，反向计算容易，即同时知道 C 和 S，则计算 M = f<sup>-1</sup>(M)是容易的，S相当于陷门，和P配对</li>
+</ol>
+<h3 id="RSA公钥加密体制"><a href="#RSA公钥加密体制" class="headerlink" title="RSA公钥加密体制"></a>RSA公钥加密体制</h3><h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><ol>
+<li>密钥生成<ul>
+<li>选取两个大素数p和q，(p≠q，且p和q须保密) <strong>1024bit的密钥</strong></li>
+<li>计算 <strong>n=p×q</strong>，φ(n)=(p-1)×(q-1)，φ为n的欧拉函数</li>
+<li>选择整数e，e与φ(n)互素，1&lt;e&lt;φ(n)</li>
+<li>计算d，<strong>d = e^-1^ mod φ(n)</strong>，公钥为<code>{e,n}</code>，私钥为<code>{d}</code></li>
+</ul>
+</li>
+<li>加密<ul>
+<li>明文 <strong>M&lt;n</strong>，密文 <strong>C = M<sup>e</sup> mod n</strong></li>
+</ul>
+</li>
+<li>解密<ul>
+<li>密文 <strong>C</strong>，明文 <strong>M = C<sup>d</sup> mod n</strong></li>
+</ul>
+</li>
+</ol>
+<h4 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h4><p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/HWQ1WxKs/ximedeshig.png" class="lazyload"></p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">c</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">c</span> = <span class="keyword">c</span> * <span class="keyword">c</span> mod n</span><br><span class="line">if b = <span class="number">1</span></span><br><span class="line">   <span class="keyword">c</span> = <span class="keyword">c</span> * a mod n</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="RSA的攻击"><a href="#RSA的攻击" class="headerlink" title="RSA的攻击"></a>RSA的攻击</h4><h5 id="针对n分解的攻击"><a href="#针对n分解的攻击" class="headerlink" title="针对n分解的攻击"></a>针对n分解的攻击</h5><ol>
+<li>试除法：完全尝试所有小于&radic;n的素数</li>
+<li>因式分解法<ul>
+<li>二次筛法</li>
+<li>连分数法</li>
+<li>椭圆曲线筛法</li>
+</ul>
+</li>
+</ol>
+<h5 id="循环攻击"><a href="#循环攻击" class="headerlink" title="循环攻击"></a>循环攻击</h5><ol>
+<li>设m为明文，(n,e)为公钥，密文 c = m<sup>e</sup> mod n<ul>
+<li>攻击者得到密文c后，对c依次进行如下变换：<br>c<sub>1</sub> = c<sup>e</sup> mod n<br>c<sub>2</sub> = c<sub>1</sub><sup>e</sup> mod n<br>……    ……<br>c<sub>k</sub> = c<sub>k-1</sub><sup>e</sup> mod n<br>c<sub>k+1</sub> = c<sub>k</sub><sup>e</sup> mod n</li>
+<li>k+1次迭代后，如果c<sub>k+1</sub>=c，由c=m<sup>e</sup> mod n，则c<sub>k</sub>= m，获得明文</li>
+</ul>
+</li>
+<li>避免循环攻击：<ul>
+<li>ord<sub>n</sub>(m)要大，且<strong>φ(ord<sub>n</sub>(m))要有大的素因子</strong></li>
+<li>ord<sub>n</sub>(m)是φ(n)的因子，所以需要<strong>p-1和q-1都有大的因子</strong></li>
+</ul>
+</li>
+</ol>
+<h5 id="共模攻击"><a href="#共模攻击" class="headerlink" title="共模攻击"></a>共模攻击</h5><ul>
+<li>m为明文，两用户的公钥分别为e<sub>1</sub>和e<sub>2</sub>，且互素，共同的模数n，两个密文分别为c<sub>1</sub>和c<sub>2</sub></li>
+<li>攻击者知道n，e<sub>1</sub>，e<sub>2</sub>，c<sub>1</sub>和c<sub>2</sub></li>
+<li>恢复明文m：由欧几里得算法可找出r和s满足 <strong>re<sub>1</sub>+se<sub>2</sub>=1</strong>，假定r是负数，那么 <strong>(c<sub>1</sub><sup>-1</sup>)<sup>-r</sup> c<sub>2</sub><sup>s</sup> = m<sup>re<sub>1</sub>+se<sub>2</sub></sup> = m mod n</strong></li>
+<li>无需私钥d即可获得明文m</li>
+</ul>
+<p>防御：使用RSA公钥加密的通信中，不同用户的密钥不能有相同的模值</p>
+<h5 id="低加密指数攻击"><a href="#低加密指数攻击" class="headerlink" title="低加密指数攻击"></a>低加密指数攻击</h5><p>小的公钥e可以加快加密的速度，但过小的公钥易受到攻击</p>
+<ul>
+<li>如果3个用户都使用3作为公钥，对同一个明文 m 加密，则 c<sub>1</sub>=m<sup>3</sup> mod n<sub>1</sub>，c<sub>2</sub>=m<sup>3</sup> mod n<sub>2</sub>，c<sub>3</sub>=m<sup>3</sup> mod n<sub>3</sub>，且n<sub>1</sub>，n<sub>2</sub>，n<sub>3</sub>互素，m小于模数</li>
+<li>由<strong>中国剩余定理</strong>可从c<sub>1</sub>，c<sub>2</sub>，c<sub>3</sub>计算出c，且 <strong>c = m<sup>3</sup>mod (n<sub>1</sub>n<sub>2</sub>n<sub>3</sub>)，m = c<sup>1/3</sup></strong></li>
+<li>如果采用不同的n，相同的e，对e(e+1)/2个线性相关的消息加密，系统就会受到威胁，所以一般选取16位以上的素数(速度快且可防止攻击)</li>
+<li>对短消息，用<strong>随机数填充</strong>以保证m<sup>e</sup> ≠ m<sup>e</sup> mod n，从而杜绝低加密指数攻击</li>
+</ul>
+<h4 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h4><ol>
+<li><p>密钥长度：至少1024bit</p>
+</li>
+<li><p>选择素数p和q时，应使其欧拉函数j(p)和j(q)的最小公倍数尽可能大(<strong>φ(p)和φ(q)</strong>有大的素因子)。最小公倍数越大，幂剩余函数的周期就越长—<strong>避免循环攻击</strong></p>
+</li>
+<li><p>密钥中的各项参数应选得足够大—<strong>避免穷举攻击</strong></p>
+</li>
+<li><p>在同一个通信网络中，不同的用户不应该使用共同的模数—<strong>避免同模攻击</strong></p>
+</li>
+</ol>
+<h3 id="EIGamal公钥加密体制"><a href="#EIGamal公钥加密体制" class="headerlink" title="EIGamal公钥加密体制"></a>EIGamal公钥加密体制</h3><h4 id="算法描述-1"><a href="#算法描述-1" class="headerlink" title="算法描述"></a>算法描述</h4><p>密钥生成：选择随机数 x，计算 y = g ^x^ (mod p)，则公钥为（y, g, p)，私钥为 x</p>
+<p>加密过程：</p>
+<ol>
+<li>得到接收方的公钥 (y, g, p)</li>
+<li>随机选择整数 r</li>
+<li>计算 c <del>1</del> = g ^r^ (mod p)，c <del>2</del> = m y ^r^ (mod p)</li>
+</ol>
+<p>解密过程：使用私钥 x 和解密算法 m = c <del>2</del> * (c <del>1</del> ^x^ ) ^-1^</p>
+<p>验证正确性：</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/NFdPTbfw/deaaam.png" class="lazyload"></p>
+<h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><p>数字签名的目的和要求</p>
+<p>目的：保证信息的完整性和真实性，即消息没有被篡改，而且签名也没有被篡改，消息只能始发于所声称的一方</p>
+<p>要求：</p>
+<ol>
+<li>不可否认性，签名者事后不能否认或抵赖自己的签名</li>
+<li>不可伪造性，其他任何人均不能伪造签名，也不能对接收或发送的信息进行篡改、伪造和冒充</li>
+<li>公正的仲裁，若当事双方对签名真伪发生争执时，能通过公正的仲裁验证签名来去确定其真伪</li>
+</ol>
+<h3 id="RSA签名"><a href="#RSA签名" class="headerlink" title="RSA签名"></a>RSA签名</h3><p>密钥生成：（与公钥加密系统一样） 公钥P={e,n}；私钥S={d}</p>
+<p>签名过程：A对消息m进行签名，计算签名 s = h(m)^d^ mod n，将(s,m)发送给B，m为安全的Hash函数</p>
+<p>验证过程：B收到消息m和签名s后，计算 h(m)，检验 h(m) = s^e^ mod n 是否成立，成立则签名有效</p>
+<h4 id="对RSA签名的攻击"><a href="#对RSA签名的攻击" class="headerlink" title="对RSA签名的攻击"></a>对RSA签名的攻击</h4><p>一般攻击：攻击者任选一个数据 Y，用A的公钥计算 X = Y^e^ mod n，于是便可以用 Y 伪造对消息 X 的签名，因为 Y = X^d^ mod n，实际意义不大，伪造的消息 X 具有实际意义的概率很小</p>
+<p>利用已有签名进行攻击：消息 M<del>1</del>、M<del>2</del> 的签名分别是 S<del>1</del> 和 S<del>2</del>，则任何知道 M<del>1</del>、S<del>1</del>，M<del>2</del>，S<del>2</del>的人可以伪造对消息 M<del>1</del>M<del>2</del>的签名S<del>1</del>S<del>2</del>，使用安全的Hash函数可以避免这样的攻击</p>
+<p>利用签名获得明文：</p>
+<ol>
+<li>攻击者截获密文 C = M^e^ mod n，选择随机数 r，并计算 x = r^e^ mod n，y = x * C mod n</li>
+<li>攻击者设法让发送者对y进行签名，获得 S = y^d^ mod n</li>
+<li>攻击者计算 r^-1^ * S mod n = r^-1^ y^d^ mod n = r^-1^ x^d^ C^d^ mod n = C^d^ mod n = M</li>
+<li>防范：对数据的Hash值签名</li>
+</ol>
+<h3 id="H-M-的重要性"><a href="#H-M-的重要性" class="headerlink" title="H(M)的重要性"></a>H(M)的重要性</h3><ol>
+<li>加快签名速度，消息比较长时，使用公钥加密速度比较慢，对消息的Hash值签名，签名只与Hash值的长度有关</li>
+<li>比单纯对消息本身进行签名具有更好的抗攻击性</li>
+</ol>
+<h3 id="EIGamal签名体制"><a href="#EIGamal签名体制" class="headerlink" title="EIGamal签名体制"></a>EIGamal签名体制</h3><p>安全性：</p>
+<ol>
+<li>非确定性数字签名算法，同意消息M的签名依赖于随机数k</li>
+<li>安全性基于有限域上计算离散对数的困难性</li>
+<li>随机数k不能泄露（已知k可以计算x）</li>
+<li>随机数k不能被重复使用（可计算出k进而计算出私钥x）</li>
+</ol>
+  	
 					
 	  </div>     
 	  
@@ -372,7 +719,7 @@
      <div class="mobile-menu">      
 
       
-      <img class="mobile-menu-icon" src="/images/favicon.png">  
+      <img class="mobile-menu-icon lazyload" src="/images/placeholder.png" data-src="/images/favicon.png">  
       
 
          
@@ -421,7 +768,9 @@
 		<div class="copyright">
 			&copy;
 			
-			2019
+			2019 -
+			
+			2020
 			SunSh1ne
 
 			<br>

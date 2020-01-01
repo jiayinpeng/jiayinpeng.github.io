@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">1254
+				<span class="words">1416
 				</span>
 			
 		</div>
@@ -166,7 +166,7 @@
 <ul>
 <li>MD5步函数的执行过程：</li>
 </ul>
-<p><img src="https://i.postimg.cc/VsrPxMTS/qw.png" alt></p>
+<p><img src="https://i.postimg.cc/9MZTwnNv/qw.png" alt></p>
 <ul>
 <li>M[ j ] 表示消息分组 M<sub>i</sub> 的第 j (0 ≤ j ≤ 15) 个32bit分组，第一轮中就是简单的 0, 1, …, 15 </li>
 </ul>
@@ -179,6 +179,15 @@
 </li>
 </ul>
 <p>轮函数先取向量(A、B、C、D)中的后3个作一次<code>非线性函数运算</code>，所得的结果一次加上<code>第1个变量</code>，<code>32bit消息子分组</code>和<code>1个伪随机常数</code>，再将所得的结果循环左移指定位数，并加上(A、B、C、D)的第二个变量，最后把新值赋给向量中的第1个变量</p>
+<h3 id="Hash函数的安全性"><a href="#Hash函数的安全性" class="headerlink" title="Hash函数的安全性"></a>Hash函数的安全性</h3><p>攻击者的目标：找到两个不停的消息映射为同一杂凑值</p>
+<p>对Hash函数的基本攻击方法</p>
+<ol>
+<li>穷举攻击：<ul>
+<li>最典型的方法是<strong>生日攻击</strong>：给定初值 H<sub>0</sub>，寻找M’ ≠ M，使 h(M’) = H<sub>0</sub></li>
+</ul>
+</li>
+<li>密码分析法：依赖于Hash函数的结构和代数性质分析，采用针对Hash函数弱性质的方法进行攻击，<strong>中间相遇攻击</strong>，<strong>修正分组攻击</strong>和<strong>差分攻击</strong></li>
+</ol>
   	
 					
 	  </div>     
@@ -355,7 +364,9 @@
 		<div class="copyright">
 			&copy;
 			
-			2019
+			2019 -
+			
+			2020
 			SunSh1ne
 
 			<br>
