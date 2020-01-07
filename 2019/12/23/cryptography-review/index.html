@@ -98,7 +98,7 @@
 			
 			
 				<i class="iconfont icon-words"></i>
-				<span class="words">8465
+				<span class="words">8449
 				</span>
 			
 		</div>
@@ -137,7 +137,7 @@
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>信息安全的目标：</p>
 <ol>
 <li>机密性：保证信息不泄露给非授权的用户和实体</li>
-<li>完整性：保证信息处于保持完整或为受损的状态，防止对信息特性和状态的中断，窃取，篡改，伪造</li>
+<li>完整性：保证信息处于保持完整或未受损的状态，防止对信息特性和状态的中断，窃取，篡改，伪造</li>
 <li>可用性：授权用户按需随时访问所需信息而不被非法拒绝</li>
 <li>认证性：确保消息的来源，可分为<strong>消息认证</strong>和<strong>实体认证</strong></li>
 <li>不可否认性：保障用户无法在事后否认曾经对消息的生成、签发、接收</li>
@@ -176,13 +176,13 @@
 <li>加密：c = (m * k) mod q</li>
 <li>解密：m = (c * k<sup>-1</sup>) mod q</li>
 </ul>
-<p>仿射密码  密钥空间：φ(m)*(m-1)</p>
+<p>仿射密码  密钥空间：φ(26)*(26-1)</p>
 <ul>
-<li>选取 k_1，k_2 两个参数，其中gcd(k_1,26)=1</li>
-<li>加密：c = K_1 * m + K_2 mod 26<ul>
-<li>k_1 = 1 时，移位密码</li>
-<li>K_2 = 1 时，乘数密码<ul>
-<li>解密：m = (c - k_2) * k_1<sup>-1</sup> mod 26</li>
+<li>选取 K<del>1</del>，K<del>2</del> 两个参数，其中gcd(K<del>1</del>, 26)=1</li>
+<li>加密：C = K<del>1</del> * M + K<del>2</del> mod 26<ul>
+<li>k<del>1</del> = 1 时，移位密码</li>
+<li>K<del>2</del> = 0 时，乘数密码<ul>
+<li>解密：M = (C - k<del>2</del>) * k<del>1</del>^-1^ mod 26</li>
 </ul>
 </li>
 </ul>
@@ -197,10 +197,10 @@
 <p>维吉尼亚密码</p>
 <ul>
 <li>26 * 26的方阵</li>
-<li>密钥：k = k1k2k3……kn</li>
-<li>明文：m = m1m2m3……mn</li>
-<li>加密：ci = mi + ki mod 26</li>
-<li>解密：mi = ci - ki mod 26</li>
+<li>密钥：k = k<del>1</del>k<del>2</del>k<del>3</del>……k<del>n</del></li>
+<li>明文：m = m<del>1</del>m<del>2</del>m<del>3</del>……m<del>n</del></li>
+<li>加密：c<del>i</del> = m<del>i</del> + k<del>i</del> mod 26</li>
+<li>解密：m<del>i</del> = c<del>i</del> - k<del>i</del> mod 26</li>
 </ul>
 <p>希尔密码</p>
 <ul>
@@ -329,10 +329,8 @@
 </li>
 <li><p>三重DES：</p>
 <ul>
-<li>EEE3   3 x 56</li>
-<li>EDE3   3 x 56</li>
-<li>EEE2   2 x 56</li>
-<li>EDE2   2 x 56</li>
+<li>EEE3/EDE3   3 x 56</li>
+<li>EEE2/EDE2   2 x 56</li>
 </ul>
 </li>
 </ol>
@@ -386,32 +384,21 @@
 <li>轮常量异或：将前两步的几个同轮常量 Rcon[j] (轮数)进行异或</li>
 </ul>
 <h3 id="典型分组密码"><a href="#典型分组密码" class="headerlink" title="典型分组密码"></a>典型分组密码</h3><h4 id="IDEA算法"><a href="#IDEA算法" class="headerlink" title="IDEA算法"></a>IDEA算法</h4><p>明文分组长度<strong>64bit</strong>，密钥长度<strong>128bit</strong>，迭代<strong>8轮</strong>，构成<strong>64bit</strong>的密文块</p>
-<h4 id="SMS4密码算法"><a href="#SMS4密码算法" class="headerlink" title="SMS4密码算法"></a><strong>SMS4</strong>密码算法</h4><p>分组长度<strong>128比特</strong>，密钥长度<strong>128比特</strong>，加密算法与密钥扩展算法都采用<strong>32轮非线性迭代结构</strong></p>
-<h3 id="分组密码的工作模式"><a href="#分组密码的工作模式" class="headerlink" title="分组密码的工作模式"></a>分组密码的工作模式</h3><ol>
-<li>电子密码本模式（ECB）</li>
-</ol>
-<p>加解密：</p>
+<h4 id="SMS4密码算法"><a href="#SMS4密码算法" class="headerlink" title="SMS4密码算法"></a><strong>SMS4</strong>密码算法</h4><p>分组长度<strong>128bit</strong>，密钥长度<strong>128bit</strong>，加密算法与密钥扩展算法都采用<strong>32轮非线性迭代结构</strong></p>
+<h3 id="分组密码的工作模式"><a href="#分组密码的工作模式" class="headerlink" title="分组密码的工作模式"></a>分组密码的工作模式</h3><h4 id="电子密码本模式（ECB）"><a href="#电子密码本模式（ECB）" class="headerlink" title="电子密码本模式（ECB）"></a>电子密码本模式（ECB）</h4><p>加解密：</p>
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/MXksRYns/ecbsd.png" class="lazyload"></p>
-<p>特点：并行计算，速度快，<strong>相同密钥作用下，相同明文加密后将产生相同密文，易于暴露明文的固有格式和统计特性</strong></p>
+<p>特点：并行计算，速度快，<strong>相同密钥作用下，相同明文加密后将产生相同密文，易暴露明文的固有格式和统计特性</strong></p>
 <p>密文中数据出了错，解密时会使得相对应的整个明文分组解密错误，但不会影响其他密文块解密</p>
-<ol start="2">
-<li>密码分组链接模式（CBC）</li>
-</ol>
-<p>加密：</p>
+<h4 id="密码分组链接模式（CBC）"><a href="#密码分组链接模式（CBC）" class="headerlink" title="密码分组链接模式（CBC）"></a>密码分组链接模式（CBC）</h4><p>加密：</p>
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/h47RJyw1/cbcbcbccb.png" class="lazyload"></p>
 <p>解密：</p>
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/N00WQpmT/scscscsbc.png" class="lazyload"></p>
 <p>CBC的传播错误</p>
 <ul>
-<li><p><strong>明文有一分组有错</strong>，会使以后的密文组都受影响，但经解密后，除原来有误的一组外，其后各组明文都正确地恢复</p>
-</li>
-<li><p>若传送过程中<strong>某组密文组出错时</strong>，则该组恢复的明文和下一组恢复数据出错。再后面的组将不受影响</p>
-</li>
+<li><strong>明文有一分组有错</strong>，会使以后的密文组都受影响，但经解密后，除原来有误的一组外，其后各组明文都正确地恢复</li>
+<li>若传送过程中<strong>某组密文组出错时</strong>，则该组恢复的明文和下一组恢复数据出错。再后面的组将不受影响</li>
 </ul>
-<ol start="3">
-<li>密码反馈模式（CFB）</li>
-</ol>
-<p>加解密：</p>
+<h4 id="密码反馈模式（CFB）"><a href="#密码反馈模式（CFB）" class="headerlink" title="密码反馈模式（CFB）"></a>密码反馈模式（CFB）</h4><p>加解密：</p>
 <p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/V6q9pcvF/efgzg.jpg" class="lazyload"></p>
 <p>CFB的优点：自同步能力强，可以处理任意长度的消息</p>
 <p>CFB的缺点：</p>
@@ -421,19 +408,13 @@
 <li><p>密文里的一位错误会引起明文的一个单独错误，此错误进入移位寄存器，导致密文成为无用信息，直到该错误从移位寄存器中移出</p>
 </li>
 </ul>
-<ol start="4">
-<li>输出反馈模式（OFB）</li>
-</ol>
-<p>特点：</p>
+<h4 id="输出反馈模式（OFB）"><a href="#输出反馈模式（OFB）" class="headerlink" title="输出反馈模式（OFB）"></a>输出反馈模式（OFB）</h4><p>特点：</p>
 <ul>
 <li>无错误传播</li>
 <li>失去同步是致命的，移位寄存器需要同步</li>
 <li>对密文的篡改难以检测</li>
 </ul>
-<ol start="4">
-<li>计数器模式（CTR）</li>
-</ol>
-<p>特点：</p>
+<h4 id="计数器模式（CTR）"><a href="#计数器模式（CTR）" class="headerlink" title="计数器模式（CTR）"></a>计数器模式（CTR）</h4><p>特点：</p>
 <ul>
 <li>随机访问特性：可以随机的对任意一个密文分组进行解密，对该密文分组的处理与其它密文无关</li>
 <li>高效率：能并行处理; 可以提前进行预处理，这也可以极大的提高处理效率</li>
@@ -461,7 +442,7 @@
 <p>共4轮，每轮16步</p>
 <h3 id="SHA1算法"><a href="#SHA1算法" class="headerlink" title="SHA1算法"></a>SHA1算法</h3><p>分组长度为<strong>512bit</strong>，输出<strong>160bit</strong>的消息摘要，有更强的抗穷举能力</p>
 <p>共4轮，每轮20步</p>
-<h3 id="MD5安全性"><a href="#MD5安全性" class="headerlink" title="MD5安全性"></a>MD5安全性</h3><p>攻击者的目标：找到两个不停的消息映射为同一杂凑值</p>
+<h3 id="MD5安全性"><a href="#MD5安全性" class="headerlink" title="MD5安全性"></a>MD5安全性</h3><p>攻击者的目标：找到两个不同的消息映射为同一杂凑值</p>
 <p>对Hash函数的基本攻击方法</p>
 <ol>
 <li>穷举攻击：</li>
@@ -510,7 +491,7 @@
 </li>
 </ol>
 <h4 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h4><p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/HWQ1WxKs/ximedeshig.png" class="lazyload"></p>
-<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">c</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">c</span> = <span class="keyword">c</span> * <span class="keyword">c</span> mod n</span><br><span class="line">if b = <span class="number">1</span></span><br><span class="line">   <span class="keyword">c</span> = <span class="keyword">c</span> * a mod n</span><br></pre></td></tr></table></figure>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">c = <span class="number">1</span>, <span class="built_in">t</span> = <span class="number">0</span></span><br><span class="line"><span class="built_in">t</span> = <span class="number">2</span> * <span class="built_in">t</span></span><br><span class="line">c = c * c <span class="built_in">mod</span> <span class="built_in">n</span></span><br><span class="line"><span class="built_in">if</span> b = <span class="number">1</span></span><br><span class="line">   c = c * a <span class="built_in">mod</span> <span class="built_in">n</span></span><br><span class="line">   <span class="built_in">t</span> = <span class="built_in">t</span> + <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -556,7 +537,7 @@
 </li>
 <li><p>密钥中的各项参数应选得足够大—<strong>避免穷举攻击</strong></p>
 </li>
-<li><p>在同一个通信网络中，不同的用户不应该使用共同的模数—<strong>避免同模攻击</strong></p>
+<li><p>在同一个通信网络中，不同的用户不应该使用共同的模数—<strong>避免共模攻击</strong></p>
 </li>
 </ol>
 <h3 id="EIGamal公钥加密体制"><a href="#EIGamal公钥加密体制" class="headerlink" title="EIGamal公钥加密体制"></a>EIGamal公钥加密体制</h3><h4 id="算法描述-1"><a href="#算法描述-1" class="headerlink" title="算法描述"></a>算法描述</h4><p>密钥生成：选择随机数 x，计算 y = g ^x^ (mod p)，则公钥为（y, g, p)，私钥为 x</p>
@@ -564,7 +545,7 @@
 <ol>
 <li>得到接收方的公钥 (y, g, p)</li>
 <li>随机选择整数 r</li>
-<li>计算 c <del>1</del> = g ^r^ (mod p)，c <del>2</del> = m y ^r^ (mod p)</li>
+<li>计算 c<del>1</del> = g^r^ (mod p)，c<del>2</del> = m y^r^ (mod p)</li>
 </ol>
 <p>解密过程：使用私钥 x 和解密算法 m = c <del>2</del> * (c <del>1</del> ^x^ ) ^-1^</p>
 <p>验证正确性：</p>
@@ -575,10 +556,10 @@
 <ol>
 <li>不可否认性，签名者事后不能否认或抵赖自己的签名</li>
 <li>不可伪造性，其他任何人均不能伪造签名，也不能对接收或发送的信息进行篡改、伪造和冒充</li>
-<li>公正的仲裁，若当事双方对签名真伪发生争执时，能通过公正的仲裁验证签名来去确定其真伪</li>
+<li>公正的仲裁，若当事双方对签名真伪发生争执时，能通过公正的仲裁验证签名来确定其真伪</li>
 </ol>
 <h3 id="RSA签名"><a href="#RSA签名" class="headerlink" title="RSA签名"></a>RSA签名</h3><p>密钥生成：（与公钥加密系统一样） 公钥P={e,n}；私钥S={d}</p>
-<p>签名过程：A对消息m进行签名，计算签名 s = h(m)^d^ mod n，将(s,m)发送给B，m为安全的Hash函数</p>
+<p>签名过程：A对消息m进行签名，计算签名 s = h(m)^d^ mod n，将(s,m)发送给B，h为安全的Hash函数</p>
 <p>验证过程：B收到消息m和签名s后，计算 h(m)，检验 h(m) = s^e^ mod n 是否成立，成立则签名有效</p>
 <h4 id="对RSA签名的攻击"><a href="#对RSA签名的攻击" class="headerlink" title="对RSA签名的攻击"></a>对RSA签名的攻击</h4><p>一般攻击：攻击者任选一个数据 Y，用A的公钥计算 X = Y^e^ mod n，于是便可以用 Y 伪造对消息 X 的签名，因为 Y = X^d^ mod n，实际意义不大，伪造的消息 X 具有实际意义的概率很小</p>
 <p>利用已有签名进行攻击：消息 M<del>1</del>、M<del>2</del> 的签名分别是 S<del>1</del> 和 S<del>2</del>，则任何知道 M<del>1</del>、S<del>1</del>，M<del>2</del>，S<del>2</del>的人可以伪造对消息 M<del>1</del>M<del>2</del>的签名S<del>1</del>S<del>2</del>，使用安全的Hash函数可以避免这样的攻击</p>
@@ -595,7 +576,7 @@
 </ol>
 <h3 id="EIGamal签名体制"><a href="#EIGamal签名体制" class="headerlink" title="EIGamal签名体制"></a>EIGamal签名体制</h3><p>安全性：</p>
 <ol>
-<li>非确定性数字签名算法，同意消息M的签名依赖于随机数k</li>
+<li>非确定性数字签名算法，同一消息M的签名依赖于随机数k</li>
 <li>安全性基于有限域上计算离散对数的困难性</li>
 <li>随机数k不能泄露（已知k可以计算x）</li>
 <li>随机数k不能被重复使用（可计算出k进而计算出私钥x）</li>
@@ -668,6 +649,14 @@
       
     </div>
     <div class="link">
+      
+      <a href="/2020/01/04/Java-review/" class="link-wrap">
+        <strong class="caption">newer</strong>
+        
+        <span class="title">
+          Java复习
+        </span>
+      </a>
       
     </div>
   </nav>

@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  Java复习 |   SunSh1ne❤️ </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>  
+  <body>   
+    
+      <header class="header-wrapper">
+
+  <nav class="inner">
+    <div class="title">
+      <a href="/">
+        <img class="logo" src="/images/logo.png">
+      </a>
+    </div>
+
+    <ul class="menu">
+      
+      
+      <li class="item">
+        <a class="link" id="menu-home" href="/">
+          <i class="iconfont icon-home">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-archives" href="/archives">
+          <i class="iconfont icon-archives">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-tags" href="/tags">
+          <i class="iconfont icon-tags">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-about" href="/about">
+          <i class="iconfont icon-about">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-search">
+          <i class="iconfont icon-search">
+        </i></a>
+        
+
+        
+      
+    </li></ul>
+  </nav>
+</header>
+
+<header class="mobile-header-wrapper">
+  <i id="mobile-toggle" class="iconfont icon-menu mobile-toggle"></i>
+</header>   
+
+      <div class="container">       
+          
+          
+            <div class="container-inner">  
+          
+
+          <article class="post slideDownMin">
+  
+	
+<div class="header">
+		<p class="title">	
+			Java复习
+		</p>
+		<div class="info">	
+			<time>
+				1月 04, 2020
+			</time>
+
+			
+			
+				<i class="iconfont icon-words"></i>
+				<span class="words">16995
+				</span>
+			
+		</div>
+</div> 
+	
+
+    <script type="text/x-mathjax-config">
+        var post = document.getElementsByClassName("post")[0];  
+        MathJax.Hub.Config({
+            showProcessingMessages: false,
+            messageStyle: "none",    
+            tex2jax: {
+                inlineMath:  [ ["$", "$"] , ["\\(","\\)"]],
+                displayMath: [ ["$$","$$"] , ["\\[","\\]"]],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+            },
+            "HTML-CSS": {            
+                showMathMenu: false
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub,post]);
+    </script>
+    <style>.MathJax{outline:0;}</style>
+
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.2/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+ 
+
+	  <div class="typo post-content ">
+
+		
+
+			
+					<p>当年万里觅封侯，匹马戍凉州</p>
+<a id="more"></a>
+
+<blockquote>
+<p>试题类型：</p>
+<ul>
+<li>选择题</li>
+<li>读程序写结果</li>
+<li>程序填空</li>
+<li>编程（2道）<ul>
+<li>面向对象</li>
+<li>图形用户界面，多线程，网络</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>几个Java技术术语</p>
+<ul>
+<li>Java虚拟机（JVM） 用软件仿真计算机硬件  实现<strong>可移植性</strong></li>
+<li>Java运行系统（Java运行时系统） 包括<strong>JVM</strong>的具体实现和<strong>Java API</strong></li>
+<li>Java应用程序编程接口（API） 各种常用类和接口 </li>
+<li>Java开发工具包（JDK） 包含类库、编译运行工具等</li>
+</ul>
+<p>Java程序的开发执行流程：</p>
+<p><img src="https://i.postimg.cc/B6BT49TS/no1cool.png" alt></p>
+<p>同一个<strong>.java</strong>文件中可以定义多个类，但是只能定义一个公共类，且文件名称必须和这个公共类名相同</p>
+<h2 id="Java语言基础"><a href="#Java语言基础" class="headerlink" title="Java语言基础"></a>Java语言基础</h2><h4 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h4><p>定义规则：</p>
+<ol>
+<li>由字母、数字、下划线、$ 组成，不能由数字开头</li>
+<li>不能是Java中的保留字</li>
+<li>大小写敏感，长度无限制</li>
+</ol>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>必须<strong>先定义再使用</strong>，使用标识符表示变量名，变量名标志存放变量值的内存位置，其内存存放的内容是变量的值</p>
+<p>Java的变量有两种：局部变量（使用前必须给定初值，否则会编译错误）、类成员变量</p>
+<p>变量的类型：</p>
+<ol>
+<li>基本数据类型：<ul>
+<li>整数类型</li>
+<li>实数类型</li>
+<li>字符型</li>
+<li>布尔型</li>
+</ul>
+</li>
+<li>构造数据类型：构造类型用类来描述</li>
+</ol>
+<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><p>分为数值常量和符号常量，类静态成员常量只能在定义时初始化</p>
+<p>数值常量：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">整型：<span class="number">123</span>、<span class="number">-15</span></span><br><span class="line">实型：<span class="number">12.1f</span></span><br><span class="line">布尔：<span class="literal">true</span></span><br><span class="line">字符：<span class="string">'x'</span></span><br><span class="line">字符串：<span class="string">"TEST"</span></span><br></pre></td></tr></table></figure>
+
+<p>符号常量：使用修饰符<strong>“final”</strong>定义符号常量</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> 类型 常量名 = 值;</span><br><span class="line"><span class="keyword">final</span> <span class="built_in">int</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>基本数据类型表</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据类型名</th>
+<th align="center">占用内存空间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">byte</td>
+<td align="center">1字节</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td align="center">2字节</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">4字节</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">8字节</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">4字节</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">8字节</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td align="center">2字节</td>
+</tr>
+<tr>
+<td align="center">boolean</td>
+<td align="center">1位</td>
+</tr>
+</tbody></table>
+<p>整型常量在机器中默认以<strong>int</strong>类型存储，实型常量在机器中默认以<strong>double</strong>类型存储，加后缀<strong>F</strong>或<strong>f</strong>在机器中以<strong>float</strong>类型存储</p>
+<p>字符类型用来表示单个字符，采用<strong>16位二进制Unicode</strong>编码表示</p>
+<p>布尔型数据只有两个值：<code>true</code>和<code>false</code>，不可将布尔类型看作整型值</p>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>与c++中一致</p>
+<p><img src="https://i.postimg.cc/Px8w5CBQ/csaga.png" alt></p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">5</span>/<span class="number">2</span>=<span class="number">2</span>; <span class="number">5.0</span>/<span class="number">2.0</span>=<span class="number">2.5</span></span><br><span class="line"><span class="number">5</span>%<span class="number">2</span>=<span class="number">1</span>; <span class="number">5.2</span>%<span class="number">2</span>=<span class="number">1.2</span>; <span class="number">5.2</span>%<span class="number">2.2</span>=<span class="number">0.8</span></span><br><span class="line"><span class="number">10</span>%<span class="number">-4</span>=<span class="number">2</span>; <span class="number">-10</span>%<span class="number">-4</span>=<span class="number">-2</span></span><br><span class="line"></span><br><span class="line">某个培训中心要为新到的学员安排房间，假设共有x个学员，每个房间可以住<span class="number">6</span>人，用一个公式来计算他们要住的房间数？ </span><br><span class="line">(x+<span class="number">5</span>)/<span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<p>逻辑运算符：</p>
+<ul>
+<li>与：op1 &amp; op2  全真为真</li>
+<li>或：op1 | op2  一真即真    对于 &amp; 和 |，两边的表达式任何情况都会参与运算</li>
+<li>短路与：op1 &amp;&amp; op2  op1为假不计算op2</li>
+<li>短路或：op1 || op2  op1为真不计算op2</li>
+</ul>
+<p>移位运算符：</p>
+<p><img src="https://i.postimg.cc/tRNgtdtV/dafagagggggnnn.png" alt></p>
+<p>使用一个表达式计算2的x次方： <code>1&lt;&lt;x</code> 将1左移x位 2<sup>x</sup></p>
+<p>Java中唯一的三元运算符：<code>变量= &lt;布尔表达式&gt; ? &lt;表达式1&gt; : &lt;表达式2&gt;</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">max</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>,c;</span><br><span class="line">        c=a&gt;b ? ++a : b++;</span><br><span class="line">        System.out.println(a,b,c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出结果：3 5 4</span></span><br></pre></td></tr></table></figure>
+
+<p>运算符优先级</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">()&gt;单目&gt;双目&gt;三目&gt;赋值</span><br><span class="line">双目：算术&gt;关系&gt;逻辑</span><br><span class="line"></span><br><span class="line">a=<span class="number">8</span><span class="number">-2</span>*<span class="number">3</span>&lt;<span class="number">4</span>&amp;&amp;<span class="number">5</span>&lt;<span class="number">2</span>  结果：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h4><p>运算过程中，Java会自动把<strong>精度较低的类型转换为精度较高</strong>的类型；低精度–&gt;高精度可以自动转换，反之则会出现编译错误，需要强制转换</p>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">精度由高到低</span><br><span class="line"><span class="keyword">double</span></span><br><span class="line"><span class="keyword">float</span></span><br><span class="line"><span class="keyword">long</span></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line"><span class="keyword">byte</span>/<span class="keyword">short</span>/<span class="keyword">char</span></span><br></pre></td></tr></table></figure>
+
+<p>自动转换：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="string">'A'</span>+<span class="number">2</span>+<span class="number">2.5</span>   <span class="comment">//结果为double类型</span></span><br><span class="line"><span class="string">'a'</span>+<span class="number">1</span>=<span class="number">98</span>    <span class="comment">//char--&gt;int 算数+</span></span><br><span class="line"><span class="string">"a"</span>+<span class="number">1</span>=<span class="string">"a1"</span>  <span class="comment">//'='两边有一个字符串即为字符串+</span></span><br></pre></td></tr></table></figure>
+
+<p>强制转换：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">int</span> i;byte b;</span><br><span class="line">b=(byte)<span class="number">345</span>;     <span class="comment">//b=345%256=89</span></span><br><span class="line">i=(<span class="built_in">int</span>)(<span class="number">3.8</span>+<span class="number">6</span>);  <span class="comment">//i=9，强制转换后小数部分被截去</span></span><br></pre></td></tr></table></figure>
+
+<p>运算时注意（一般的运算都有类型提升功能）：</p>
+<ol>
+<li>运算的结果至少是int型，即如果参与运算的两个数级别比int型低或为int型，则结果为int型</li>
+<li>参与运算的数据如果有一个级别比int型高，则运算结果与类型级别高的数相同</li>
+<li>参与运算的两个数据如果类型不一样，会把低级别的数据转换为高级别的类型后再做运算，结果为高级的类型</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">float</span> x = <span class="number">3.3f</span>;</span><br><span class="line"><span class="built_in">double</span> y = <span class="number">2.9</span>;</span><br><span class="line">byte a = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">x+(<span class="built_in">int</span>)y/<span class="number">3</span>*a</span><br><span class="line"><span class="comment">// 结果的值和类型：3.3f</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="标准输入输出（I-O）"><a href="#标准输入输出（I-O）" class="headerlink" title="标准输入输出（I/O）"></a>标准输入输出（I/O）</h4><p>一般用键盘作为标准的输入设备，显示器则是标准的输出设备</p>
+<p><code>System.in</code> 是字节流，作用是从标准输入中读一个字节</p>
+<ul>
+<li><code>int read()</code>：从流中读取一个字节并将该字节作为整数返回，没有数据则返回-1</li>
+<li><code>int read(byte b[])</code>：从流中读取多个字节放到b中，返回实际读取到的字节数</li>
+<li><code>int read(byte b[],int off,int len)</code>：从流中读取最多<strong>len</strong>字节的数据, 放到数组<strong>b</strong>的下标<strong>off</strong>开始的单元中，返回读取到的字节数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">         <span class="keyword">char</span> ch=(<span class="keyword">char</span>)System.in.read();</span><br><span class="line">         System.out.println(ch);    </span><br><span class="line">         &#125;<span class="keyword">catch</span>(IOException e)&#123;&#125;</span><br><span class="line"><span class="comment">//调用read()函数一定要 try catch</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h4><p>switch语句</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">case</span> 常量<span class="number">1</span>:语句<span class="number">1</span> [<span class="keyword">break</span>;]</span><br><span class="line"><span class="keyword">case</span> 常量<span class="number">2</span>:语句<span class="number">2</span> [<span class="keyword">break</span>;]</span><br><span class="line">……</span><br><span class="line">[dafault:缺省处理语句]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>for语句：<code>for (表达式1; 表达式2; 表达式3) {}</code> </p>
+<p><img src="https://i.postimg.cc/dVb7Ss77/forrrof.png" alt></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a=<span class="number">5</span>,b=<span class="number">6</span>,i=<span class="number">0</span>,j=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">switch</span>(a)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>: <span class="keyword">switch</span>(b)</span><br><span class="line">                    &#123;</span><br><span class="line">                          <span class="keyword">case</span> <span class="number">5</span>:i++;<span class="keyword">break</span>;</span><br><span class="line">                          <span class="keyword">case</span> <span class="number">6</span>:j++;<span class="keyword">break</span>;</span><br><span class="line">                          <span class="keyword">default</span>:i++;j++;</span><br><span class="line">                     &#125;  <span class="comment">//没有break</span></span><br><span class="line">         <span class="keyword">case</span> <span class="number">6</span>: i++;j++;</span><br><span class="line">                     <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">default</span>: i++;j++;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(i+<span class="string">","</span>+j);</span><br><span class="line"><span class="comment">//结果：1，2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>Java中数组是独立的类</p>
+<p>一维数组：</p>
+<ul>
+<li>定义：<code>int[] a = new int[100];</code></li>
+<li>初始化：<code>int[] b = {1,2,3,4};</code> 或<code>int[] a = new int[] {1,2,3,4};</code></li>
+</ul>
+<p>Java在对数组元素操作时会<strong>对数组下标进行越界检查</strong>以保证安全性</p>
+<p>每个数组都有一个属性<code>length</code>指明其长度</p>
+<p>二维数组：</p>
+<p>Java的多维数组实际是<strong>数组的数组</strong>，不一定是规则的矩阵数组</p>
+<p>定义：</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/1zL77qSk/ddddy1.png" class="lazyload"></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/sX76kgDv/ddd2d.png" class="lazyload"></p>
+<p>对数组的排序</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line">Arrays.sort(x);</span><br></pre></td></tr></table></figure>
+
+<p>二分查找（先排序，找到返回下标，没找到返回小于0的数）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>[] x=<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">2</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">3</span>&#125;;</span><br><span class="line">java.util.Arrays.sort(x);</span><br><span class="line">System.out.println(java.util.Arrays.binarySearch(x,<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>拷贝数组</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>[] x;</span><br><span class="line">x = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] y;</span><br><span class="line">y = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];</span><br><span class="line">System.arraycopy(x,<span class="number">0</span>,y,<span class="number">0</span>,<span class="number">4</span>);</span><br><span class="line"><span class="comment">//将数组x内的4个元素从下标0开始拷贝到数组y</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="面向对象程序设计"><a href="#面向对象程序设计" class="headerlink" title="面向对象程序设计"></a>面向对象程序设计</h2><p>main()函数写法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类的定义：</p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line"><span class="comment">[修饰符]</span> class 类名 <span class="comment">[extends 父类名]</span> <span class="comment">[implements 接口名列表]</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">[成员变量说明]</span></span><br><span class="line"><span class="comment">[构造方法说明]</span></span><br><span class="line"><span class="comment">[静态初始化说明]</span></span><br><span class="line"><span class="comment">[成员方法说明]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="类首"><a href="#类首" class="headerlink" title="类首"></a>类首</h4><p><code>[修饰符] class 类名 [extends 父类名] [implements 接口名列表]</code></p>
+<figure class="highlight aspectj"><table><tr><td class="code"><pre><span class="line">访问权限修饰符：</span><br><span class="line">缺省或<span class="keyword">public</span></span><br><span class="line"><span class="keyword">abstract</span>:抽象类（不能创建对象）</span><br><span class="line"><span class="keyword">final</span>：最终类（不能有子类）</span><br><span class="line"></span><br><span class="line"><span class="keyword">extends</span>:继承（父类）</span><br><span class="line"><span class="keyword">implements</span>:实现 （接口，可以有多个）</span><br></pre></td></tr></table></figure>
+
+<h4 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h4><p><code>[修饰符] 成员变量类型 成员变量名列表;</code></p>
+<p><code>pubic static int a=10;</code></p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/90GGXDvq/jiuzeh.png" class="lazyload"></p>
+<p>大小：<code>public</code>&gt;<code>protected</code>&gt;<code>缺省</code>&gt;<code>private</code></p>
+<p><code>static</code>–静态变量（类变量），可以通过类访问，也可以通过类的对象访问</p>
+<p>没有<code>static</code>修饰的叫做对象变量</p>
+<p><code>final</code>–最终变量（对象常量），说明后不能再改变值，定义时或构造函数中赋值</p>
+<p><code>static final</code>–类常量，一定要在定义时赋值</p>
+<h4 id="成员方法"><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h4><p><code>[方法修饰符] 返回值类型 方法名 ([形参列表]) [throws异常列表] {}</code></p>
+<p><code>publc int max(int a,int b) {return a&gt;b?a:b;}</code></p>
+<p>方法体也可以是一个分号<code>;</code>，表示无具体方法或未实现，当且仅当方法修饰符中有<code>abstract</code>或<code>native</code>时，方法才可无方法体   <code>abstract void play();</code></p>
+<h5 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h5><p>类中可以有多个<strong>带有不同参数的同名方法</strong>，参数列表必须不同</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">或者参数个数不同，</span><br><span class="line">或者是参数类型不同，</span><br><span class="line">或者参数类型的顺序不同</span><br></pre></td></tr></table></figure>
+
+<h5 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h5><p><code>[构造方法修饰符] 方法名 ([形式参数列表]) [throws异常列表] {}</code></p>
+<ol>
+<li>构造方法的方法名与类名相同</li>
+<li>构造方法没有返回类型，不能写void</li>
+<li>构造方法主要作用时完成对类对象的初始化工作</li>
+<li>每个类至少一个构造方法，没有显式定义构造方法，Java会自动提供一个缺省的构造方法，只要类中显式定义了一个或多个构造方法，而且所有显式定义的构造方法都带参数，那么将失去缺省构造方法</li>
+</ol>
+<p><code>this</code>的使用：<code>this</code>用来表示本类对象</p>
+<p>在方法和构造方法中，可以使用<code>this</code>来访问对象的属性和方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Person(String n,<span class="keyword">int</span> a)&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = n;</span><br><span class="line">    <span class="keyword">this</span>.age = a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>static</code>方法中不能使用<code>this</code></p>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p><code>Object</code>类是Java所有类的直接父类或间接父类</p>
+<p>子类可以继承父类所有非<code>private</code>的属性和方法（除构造方法）</p>
+<p>属性可以<strong>继承、添加、隐藏</strong></p>
+<p>属性的隐藏（覆盖）：子类重新定义一个与父类成员变量完全相同的变量</p>
+<p>方法可以<strong>继承、添加、覆盖、重载</strong></p>
+<p>方法的覆盖：子类中定义的方法和父类中的方法的首部是一样的，包括<strong>方法名、参数列表、返回类型和异常抛出</strong>，但方法体的实现改变了</p>
+<p>方法的重载：方法名相同，但参数列表不同，实际上相当于在子类中新加了一个方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//某类的静态成员为该类及该类的所有子类所共有</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">a</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> b=<span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span> <span class="keyword">extends</span> <span class="title">a</span></span></span><br><span class="line"><span class="class"></span>&#123;	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		test.b=<span class="number">20</span>;</span><br><span class="line">		System.out.println(a.b);   <span class="comment">//20		</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//子类中新定义的静态成员变量与父类中的某个静态成员变量同名，则这两个静态成员变量相互独立</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="super的使用"><a href="#super的使用" class="headerlink" title="super的使用"></a>super的使用</h5><p>构造方法不能继承，但是子类的构造方法能确保它的直接父类和间接父类的构造方法都能被调用</p>
+<p>使用情况：</p>
+<ol>
+<li>子类隐藏了超类中的变量或方法，而程序中又要使用  <code>super.变量</code>  <code>super.方法([参数表])</code></li>
+<li>子类的构造方法中引用父类的构造方法    <code>super([参数表])</code></li>
+</ol>
+<p>子类调用父类的构造方法必须放在子类构造方法的第一行</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">point</span></span>&#123;</span><br><span class="line">    point(<span class="keyword">int</span> x,<span class="keyword">int</span> y)&#123;&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">color</span> <span class="keyword">extends</span> <span class="title">point</span></span>&#123;</span><br><span class="line">    color(<span class="keyword">int</span> x,<span class="keyword">int</span> y)&#123;</span><br><span class="line">        <span class="keyword">super</span>(x,y); <span class="comment">//必须放在第一句</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不明确使用<code>super</code>调用父类构造方法时，系统会自动在构造方法中加上<code>super()</code>，来调用父类<strong>不带参数的构造方法</strong></p>
+<p>建议：在子类的构造方法中最好能明确使用<code>super</code>调用父类的构造方法给从父类继承来的变量初始化</p>
+<p>构造方法的调用顺序：</p>
+<ol>
+<li>首先调用父类的构造方法，递归，故最顶级的父类最先调用</li>
+<li>根据各成员的声明顺序，执行成员变量的初始化赋值</li>
+<li>执行自己的构造方法中的语句</li>
+</ol>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/1RDYcPCt/cooloolool.png" class="lazyload"></p>
+<p>子类对象和父类对象的转换：</p>
+<ol>
+<li>子类对象–&gt;父类对象：显式或隐式，子类对象直接向父类对象赋值</li>
+<li>父类对象–&gt;子类对象：只有父类对象实际指向的是一个子类对象时，使用强制类型转换</li>
+</ol>
+<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><p><code>abstract</code>修饰的类和方法，抽象类不能创建任何对象，必须产生子类，由子类创建对象</p>
+<p>类中的某一方法是抽象的，整个类就必须说明成抽象的</p>
+<p>抽象方法在子类中必须被实现，否则子类仍是抽象的</p>
+<h4 id="final类"><a href="#final类" class="headerlink" title="final类"></a>final类</h4><p><code>final</code>类：不能被继承，没有子类</p>
+<p><code>final</code>方法：不能被子类所覆盖</p>
+<p>所有<code>final</code>类中的方法默认为<code>final</code>方法</p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><ol>
+<li>使程序设计和实现相互分离</li>
+<li>弥补Java只支持单重继承的不足</li>
+</ol>
+<p><code>[修饰符] interface 接口名 [extends] [接口列表] {接口体}</code></p>
+<p>接口的权限修饰符：</p>
+<ol>
+<li>缺省：同包访问</li>
+<li>public：任意访问</li>
+</ol>
+<p>接口中的成员变量都是隐含<code>public static final</code>的，即静态最终变量（常量）</p>
+<p>接口中的方法都是抽象方法，所有方法隐含<code>public abstract</code></p>
+<p><code>int step = 5; ---&gt; public static final int step =5;</code></p>
+<p>接口的抽象程度比抽象类更高，不需要具体实现优先使用接口</p>
+<h4 id="包"><a href="#包" class="headerlink" title="包"></a>包</h4><p>相当于文件夹</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br></pre></td></tr></table></figure>
+
+<h4 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h4><p>Java按值传递所有参数，制作所有参数的副本，不管它们的类型</p>
+<p><code>==</code>和<code>!==</code>比较引用型变量时，只能判断运算符两边引用的是否为同一对象，即判断地址值是否相同</p>
+<p>判断对象实体值是否相同使用<code>equals()</code>方法</p>
+<p>自己定义的类如果要支持<code>equals</code>方法必须要重写从<code>Object</code>类继承来的<code>equals</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Object类中的equals方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span>==obj);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//重写equals()方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>==obj) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(obj==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(getClass()!=obj.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    Person p = (Person)obj;</span><br><span class="line">    <span class="keyword">if</span>(name.equals(p.name)&amp;&amp;age==p.age) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h4><p>将类的定义置于一个用于封装它的类（外部类）中</p>
+<p>内部类不能与任何一层外部类同名</p>
+<p>作用：逻辑分组，隐藏细节</p>
+<p>可以使用<code>protected private</code>修饰符，<code>final abstract static</code>表示不能被继承，不能被实例化，静态内部类</p>
+<h5 id="匿名类"><a href="#匿名类" class="headerlink" title="匿名类"></a>匿名类</h5><p>没有类名的特殊内部类</p>
+<p>当需要创建一个类的对象而且用不上它的名字时，使用内部类可以使代码看上去简洁清楚</p>
+<p>没有名字，不能定义构造方法</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>异常处理机制：抛出异常(系统抛出；用户自定义抛出)—&gt;捕获异常(寻找合适的方法处理异常)</p>
+<p>格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    …………</span><br><span class="line">&#125;<span class="keyword">catch</span>(ExceptionName1 e)</span><br><span class="line">&#123;…………&#125;</span><br><span class="line"><span class="keyword">catch</span>(ExceptionName2 e) <span class="comment">//catch 不一定执行</span></span><br><span class="line">&#123;…………&#125;</span><br><span class="line"><span class="keyword">finally</span>    <span class="comment">//finally 总是执行</span></span><br><span class="line">&#123;…………&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Exception</code>类子类由两种：</p>
+<ul>
+<li>运行时异常：<strong>程序编写不正确</strong>导致，除数为0、错误的强制类型转换、数组越界访问、空引用</li>
+<li>非运行时异常：不是程序本身的错误，如找不到指定的文件</li>
+</ul>
+<p>Java程序必须<strong>捕获</strong>或<strong>声明抛出</strong>所有<strong>非运行时异常</strong>，对运行时异常不做要求</p>
+<p><code>FileNotFoundException</code> 访问文件未找到，非运行时</p>
+<p><code>IOException</code> I/O故障，非运行时</p>
+<p>用户处理异常的三种方法：</p>
+<ol>
+<li><code>try-catch-finally</code>捕获和处理</li>
+<li><code>throws</code>声明抛出</li>
+<li><code>throw</code>定义自己的异常类抛出</li>
+</ol>
+<p>将可能抛出一个或者若干个异常的代码放入try语句块中，应尽量减小try代码块的大小</p>
+<p><img src="/images/placeholder.png" alt data-src="https://i.postimg.cc/HL1sPbD5/harddeondat-0day.png" class="lazyload"></p>
+<p>（4）try块中产生了异常，在方法中没有捕获。在这种情况下，Java将执行try块中的代码直到产生异常，然后跳过try块中的代码而转去执行finally子句中的代码，最后将异常抛出给方法的调用者</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">J_Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            System.out.print(<span class="string">'h'</span>);</span><br><span class="line">            mb_method1(args);</span><br><span class="line">            System.out.print(<span class="string">'x'</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            System.out.print(<span class="string">'m'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(<span class="string">'n'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mb_method1</span><span class="params">(String a[])</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            mb_method2(a);</span><br><span class="line">            System.out.print(<span class="string">'a'</span>);</span><br><span class="line">        &#125;<span class="comment">/*catch(Exception e)&#123;       //未注释：hbcdxn</span></span><br><span class="line"><span class="comment">            System.out.print('b');*/</span>   <span class="comment">//注释：hcmn</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span>&#123;</span><br><span class="line">            System.out.print(<span class="string">'c'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(<span class="string">'d'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mb_method2</span><span class="params">(String a[])</span></span>&#123;</span><br><span class="line">        System.out.println(a[a.length]); <span class="comment">//产生数组越界</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Java基本类库"><a href="#Java基本类库" class="headerlink" title="Java基本类库"></a>Java基本类库</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang   <span class="comment">//语言包</span></span><br><span class="line">java.util   <span class="comment">//工具包</span></span><br><span class="line">java.io</span><br></pre></td></tr></table></figure>
+
+<p><code>java.lang.Object</code> 整个类层次结构的根节点</p>
+<p><code>java.lang.Math</code> 提供数学常数及各种函数</p>
+<ul>
+<li><code>random</code>随机数 <ul>
+<li>得到一个[0,1)之间的随机数 <code>double c = Math.random();</code></li>
+<li>得到一个[20,80)之间的随机整数  <code>int c = (int)(Math.random()*60+20);</code></li>
+</ul>
+</li>
+<li><code>ceil 向上取整</code> <code>floor 向下取整</code> <code>rint 四舍五入</code> 均为<code>double</code></li>
+<li><code>round 四舍五入</code> <code>int&lt;--float</code> <code>long&lt;--double</code></li>
+</ul>
+<p><code>java.lang.Thread</code> 提供对多线程的支持</p>
+<p><code>java.lang.Throwable</code> 所有异常的基类</p>
+<h4 id="字符串类"><a href="#字符串类" class="headerlink" title="字符串类"></a>字符串类</h4><p><code>java.lang.String</code> 不可改变的静态字符串</p>
+<p><code>java.lang.StringBuffer</code> 动态可变字符串</p>
+<h5 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h5><p>所有字符串常量都是<code>String</code>对象，存储在<code>String Pool</code>(字符串池)中，字符串池是常量池的一部分</p>
+<p><code>String</code>对象一旦创建内容不可改变，若要更改，则必须创建一个新的<code>String</code>对象</p>
+<p><code>==</code>比较地址值，<code>equals()</code>比较实体值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        String a = <span class="string">"hello"</span>;</span><br><span class="line">        String b = <span class="string">"hello"</span>;</span><br><span class="line">        System.out.println(a==b);        <span class="comment">//true 常量池优化</span></span><br><span class="line">        </span><br><span class="line">        String m = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        String n = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        System.out.println(m==n);        <span class="comment">//false 两个对象 两个常量</span></span><br><span class="line">        </span><br><span class="line">        String a = <span class="string">"hellojava"</span>;</span><br><span class="line">        String b = <span class="string">"java"</span>;</span><br><span class="line">        String c = <span class="string">"hello"</span> + b;</span><br><span class="line">        System.out.println(a==c)         <span class="comment">//false a和c不是同一对象</span></span><br><span class="line">        </span><br><span class="line">        String x = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        String y = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        System.out.println(x.equals(y)); <span class="comment">//true 实体值相同</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String str = <span class="string">"HeLlo"</span>;</span><br><span class="line">System.out.println(substring(<span class="number">2</span>));  <span class="comment">//字串 Llo</span></span><br><span class="line">System.out.println(str.charAt(<span class="number">1</span>)); <span class="comment">//某个字符 e</span></span><br><span class="line">System.out.println(str.toUpperCase());  <span class="comment">//转为大写 HELLO</span></span><br><span class="line">System.out.println(str.toLowerCase());  <span class="comment">//转为小写 hello</span></span><br><span class="line"><span class="keyword">char</span>[]  s = str.toCharArray();  <span class="comment">//转为字符数组</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="StringBuffer类"><a href="#StringBuffer类" class="headerlink" title="StringBuffer类"></a>StringBuffer类</h5><p>三种构造方法</p>
+<ol>
+<li><code>StringBuffer sb = new StringBuffer();</code></li>
+<li><code>StringBuffer sb = new StringBuffer(int length());</code></li>
+<li><code>StringBuffer sb = new StringBuffer(String str);</code></li>
+</ol>
+<p>更新方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">StringBuffer s = <span class="keyword">new</span> StringBuffer(<span class="string">"hello"</span>);</span><br><span class="line">s.append(<span class="string">"java"</span>);    <span class="comment">//hellojava</span></span><br><span class="line">s.insert(<span class="number">5</span>,<span class="string">"sun"</span>);   <span class="comment">//hellosunjava</span></span><br><span class="line">s.setCharAt(<span class="number">1</span>,<span class="string">'E'</span>);  <span class="comment">//hEllosunjava</span></span><br><span class="line">s.delect(<span class="number">5</span>,<span class="number">8</span>);       <span class="comment">//hEllojava</span></span><br></pre></td></tr></table></figure>
+
+<p><code>String</code>对象和<code>StringBuffer</code>对象相互转换</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">StringBuffer sb = <span class="keyword">new</span> StringBuffer(<span class="string">"hello"</span>);  <span class="comment">//String--&gt;StringBuffer  调用构造方法</span></span><br><span class="line">String s = sb.toString();      <span class="comment">//StringBuffer--&gt;String  使用 toString()方法</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="向量类"><a href="#向量类" class="headerlink" title="向量类"></a>向量类</h4><p><code>java.util.Vector</code></p>
+<p>数组和向量的不同：</p>
+<ol>
+<li>数组一旦定义，空间长度不可改变，向量空间是动态的</li>
+<li>数组中既能存放基本数据类型，也能存放对象，向量中只能存放对象，可封装类如<code>Integer</code>存放基本数据类型</li>
+</ol>
+<p>构造函数</p>
+<ol>
+<li><code>Vector()</code>      默认大小10</li>
+<li><code>Vector(int size)</code> 指定大小</li>
+<li><code>Vector(int size, int inc)</code> 指定大小和增量 </li>
+</ol>
+<p>创建向量：<code>Vector&lt;Integer&gt; v = new Vector&lt;Integer&gt;(10);</code> &lt;&gt;中的类型不能是基本数据类型</p>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">v.add(x);   <span class="comment">//添加元素</span></span><br><span class="line">v.elementAt(idx); <span class="comment">//获取下标为idx的元素</span></span><br><span class="line">v.setElementAt(obj,idx);  <span class="comment">//修改元素</span></span><br><span class="line">v.size();   <span class="comment">//实际元素个数</span></span><br><span class="line">v.clear();  <span class="comment">//清空向量</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="图形用户界面"><a href="#图形用户界面" class="headerlink" title="图形用户界面"></a>图形用户界面</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*</span><br><span class="line"><span class="keyword">import</span> javax.swing.*</span><br></pre></td></tr></table></figure>
+
+<h4 id="JFrame"><a href="#JFrame" class="headerlink" title="JFrame"></a>JFrame</h4><p>JFrame类用于创建带有菜单条的全功能对象，为窗口、面板等组件提供框架，可以包含窗口标题、最大化、最小化和关闭窗口等按钮，通常是GUI应用程序窗口的顶层容器组件</p>
+<p>JFrame类的对象开始是不可见的，要调用<code>a.setVisible(true)</code>方法</p>
+<p>构造方法：</p>
+<ul>
+<li><code>JFrame()</code>不带标题的框架</li>
+<li><code>JFrame(String)</code>带标题的框架</li>
+</ul>
+<p><code>JFrame</code>和<code>JDialog</code>都是<code>Window</code>的子类，他们都是窗口类，默认布局管理器都是<code>BorderLayout</code></p>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">show()  <span class="comment">//显示框架</span></span><br><span class="line">setVisible(<span class="keyword">boolean</span> b)  <span class="comment">//使框架可见/不可见(true/false)</span></span><br><span class="line">setTitle()   <span class="comment">//设置标题</span></span><br><span class="line">setSize(<span class="keyword">int</span> w,<span class="keyword">int</span> h) <span class="comment">//设置框架的尺寸</span></span><br><span class="line">setBounds(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> w,<span class="keyword">int</span> h) <span class="comment">//设置框架的位置及尺寸</span></span><br><span class="line">add(String p,Component ob) <span class="comment">//将组件加入到框架的p位置，没有p默认中心</span></span><br><span class="line">setLayout(<span class="keyword">new</span> FlowLayout()) <span class="comment">//设置布局管理器</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="JPanel"><a href="#JPanel" class="headerlink" title="JPanel"></a>JPanel</h4><p>面板<code>JPanel</code>是能在屏幕上实际显示的组件，提供容纳其他组件的功能，本身必须放在<code>Window Frame Dialog</code>中才能使用</p>
+<p>默认布局管理器是<code>FlowLayout</code>，从左到右，从上到下</p>
+<p>设置背景色和前景色：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JPanel b = <span class="keyword">new</span> JPanel();</span><br><span class="line">b.setBackground(Color.RED);   <span class="comment">//背景色</span></span><br><span class="line">b.setForeground(Color.BLUE);  <span class="comment">//前景色</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="JButton"><a href="#JButton" class="headerlink" title="JButton"></a>JButton</h4><p>构造方法：</p>
+<ul>
+<li><code>JButton()</code> 无文本</li>
+<li><code>JButton(String t)</code> 有文本</li>
+</ul>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setLable(String t) <span class="comment">//设置按钮标志</span></span><br><span class="line">setText(<span class="string">"hello"</span>)</span><br><span class="line">addACtionListener(ActionListener <span class="number">1</span>) <span class="comment">//将1指定为按钮的事件监听者</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="JLabel"><a href="#JLabel" class="headerlink" title="JLabel"></a>JLabel</h4><p>构造方法：</p>
+<ul>
+<li><code>JLabel()</code> 空标签</li>
+<li><code>JLabel(String text)</code> 带有指定文本的标签</li>
+<li><code>JLabel(String text, int alignment)</code> 带有指定文本和在容器中的对齐方式的标签</li>
+</ul>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setText(String text)  <span class="comment">//设置文本 </span></span><br><span class="line">setAlignment(<span class="keyword">int</span> alignment)  <span class="comment">//设置对齐方式 JLabel.LEFT/CENTER/RIGHT</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="JTextField"><a href="#JTextField" class="headerlink" title="JTextField"></a>JTextField</h4><p>构造方法：</p>
+<ul>
+<li><code>JTextField()</code>  空文本框</li>
+<li><code>JTextField(String text)</code> 有初始文本</li>
+<li><code>JTextField(int Columns)</code> 指定列数</li>
+<li><code>JTextField(String text, int Columns)</code> 初始文本、指定列数</li>
+</ul>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setText(String s)  <span class="comment">//设置文本框中的字符串</span></span><br><span class="line">getText(String s)  <span class="comment">//获得文本框中的字符串</span></span><br><span class="line">addActionListener(ActionListener <span class="number">1</span>) <span class="comment">//指定1为文本框的事件监听者</span></span><br><span class="line">setEchoChar(String s)  <span class="comment">//设置用户输入的回应字符,输入密码时可设置为*</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h4><p>见本文末尾实例</p>
+<p><code>Window</code>关闭窗体</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">f.addWindowListener(<span class="keyword">new</span> windowAdapter()&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowClosing</span><span class="params">(WindowEvent e)</span></span>&#123;</span><br><span class="line">        System.exit(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="图形绘制"><a href="#图形绘制" class="headerlink" title="图形绘制"></a>图形绘制</h4><p>见本文末尾实例</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>实现方式：</p>
+<ol>
+<li><p>继承<code>Thread</code>，覆盖<code>run()</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mythread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">   </span>&#123;………&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现<code>Runnable</code>，实现<code>run()</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mythread</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;………&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>两个线程，一个线程让标签1向右移动，另一个线程让标签2向下移动，主界面设置按钮，启动线程</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> mythread extends Thread&#123;</span><br><span class="line">   JLabel j1,j2;</span><br><span class="line">   mythread(JLabel j1,Jlabel j2)&#123;</span><br><span class="line">      <span class="keyword">this</span>.j1 = j1;</span><br><span class="line">      <span class="keyword">this</span>.j2 = j2;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">try</span>&#123;</span><br><span class="line">         sleep(<span class="number">1000</span>);</span><br><span class="line">         j1.setLocation(j1.getX()+<span class="number">10</span>,j1.getY());</span><br><span class="line">         j2.setLocation(j1.getX(),j1.getY()+<span class="number">10</span>);</span><br><span class="line">      &#125;<span class="keyword">catch</span>(InterruptedException e)&#123;System.out.println(e.toString());&#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">JFrame</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">      Test f = <span class="keyword">new</span> Test();</span><br><span class="line">      f.setTitle(<span class="string">"thread"</span>);</span><br><span class="line">      f.setVisible(<span class="keyword">true</span>);</span><br><span class="line">      Jlabel j1 = <span class="keyword">new</span> JLabel(<span class="string">"label1"</span>);</span><br><span class="line">      Jlabel j2 = <span class="keyword">new</span> JLabel(<span class="string">"label2"</span>);</span><br><span class="line">      f.add(j1);</span><br><span class="line">      f.add(j2);</span><br><span class="line">      JButton b = <span class="keyword">new</span> JButton(<span class="string">"start"</span>);</span><br><span class="line">      f.add(b);</span><br><span class="line">      b.addActionListener(<span class="keyword">new</span> actionListener()&#123;</span><br><span class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span></span>&#123;</span><br><span class="line">            mythread t1 = <span class="keyword">new</span> mythread(j1,j2);</span><br><span class="line">            mythread t2 = <span class="keyword">new</span> mythread(j1,j2);</span><br><span class="line">            t1.start();</span><br><span class="line">            t2.start();</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="线程生命周期"><a href="#线程生命周期" class="headerlink" title="线程生命周期"></a>线程生命周期</h4><ol>
+<li>创建状态：<code>Thread myThread = new MyThreadClass();</code></li>
+<li>可运行状态：分配资源</li>
+<li>不可运行状态：<ul>
+<li>调用<code>sleep()</code>方法   –&gt; 等待</li>
+<li>调用<code>suspend()</code>方法   –&gt;调用<code>resume()</code>方法</li>
+<li>调用<code>wait()</code>方法   –&gt;调用<code>notifyAll()</code>方法</li>
+<li>输入输出流发生阻塞   –&gt;等待</li>
+<li>线程试图调用另一个对象的同步方法   –&gt;等待释放同步锁</li>
+</ul>
+</li>
+<li>死亡状态：<ul>
+<li>自然撤销</li>
+<li>调用<code>stop()</code>方法停止当前线程 ，一般不用</li>
+</ul>
+</li>
+</ol>
+<h4 id="同步与互斥"><a href="#同步与互斥" class="headerlink" title="同步与互斥"></a>同步与互斥</h4><p>Java中只需要把一个方法声明为<code>synchronized</code>即可有效防止冲突</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="wait和notify"><a href="#wait和notify" class="headerlink" title="wait和notify"></a>wait和notify</h5><p><code>wait</code>导致当前线程等待，直到另一个线程调用该对象的<code>notify()</code>方法</p>
+<p><code>notify</code>唤醒正在等待对象监视器的单个线程</p>
+<p><code>wait</code>和<code>notify</code>必须配合<code>synchronized</code>使用，<code>wait</code>在<code>notify</code>前用</p>
+<h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><p>基于TCP的C/S通信</p>
+<h2 id="一些实例"><a href="#一些实例" class="headerlink" title="一些实例"></a>一些实例</h2><h3 id="输入10个数并排序"><a href="#输入10个数并排序" class="headerlink" title="输入10个数并排序"></a>输入10个数并排序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">      <span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">      Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>;i++)&#123;</span><br><span class="line">         a[i] = scan.nextInt();</span><br><span class="line">      &#125;</span><br><span class="line">      Arrays.sort(a);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>;i++)&#123;</span><br><span class="line">         System.out.print(a[i]+<span class="string">" "</span>);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="复数类"><a href="#复数类" class="headerlink" title="复数类"></a>复数类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Complex</span></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">int</span> realPart;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">int</span> maginPart;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Complex</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.realPart = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">this</span>.maginPart = <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Complex</span><span class="params">(<span class="keyword">int</span> r,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.realPart = r;</span><br><span class="line">      <span class="keyword">this</span>.maginPart = i;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.realPart+<span class="string">"+"</span>+<span class="keyword">this</span>.maginPart+<span class="string">"i"</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Complex <span class="title">complexAdd</span><span class="params">(Complex a)</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Complex(<span class="keyword">this</span>.realPart + a.realPart,<span class="keyword">this</span>.maginPart + a.maginPart);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Complex <span class="title">complexSub</span><span class="params">(Complex a)</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Complex(<span class="keyword">this</span>.realPart - a.realPart,<span class="keyword">this</span>.maginPart - a.maginPart);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">      Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">      Complex a1 = <span class="keyword">new</span> Complex(scan.nextInt,scan.nextInt);</span><br><span class="line">      Complex a2 = <span class="keyword">new</span> Complex(scan.nextInt,scan.nextInt);</span><br><span class="line">      System.out.println(<span class="string">"a1:"</span>+a1.toString());</span><br><span class="line">      System.out.println(<span class="string">"a2:"</span>+a2.toString());</span><br><span class="line">      System.out.println(<span class="string">"a1+a2="</span>+a1.Add(a2).toString());</span><br><span class="line">      System.out.println(<span class="string">"a1-a2="</span>+a1.Sub(a2).toString());</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="加法器"><a href="#加法器" class="headerlink" title="加法器"></a>加法器</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.*;</span><br><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jiafaqi</span> <span class="keyword">extends</span> <span class="title">JFrame</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">      jiafaqi j = <span class="keyword">new</span> jiafaqi();</span><br><span class="line">      j.setTitle(<span class="string">"加法器"</span>);</span><br><span class="line">      JTextField shu1 = <span class="keyword">new</span> JTextField(<span class="number">5</span>);</span><br><span class="line">      JTextField shu2 = <span class="keyword">new</span> JTextField(<span class="number">5</span>);</span><br><span class="line">      JTextField result = <span class="keyword">new</span> JTexField(<span class="number">5</span>);</span><br><span class="line">      JButton jia = <span class="keyword">new</span> JButton(<span class="string">"+"</span>);</span><br><span class="line">      JButton jian = <span class="keyword">new</span> JButton(<span class="string">"-"</span>);</span><br><span class="line">      j.add(shu1); <span class="comment">//添加组件</span></span><br><span class="line">      j.add(shu2);</span><br><span class="line">      j.add(jia);</span><br><span class="line">      j.add(jian);</span><br><span class="line">      j.add(result);</span><br><span class="line">      j.setLocation(<span class="number">300</span>,<span class="number">300</span>);</span><br><span class="line">      j.setSize(<span class="number">500</span>,<span class="number">100</span>);                             <span class="comment">//事件监听器 匿名类</span></span><br><span class="line">      jia.addActionListener(<span class="keyword">new</span> ActionListener()&#123;</span><br><span class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPeformed</span><span class="params">(ActionEvent e)</span></span>&#123;</span><br><span class="line">            <span class="keyword">int</span> x = Integer.parseInt(shu1.getText());</span><br><span class="line">            <span class="keyword">int</span> y = Integer.parseInt(shu2.getText());</span><br><span class="line">            <span class="keyword">int</span> z = x + y;</span><br><span class="line">            result.setText(Integer.toString(z));</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      jian.addActionListener(<span class="keyword">new</span> ActionListener()&#123;</span><br><span class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPeformed</span><span class="params">(ActionEvent e)</span></span>&#123;</span><br><span class="line">            <span class="keyword">int</span> x = Integer.parseInt(shu1.getText());</span><br><span class="line">            <span class="keyword">int</span> y = Integer.parseInt(shu2.getText());</span><br><span class="line">            <span class="keyword">int</span> z = x - y;</span><br><span class="line">            result.serText(Integer.toString(z));</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      f.setVisible(<span class="keyword">true</span>); <span class="comment">//别忘了这个</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="变脸"><a href="#变脸" class="headerlink" title="变脸"></a>变脸</h3><blockquote>
+<p>利用事件处理程序mouseUp()实现程序运行后出现一张笑脸，鼠标点击一次则变成哭脸，再点击一次又变成笑脸，依次轮换</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.*;</span><br><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">JFrame</span></span>&#123;</span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">int</span> m = <span class="number">0</span>;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">      Test f = <span class="keyword">new</span> Test();</span><br><span class="line">      f.setTitle(<span class="string">"变脸"</span>);</span><br><span class="line">      f.setSize(<span class="number">300</span>,<span class="number">300</span>);</span><br><span class="line">      f.setVisible(<span class="keyword">true</span>);</span><br><span class="line">      f.addMouseListener(<span class="keyword">new</span> MouseAdapter()&#123;    <span class="comment">//鼠标的点击事件</span></span><br><span class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mouseClicked</span><span class="params">(MouseEvent e)</span></span>&#123;</span><br><span class="line">            f.reprint();</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(m++%<span class="number">2</span>==<span class="number">1</span>)&#123;</span><br><span class="line">         <span class="keyword">super</span>.paint(g); <span class="comment">//消除之前画的</span></span><br><span class="line">         g.getColor(Color.blue);</span><br><span class="line">         g.drawString(<span class="string">"哭！"</span>,<span class="number">80</span>,<span class="number">60</span>);</span><br><span class="line">         g.drawOval(<span class="number">100</span>,<span class="number">50</span>,<span class="number">120</span>,<span class="number">160</span>);</span><br><span class="line">         g.drawArc(<span class="number">170</span>,<span class="number">90</span>,<span class="number">30</span>,<span class="number">30</span>,<span class="number">0</span>,-<span class="number">180</span>);</span><br><span class="line">         g.drawArc(<span class="number">120</span>,<span class="number">90</span>,<span class="number">30</span>,<span class="number">30</span>,<span class="number">0</span>,-<span class="number">180</span>);</span><br><span class="line">         g.drawArc(<span class="number">120</span>,<span class="number">150</span>,<span class="number">80</span>,<span class="number">80</span>,<span class="number">20</span>,<span class="number">140</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">         <span class="keyword">super</span>.paint(g); <span class="comment">//消除之前画的</span></span><br><span class="line">         g.getColor(Color.blue);</span><br><span class="line">         g.drawString(<span class="string">"笑！"</span>,<span class="number">80</span>,<span class="number">60</span>);</span><br><span class="line">         g.drawOval(<span class="number">100</span>,<span class="number">50</span>,<span class="number">120</span>,<span class="number">160</span>);</span><br><span class="line">         g.drawArc(<span class="number">170</span>,<span class="number">90</span>,<span class="number">30</span>,<span class="number">30</span>,<span class="number">0</span>,<span class="number">180</span>);</span><br><span class="line">         g.drawArc(<span class="number">120</span>,<span class="number">90</span>,<span class="number">30</span>,<span class="number">30</span>,<span class="number">0</span>,<span class="number">180</span>);</span><br><span class="line">         g.drawArc(<span class="number">120</span>,<span class="number">150</span>,<span class="number">80</span>,<span class="number">80</span>,-<span class="number">20</span>,-<span class="number">140</span>);         </span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="GUI多线程"><a href="#GUI多线程" class="headerlink" title="GUI多线程"></a>GUI多线程</h3><blockquote>
+<p>编写一个图形用户界面程序，窗体的宽度300，高度150，布局管理器为null，窗体上有二个标签和二个按钮，标签的位置为（10,30）和（200,60），按钮的位置为（50,100）和（150,100），它们的宽度和高度都是80和20。编写一个线程，该线程可以让标签向右或向左移动10次，每次移动10个单位，间隔1秒，通过按钮的动作事件启动上述线程，“向右走”按钮启动“向右移标签”，“向左走”按钮启动“向左移标签</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">   JLabel l1,l2;</span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">boolean</span> bool;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">(JLabel l1,Jlabel l2)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.l1 = l1;</span><br><span class="line">      <span class="keyword">this</span>.l2 = l2;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(bool==<span class="keyword">true</span>)&#123;</span><br><span class="line">         <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">               l1.setBounds(l1.getX()+<span class="number">10</span>,<span class="number">30</span>,<span class="number">80</span>,<span class="number">80</span>);</span><br><span class="line">               Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;<span class="keyword">catch</span>(Exception e)&#123;System.out.println(e.toString());&#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">         <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">               l1.setBounds(l2.getX()-<span class="number">10</span>,<span class="number">60</span>,<span class="number">80</span>,<span class="number">80</span>);</span><br><span class="line">               Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;<span class="keyword">catch</span>(Exception e)&#123;System.out.println(e.toString());&#125;         </span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">      JFrame f = <span class="keyword">new</span> JFrame();</span><br><span class="line">      f.setSize(<span class="number">300</span>,<span class="number">200</span>);</span><br><span class="line">      f.setVisible(<span class="keyword">true</span>);</span><br><span class="line">      f.setLayout(<span class="keyword">null</span>);</span><br><span class="line">      JLabel l1 = <span class="keyword">new</span> JLabel(<span class="string">"右移"</span>);</span><br><span class="line">      JLabel l2 = <span class="keyword">new</span> JLabel(<span class="string">"左移"</span>);</span><br><span class="line">      l1.setBounds(<span class="number">10</span>,<span class="number">30</span>,<span class="number">80</span>,<span class="number">20</span>);</span><br><span class="line">      l2.setBounds(<span class="number">200</span>,<span class="number">60</span>,<span class="number">80</span>,<span class="number">20</span>);</span><br><span class="line">      f.add(l1);</span><br><span class="line">      f.add(l2);</span><br><span class="line">      JButton b1 = <span class="keyword">new</span> JButton(<span class="string">"右"</span>);</span><br><span class="line">      JButton b2 = <span class="keyword">new</span> JButton(<span class="string">"左"</span>);</span><br><span class="line">      b1.setBounds(<span class="number">50</span>,<span class="number">100</span>,<span class="number">80</span>,<span class="number">20</span>);</span><br><span class="line">      b2.setBounds(<span class="number">150</span>,<span class="number">100</span>,<span class="number">80</span>,<span class="number">20</span>);</span><br><span class="line">      f.add(b1);</span><br><span class="line">      f.add(b2);</span><br><span class="line">      Test t1 = <span class="keyword">new</span> Test(l1,l2);</span><br><span class="line">      Test t2 = <span class="keyword">new</span> Test(l1,l2);</span><br><span class="line">      b1.addActionListener(<span class="keyword">new</span> ActionListener()&#123;</span><br><span class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span></span>&#123;</span><br><span class="line">            bool = <span class="keyword">true</span>;</span><br><span class="line">            t1.start();</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      b2.addActionListener(<span class="keyword">new</span> ActionListener()&#123;</span><br><span class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span></span>&#123;</span><br><span class="line">            bool = <span class="keyword">false</span>;</span><br><span class="line">            t2.start();</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+  	
+					
+	  </div>     
+	  
+
+	<div class="bottom">
+  <div class="other">
+    <div class="meta">
+      
+
+      
+      <i class="iconfont icon-tag"></i>
+      <a class="tag-link" href="/tags/Course-Review/" rel="tag">-Course Review</a>
+      
+    </div>
+
+    <div class="operate">
+      
+      <span class="text">Share</span>
+      <ul class="share">
+	   			             
+        <li class="iconfont 
+		icon-share-qq 
+		-mob-share-qq 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weixin 
+		-mob-share-weixin 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weibo 
+		-mob-share-weibo 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-facebook 
+		-mob-share-facebook 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-twitter 
+		-mob-share-twitter 
+		item"></li>		
+   	   
+</ul>	
+
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+      
+    </div>
+  </div>
+
+
+  
+  <nav class="nav">
+    <div class="link">
+      
+      <a href="/2019/12/23/cryptography-review/" class="link-wrap">
+        <strong class="caption">older</strong>
+        
+        <span class="title">
+          密码学复习
+        </span>
+      </a>
+      
+    </div>
+    <div class="link">
+      
+    </div>
+  </nav>
+  
+</div> 
+	
+<div class="comment">
+
+    
+
+    <div id="comment">
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src="//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#comment',
+            notify: false,
+            verify: false,
+            app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+            app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',
+            path: window.location.pathname,
+            avatar: 'mm',
+            guest_info: ['nick', 'mail']
+        });
+    </script>
+    
+</div>	
+</article>
+
+          </div> 
+      </div>            
+    
+        <i id="toTop" class="iconfont icon-backtotop"></i>
+
+  
+    <div class="none" id="search">
+    <div class="header">
+        <input type="text" placeholder="输入你想搜索的" id="search-input" class="input">
+        
+        <i id="search-cancel" class="iconfont icon-cancel"></i>
+    </div>
+
+    <div id="search-result" class="result"></div>
+</div>
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon lazyload" src="/images/placeholder.png" data-src="/images/favicon.png">  
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>
+        
+    
+
+
+
+     
+    
+
+
+<footer class="footer">
+	<div class="inner">
+		<div class="copyright">
+			&copy;
+			
+			2019 -
+			
+			2020
+			SunSh1ne
+
+			<br>
+			By <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>
+		</div>
+	</div>
+</footer>   
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
