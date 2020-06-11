@@ -122,513 +122,6 @@
 	   
 	<div class="article-header">
 	    
-		<a class="title" href="/2020/06/11/interA&D/">interA&amp;D</a>  
-	       
-		 
-
-		<div class="meta">
-			<time>6月 11, 2020</time>			
-		</div>
-	</div>
-
-
-	
-
-    
-	<div class="typo article-excerpt">	
-		 
-			<blockquote>
-<p>论述题：3*10</p>
-<p>材料分析提：20</p>
-<p>代码分析提：20+30</p>
-</blockquote>
-<h3 id="WEB安全"><a href="#WEB安全" class="headerlink" title="WEB安全"></a>WEB安全</h3><h5 id="OWASP-TOP-10"><a href="#OWASP-TOP-10" class="headerlink" title="OWASP TOP 10"></a>OWASP TOP 10</h5><h6 id="A1：注入"><a href="#A1：注入" class="headerlink" title="A1：注入"></a>A1：注入</h6><p>将<strong>不受信任的数据</strong>作为命令或查询的一部分发送到解析器进行解析，通常发生在<strong>SQL、LDAP、Xpath、NoSQL</strong>查询语句</p>
-<p>攻击可以诱使解析器在没有适当授权的情况下执行非预期命令或访问数据</p>
-<ul>
-<li>导致<strong>数据丢失、破坏或泄露</strong>，主机被完全接管</li>
-</ul>
-<p>防御：使用<strong>安全的API，完全避免使用解释器</strong>，提供<strong>参数化界面的接口</strong>，迁移到<strong>ORM或实体框架</strong></p>
-<p>SQL注入：预编译，绑定参数</p>
-<h6 id="A2：失效的身份认证"><a href="#A2：失效的身份认证" class="headerlink" title="A2：失效的身份认证"></a>A2：失效的身份认证</h6><p>通过错误使用应用程序的身份认证和会话管理功能，攻击者能够<strong>破译密码、密钥或会话令牌</strong></p>
-<p>暴力破解、弱密码、撞库攻击、明文 加密或弱散列密码、不正确地使回会话ID失效</p>
-<p>防御：多因素身份验证、执行弱密码检查、设置合适的密码长度 复杂性和循环策略、限制或逐渐延迟<strong>失败的登陆尝试</strong></p>
-<h6 id="A3：敏感数据泄露"><a href="#A3：敏感数据泄露" class="headerlink" title="A3：敏感数据泄露"></a>A3：敏感数据泄露</h6><p>许多Web应用程序和API都<strong>无法正确保护敏感数据</strong>，攻击者可以通过窃取或修改未加密的数据来实施诈骗身份盗窃</p>
-<p>对敏感数据加密：</p>
-<ul>
-<li>传输过程中的数据（是否明文传输）</li>
-<li>存储的数据（是否被加密）</li>
-<li>浏览器的交互数据</li>
-</ul>
-<p>防御：</p>
-<ul>
-<li>对系统处理、存储或传输的数据分类，根据分类进行访问控制</li>
-<li>尽快清除没必要存放的重要的敏感数据</li>
-<li>确保存储的敏感数据被加密</li>
-<li>确保使用了最新的、强大的标准算法或密码、参数、协议和密钥，密钥管理到位</li>
-<li>确保传输过程中的数据被加密，如TLS，确保数据加密被强制执行，如HTTP严格安全传输协议（HSTS）</li>
-<li>禁止缓存包含敏感数据的响应</li>
-</ul>
-<h6 id="A4：XXE"><a href="#A4：XXE" class="headerlink" title="A4：XXE"></a>A4：XXE</h6><p>XXE：XML外部实体注入，一般发生在应用程序解析XML输入时，没有处理好外部实体的加载</p>
-<p>危害：文件读取、任意命令执行、探测内网端口、攻击内网网站</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" ?&gt;</span> <span class="comment">&lt;!-- xml声明 --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE note [ &lt;!-- DTD文档类型定义 根元素note --&gt;</span></span><br><span class="line"><span class="meta">  &lt;!ELEMENT note ANY &gt; &lt;!--note中的子元素--&gt;</span></span><br><span class="line"><span class="meta">  &lt;!ELEMENT to (#PCDATA)&gt; &lt;!-- 接收者 --&gt;</span></span><br><span class="line"><span class="meta">  &lt;!ENTITY x "CUMTCS"&gt;  &lt;!-- 命名实体 --&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">note</span>&gt;</span> <span class="comment">&lt;!--文档元素--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">to</span>&gt;</span>Jerry<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">x</span>&gt;</span>&amp;X;<span class="tag">&lt;/<span class="name">x</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml verison="1.0"?&gt;</span>  <span class="comment">&lt;!-- 外部实体 --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE ANY[</span></span><br><span class="line"><span class="meta">  &lt;!ENTITY xxe SYSTEM "file://etc/passwd"&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">x</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">x</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>防御：</p>
-<ul>
-<li>尽可能使用简单的数据格式（如JSON），避免对敏感数据进行序列化</li>
-<li>在XML解析器中禁用XML外部实体和DTD进程</li>
-<li>过滤用户提交的XML数据</li>
-<li>在服务器端实施积极的输入验证、过滤和清理</li>
-<li>使用API安全网关、WAF检测、监控和防止XXE攻击</li>
-</ul>
-<h6 id="A5：失效的访问控制"><a href="#A5：失效的访问控制" class="headerlink" title="A5：失效的访问控制"></a>A5：失效的访问控制</h6><p>未对用户实施<strong>恰当的访问控制</strong>，攻击者可以访问<strong>未经授权的功能和数据</strong></p>
-<p>访问其他用户账户、查看敏感文件、修改其他用户的数据、更改访问权限</p>
-<h6 id="A6：安全配置错误"><a href="#A6：安全配置错误" class="headerlink" title="A6：安全配置错误"></a>A6：安全配置错误</h6><ul>
-<li>不安全的默认配置</li>
-<li>不完整的临时配置</li>
-<li>错误的HTTP报头配置</li>
-<li>包含敏感信息的详细错误信息</li>
-</ul>
-<p>服务器默认账户、密码未删除，目录列表功能未被禁用，服务器实例应用程序未删除</p>
-<h6 id="A7：XSS"><a href="#A7：XSS" class="headerlink" title="A7：XSS"></a>A7：XSS</h6><p>网页中包含不受信任的、未经恰当验证或转义的数据，或使用可以创建HTML或Javascript的浏览器API更新现有的网页时，会出现XSS缺陷</p>
-<p>三种类型：</p>
-<ul>
-<li>反射型XSS</li>
-<li>存储型XSS</li>
-<li>基于DOM的XSS</li>
-</ul>
-<p>攻击者能够在受害者的浏览器中执行脚本，并<strong>劫持用户会话、破坏网站或将用户重定向到恶意站点</strong></p>
-<p>过滤script关键词可以使用JS事件来弹窗，如<strong>onclick oninput onmouseover</strong>等</p>
-<p>防御：</p>
-<ul>
-<li>PHP htmlspecialchars() 把预定义的字符转换位HTML实体，<strong>&amp; “ ‘ &lt; &gt;</strong></li>
-<li>提前闭合</li>
-</ul>
-<h6 id="A8：不安全的反序列化"><a href="#A8：不安全的反序列化" class="headerlink" title="A8：不安全的反序列化"></a>A8：不安全的反序列化</h6><p>序列化（serialize）被用于远程和进程间通信，远程协议，Web服务，缓存/持久性，数据库，HTTP cookie</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AA</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $flag = <span class="string">"serialize"</span>;</span><br><span class="line">	<span class="keyword">protected</span> $test = <span class="string">"test"</span>;</span><br><span class="line">	<span class="keyword">public</span> $test1 = <span class="string">"test1"</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">($flag)</span></span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;flag = $flag;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($flag)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;flag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">$ob = <span class="keyword">new</span> AA();</span><br><span class="line">$ob-&gt;set(<span class="string">'unserialzie'</span>);</span><br><span class="line">$date = serialize($ob);</span><br><span class="line"><span class="keyword">echo</span> $date;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">O:<span class="number">2</span>:<span class="string">"AA"</span>:<span class="number">3</span>:&#123;s:<span class="number">8</span>:<span class="string">" AA flag"</span>;s:<span class="number">11</span>:<span class="string">"unserialzie"</span>;s:<span class="number">7</span>:<span class="string">" * test"</span>;s:<span class="number">4</span>:<span class="string">"test"</span>;s:<span class="number">5</span>:<span class="string">"test1"</span>;s:<span class="number">5</span>:<span class="string">"test1"</span>;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>只序列化属性，不序列化方法</p>
-<p>几个魔术方法</p>
-<ul>
-<li>construct()：对象创建时自动调用</li>
-<li>wakeup()：unserialize时自动调用</li>
-<li>destruct()：对象被销毁时自动调用</li>
-<li>toString()：反序列化后的对象被输出在模板中时自动调用</li>
-</ul>
-<p>两种主要类型</p>
-<ol>
-<li>对象和数据结构攻击：攻击者改变应用逻辑或实现远程代码执行攻击</li>
-<li>数据篡改攻击：访问控制相关的攻击</li>
-</ol>
-<p>防御：</p>
-<ul>
-<li>（最安全）不接受不受信源的序列化对象，或只允许原始数据类型的序列化</li>
-<li>执行完整性检查；创建对象前强制执行严格的类型约束；记录反序列化的例外情况和失败信息；限制或监视来自于容器或服务器传入和传出的反序列化网络连接</li>
-</ul>
-<h6 id="A9：使用含有已知漏洞的组件"><a href="#A9：使用含有已知漏洞的组件" class="headerlink" title="A9：使用含有已知漏洞的组件"></a>A9：使用含有已知漏洞的组件</h6><p>应用程序中含有已知漏洞的组件被攻击者利用，造成严重的数据丢失或服务器接管，破坏应用程序防御，产生严重影响</p>
-<h6 id="A10：不足的日志记录和监控"><a href="#A10：不足的日志记录和监控" class="headerlink" title="A10：不足的日志记录和监控"></a>A10：不足的日志记录和监控</h6><p>不足的日志监视和监控，以及事件响应缺失或无效，使攻击者能够进一步攻击系统，保持持续性或转向更多系统，以及篡改、提取或销毁数据</p>
-<ul>
-<li>未记录可审计事件；告警和错误事件未能产生或产生不足和不清晰的日志信息；日志信息仅在本地存储；没有利用日志信息来监控可疑活动</li>
-</ul>
-<h5 id="代码审计与渗透测试的区别和优缺点"><a href="#代码审计与渗透测试的区别和优缺点" class="headerlink" title="代码审计与渗透测试的区别和优缺点"></a>代码审计与渗透测试的区别和优缺点</h5><p>代码审计（白盒）：系统自身、软件等存在的问题</p>
-<p>渗透测试（黑盒）：来自外部的入侵</p>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">代码审计</th>
-<th align="center">渗透测试</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">描述</td>
-<td align="center">发现程序存在的不安全编码</td>
-<td align="center">模拟黑客攻击的方式，评估目标系统的安全性</td>
-</tr>
-<tr>
-<td align="center">测试目标</td>
-<td align="center">基于提供的系统代码，发现代码的安全漏洞</td>
-<td align="center">包括但不局限与Web系统</td>
-</tr>
-<tr>
-<td align="center">测试产出</td>
-<td align="center">代码审计报告并提出修复建议</td>
-<td align="center">渗透测试报告和修复建议</td>
-</tr>
-<tr>
-<td align="center">优点</td>
-<td align="center">全面审查，贴近系统和架构，修复成本低</td>
-<td align="center">贴近实际场景，远程渗透</td>
-</tr>
-<tr>
-<td align="center">缺点</td>
-<td align="center">现场审计</td>
-<td align="center">不全面，修复成本高</td>
-</tr>
-</tbody></table>
-<h5 id="代码审计的流程"><a href="#代码审计的流程" class="headerlink" title="代码审计的流程"></a>代码审计的流程</h5><ol>
-<li>明确被审计代码使用的<strong>语言、技术栈</strong></li>
-<li>使用<strong>自动化工具</strong>整体扫描，对工具扫描结果进行<strong>人工确认</strong></li>
-<li>自动化工具可以帮我们找出部分漏洞，我们还需要人工对源代码进行审计分析，特别要关心源代码的组件（框架、库、模块）的已知漏洞和业务逻辑漏洞</li>
-<li>将工具审计和人工审计的结果写成代码审计报告，并给出漏洞修复意见</li>
-</ol>
-<p><img src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1591775972176.png" alt="1591775972176"></p>
-<p>Fretity SCA</p>
-<ul>
-<li>数据流分析器：跟踪、记录并分析程序中的数据传递过程所产生的安全问题</li>
-<li>控制流分析器：分析程序特定时间，状态下执行操作指令的安全问题</li>
-<li>语义分析器：分析过程中不安全的函数、方法的使用的安全问题</li>
-<li>结构分析器：分析程序上下文环境、结构中的安全问题</li>
-<li>配置分析器：分析项目配置中的敏感信息和配置存在的安全问题</li>
-</ul>
-<h5 id="代码审计的通用方法"><a href="#代码审计的通用方法" class="headerlink" title="代码审计的通用方法"></a>代码审计的通用方法</h5><ul>
-<li>根据敏感关键字回溯参数传递过程，最常用，大多数漏洞由函数使用不当造成</li>
-<li>查找可控变量，正向追踪变量传递过程</li>
-<li>寻找敏感功能点，通读功能点代码，文件上传，文件管理，登陆认证，找回密码</li>
-<li>直接通读全文代码，注意函数集文件，配置文件，安全过滤文件</li>
-</ul>
-<h5 id="PHP代码审计：代码分析"><a href="#PHP代码审计：代码分析" class="headerlink" title="PHP代码审计：代码分析"></a>PHP代码审计：代码分析</h5><h6 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h6><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> $_GET[<span class="string">"aa"</span>];<span class="meta">?&gt;</span>  反射型xss &lt;script&gt;alert(<span class="number">1</span>)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>防护：</p>
-<p>HTML实体转换函数</p>
-<p><code>htmlentities(String,flags,character-set,double_encode)</code></p>
-<p><code>htmlsepcialchars</code></p>
-<h6 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h6><p>前端校验、Content-type检查、黑名单过滤</p>
-<p>防护：</p>
-<ul>
-<li><p>使用MD5对文件名进行重命名，防护<strong>00截断攻击</strong></p>
-</li>
-<li><p><strong>白名单</strong>限制文件上传后缀</p>
-</li>
-<li><p>限制文件上传大小</p>
-</li>
-<li><p>通过<code>Imagecreatefromjepg()</code>和<code>Imagecreatefrompng()</code>函数将上传的文件重新写入到新的图片文件中，抹除有害数据</p>
-</li>
-<li><p><code>Imagedestory()</code>将上传的源文件删除</p>
-</li>
-<li><p><code>unlink($temp_file)</code>删除过滤过程中产生的任何临时文件</p>
-</li>
-</ul>
-<h6 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h6><p>导致文件包含的函数</p>
-<ul>
-<li>PHP：include、include_once 、require、require_once、fopen、readfile</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">include</span>($_GET[<span class="string">'test'</span>]); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>PHP伪协议</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">php:<span class="comment">//filter   读取文件 </span></span><br><span class="line">?filename=php:<span class="comment">//filter/read=convert.base64-encode/resource=xxx.php</span></span><br><span class="line"></span><br><span class="line">file:<span class="comment">//   读取本地文件</span></span><br><span class="line">?f=file:<span class="comment">//D:/soft/phpStudy/WWW/phpcode.txt</span></span><br><span class="line"></span><br><span class="line">php:<span class="comment">//input  命令执行   需要allow_url_include：on</span></span><br><span class="line">post:<span class="meta">&lt;?php</span> phpinfo()<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>防护：</p>
-<ul>
-<li>在配置中关闭<code>allow_url_fopen</code>和<code>allow_url_include</code>选项</li>
-</ul>
-<h6 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h6><p>易造成命令执行的函数和命令连接符</p>
-<ul>
-<li>exec：不输出结果，返回最后一行shell结果</li>
-<li>system：输出并返回最后一行shell结果</li>
-<li>popen、passthru、proc_open、pcntl_exec、shell_exec</li>
-<li>;   |  &amp;  %0a  `</li>
-</ul>
-<p>防护：</p>
-<ul>
-<li><p><code>escapeshellarg</code>：给字符串增加一个单引号且能引用或转码任何已经存在的单引号，确保能将一个字符串传入shell函数，并确保安全</p>
-</li>
-<li><p><code>escapeshellcmd</code>：对字符串中可能欺骗shell命令执行的字符进行转义，保证用户输入的数据在传送到exec或system函数前转义</p>
-</li>
-<li><p>黑名单过滤特殊字符或替换字符</p>
-</li>
-</ul>
-<h6 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h6><p>跨站请求伪造</p>
-<p><img src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1591790883979.png" alt="1591790883979"></p>
-<h6 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h6><p>服务器端请求伪造，攻击目标网站的内部系统</p>
-<p>原因：服务端提供从其他内部服务器应用获得数据的功能，且没有对目标地址做过滤和限制</p>
-<ul>
-<li>内外网端口和服务扫描</li>
-<li>主机本地敏感数据读取</li>
-<li>内外网主机应用程序漏洞的利用</li>
-<li>内外网Web站点漏洞的利用</li>
-</ul>
-<p>易造成SSRF的函数：</p>
-<p><code>file_get_contents(将整个文件读入一个字符串)</code></p>
-<p><code>fsockopen(打开一个网络连接)</code></p>
-<p><code>curl_exec(执行一个curl会话)</code></p>
-<p>防御：</p>
-<ul>
-<li>过滤返回的信息</li>
-<li>统一错误信息</li>
-<li>限制请求的端口为HTTP常见端口</li>
-<li>黑名单内网IP，避免被用来获取内网数据</li>
-<li>禁用不需要的协议(<code>file:// gopher:// ftp://</code>)，仅使用HTTP和HTTPS</li>
-</ul>
-<h5 id="渗透测试的流程和每一步要做的工作"><a href="#渗透测试的流程和每一步要做的工作" class="headerlink" title="渗透测试的流程和每一步要做的工作"></a>渗透测试的流程和每一步要做的工作</h5><ol>
-<li>前期交互阶段：确定渗透测试返回、目标、限制条件</li>
-<li>情报收集阶段：获取目标网络拓扑、系统配置、安全防御措施</li>
-<li>威胁建模阶段：针对获取的信息进行威胁建模与攻击规划</li>
-<li>漏洞分析阶段：综合情报，从扫描查点信息中找出可渗透的具体攻击点</li>
-<li>渗透攻击阶段：利用找出的系统漏洞入侵系统，获取访问控制权限</li>
-<li>后渗透攻击阶段：以特定业务为目标，识别出关键基础设施，并寻找客户最有价值的资产</li>
-<li>报告阶段：确定目标最为重要的威胁，将渗透测试的数据生成表格或图表，对目标系统的改进建议，对问题的修复方案</li>
-</ol>
-<h5 id="信息收集的方法"><a href="#信息收集的方法" class="headerlink" title="信息收集的方法"></a>信息收集的方法</h5><p>工具：NMAP &amp; Metasploit</p>
-<ul>
-<li>端口扫描</li>
-<li>Banner获取</li>
-<li>Ping扫描</li>
-<li>服务扫描 services</li>
-</ul>
-<h5 id="后渗透攻击阶段的目的和任务"><a href="#后渗透攻击阶段的目的和任务" class="headerlink" title="后渗透攻击阶段的目的和任务"></a>后渗透攻击阶段的目的和任务</h5><p>扫描内网主机，发现是否存在其他内网主机并尝试渗透</p>
-<p>提权</p>
-<p>渗透的持久化：添加一个新用户，获取密码，使用MSF安装后门</p>
-<p>清楚痕迹，清理日志</p>
-<h5 id="渗透测试报告"><a href="#渗透测试报告" class="headerlink" title="渗透测试报告"></a>渗透测试报告</h5><h5 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h5><h6 id="为什么要提权？"><a href="#为什么要提权？" class="headerlink" title="为什么要提权？"></a>为什么要提权？</h6><p>对目标的访问受限，需要目标系统更高的权限</p>
-<h6 id="提权的方法和步骤"><a href="#提权的方法和步骤" class="headerlink" title="提权的方法和步骤"></a>提权的方法和步骤</h6><h6 id="不同OS下的提权技术"><a href="#不同OS下的提权技术" class="headerlink" title="不同OS下的提权技术"></a>不同OS下的提权技术</h6><p>Windows：SYSTEM（最佳），Administrator</p>
-<ul>
-<li>利用内核漏洞提权</li>
-<li>利用操作系统漏洞提权<ul>
-<li>DLL劫持，劫持某些以高权限启动的程序导入的动态链接库，达到以高权限执行恶意操作的目的</li>
-<li>窃取Token，窃取高权限用户的Token，获得高权限</li>
-<li>窃取管理员账户密码</li>
-<li>允许非特权用户以system权限运行MSI文件，可以使用msf生成包含恶意代码的MSI文件</li>
-</ul>
-</li>
-</ul>
-<p>Linux：root权限  $ –&gt; #</p>
-<ul>
-<li>SUID程序提权，查找存在SUID标志位的文件</li>
-<li>修改用户属组</li>
-<li>修改/etc/passwd，用户口令优先读取/etc/passwd，可将root用户密码修改</li>
-<li>修改root用户ssh密钥，将自己的ssh密钥写入<code>/root/.ssh</code>中</li>
-<li>通配符提权</li>
-<li>应用程序提权</li>
-</ul>
-<p>数据库DB提权，UDF提权</p>
-<h6 id="提权的防御"><a href="#提权的防御" class="headerlink" title="提权的防御"></a>提权的防御</h6><ul>
-<li>及时打补丁</li>
-<li>启动Web、DB服务时以低权限启动（最小权限原则）</li>
-<li>服务只监听本地（不要开在公网）</li>
-</ul>
-<h3 id="RE（能分析汇编语言代码，能书写简单的汇编代码）"><a href="#RE（能分析汇编语言代码，能书写简单的汇编代码）" class="headerlink" title="RE（能分析汇编语言代码，能书写简单的汇编代码）"></a>RE（能分析汇编语言代码，能书写简单的汇编代码）</h3><h5 id="字节序"><a href="#字节序" class="headerlink" title="字节序"></a>字节序</h5><p>小端序：低字节低地址 0x100处存放0x01234567</p>
-<table>
-<thead>
-<tr>
-<th>地址</th>
-<th>0x100</th>
-<th>0x101</th>
-<th>0x102</th>
-<th>0x103</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>值</td>
-<td>0x67</td>
-<td>0x45</td>
-<td>0x23</td>
-<td>0x01</td>
-</tr>
-</tbody></table>
-<p>大端序：低字节高地址，网络协议采用大端序</p>
-<table>
-<thead>
-<tr>
-<th>地址</th>
-<th>0x100</th>
-<th>0x101</th>
-<th>0x102</th>
-<th>0x103</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>值</td>
-<td>0x01</td>
-<td>0x23</td>
-<td>0x45</td>
-<td>0x67</td>
-</tr>
-</tbody></table>
-<p>字符串的存储在大端序和小端序都是一样的</p>
-<h5 id="汇编基础（给定代码能说明其含义）"><a href="#汇编基础（给定代码能说明其含义）" class="headerlink" title="汇编基础（给定代码能说明其含义）"></a>汇编基础（给定代码能说明其含义）</h5><p>调用一个函数的操作步骤</p>
-<ol>
-<li>调用方将被调用函数所需要的参数放入函数所采用的<strong>调用约定</strong>指定的位置</li>
-<li>调用方将控制权转交给被调用函数(call)，返回地址入栈</li>
-<li>被调用函数为局部变量分配空间</li>
-<li>被调用函数执行操作</li>
-<li>被调用函数完成操作，释放局部变量的空间</li>
-<li>被调用函数将控制权返还给调用方(ret)</li>
-</ol>
-<h5 id="调用约定-（相关的汇编代码分析和栈的变化情况）"><a href="#调用约定-（相关的汇编代码分析和栈的变化情况）" class="headerlink" title="调用约定 ** （相关的汇编代码分析和栈的变化情况）"></a>调用约定 ** （相关的汇编代码分析和栈的变化情况）</h5><table>
-<thead>
-<tr>
-<th>调用约定</th>
-<th>调用名称</th>
-<th>参数传递顺序</th>
-<th>堆栈清理</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>__cdecl</td>
-<td>C调用约定</td>
-<td>从右向左入栈</td>
-<td>调用方</td>
-<td>适合参数可变的函数，printf</td>
-</tr>
-<tr>
-<td>__Stdcall</td>
-<td>(微软)标准调用约定</td>
-<td>从右向左入栈</td>
-<td>被调用方</td>
-<td>适合参数固定的函数，dll文件</td>
-</tr>
-<tr>
-<td>__fastcall</td>
-<td>x86 fastcall约定</td>
-<td>前两个参数传入ECX和EDX，其余参数从右向左入栈</td>
-<td>被调用方</td>
-<td>参数可变的函数无法使用</td>
-</tr>
-<tr>
-<td>__fastcall</td>
-<td>x64 fastcall约定</td>
-<td>前四个参数传递到RCX，RDX，R8，R9</td>
-<td>调用方</td>
-<td></td>
-</tr>
-<tr>
-<td>__thiscall</td>
-<td>C++中非静态成员函数</td>
-<td>从右向左入栈</td>
-<td>被调用方</td>
-<td>C++成员函数，this指针存于ECX</td>
-</tr>
-</tbody></table>
-<p>系统调用：特殊的函数调用，用于请求一项操作系统服务，通常会造成状态转换，由<strong>用户模式进入内核模式</strong>，linux x86使用<code>int 0x80</code>指令或<code>sysenter</code>指令启动</p>
-<p>64位Windows：寄存器快速调用，前四个参数传递到<code>RCX RDX R8 R9</code>，其余参数从右向左入栈，调用方平衡栈空间</p>
-<p>64位gcc前六个参数传入<code>RDI RSI RDX RCX R8 R9</code></p>
-<h5 id="简单的软件保护技术举例"><a href="#简单的软件保护技术举例" class="headerlink" title="简单的软件保护技术举例"></a>简单的软件保护技术举例</h5><ul>
-<li>栈破环检测，栈帧中存储一个特殊的<strong>cannary</strong>值，程序每次运行时随机产生，恢复寄存器和从函数返回前，程序检查该值是否被改变  <code>gcc -fno-stack-protector</code></li>
-</ul>
-<ol>
-<li>序列化：序列化=F(用户名)，<strong>修改比较指令</strong>绕过，对等函数保护：F<del>2</del>(序列号)=F<del>1</del>(用户名)，如果可执行程序可以被修改，都可以通过修改比较指令绕过，要配合软件完整性检查</li>
-<li>警告窗口(Nag)：提醒用户购买正版软件的窗口，去除：将警告窗口透明或不可见；跳过创建窗口代码</li>
-<li>时间限制：限制每次运行的时长，计时器机制；限制总运行时长 去除：跳过相关函数；将时间检测后的跳转语句NOP掉</li>
-<li>菜单功能限制：试用版和正式版时完全不同（相同）的版本</li>
-<li>KeyFile保护方式：包含用户名，注册信息的小文件，软件每次启动时会读取该文件</li>
-<li>网络验证：把关键数据放在服务器上，软件需要从服务器获取数据才能正确运行</li>
-<li>只运行一个实例：查找窗口法，使用互斥对象，使用共享区块</li>
-</ol>
-<h5 id="Windows内核管理"><a href="#Windows内核管理" class="headerlink" title="Windows内核管理"></a>Windows内核管理</h5><p>UEFI：统一可扩展固件接口，微型OS，直接读取分区中的文件，不需要MBR(主引导记录)</p>
-<p>GPT：全局唯一标识分区符，对分区数量没有限制</p>
-<p>R0和R3通信：API被封装在应用层的DLL库中，DLL库中的函数的更底层函数包含在<code>ntdll.dll</code>中，API通过<code>ntdll.dll</code>执行时，完成参数检查，系统调用<code>sysenter</code>，从R3层进入R0层</p>
-<p>应用层的命令和数据被系统的I/O管理器封装在<strong>IRP</strong>中，IRP将R3发送的数据和命令逐层下发到下层的驱动创建的设备对象进行处理，完成相应的功能</p>
-<h3 id="移动网络安全"><a href="#移动网络安全" class="headerlink" title="移动网络安全"></a>移动网络安全</h3><h4 id="移动网络的分类和安全风险"><a href="#移动网络的分类和安全风险" class="headerlink" title="移动网络的分类和安全风险"></a>移动网络的分类和安全风险</h4><p>无线局域网WLAN、无线个域网WPAN、无线体域网WBAN、无线城域网WMAN、无线广域网WWAN</p>
-<h4 id="WLAN安全机制"><a href="#WLAN安全机制" class="headerlink" title="WLAN安全机制"></a>WLAN安全机制</h4><h5 id="WEP"><a href="#WEP" class="headerlink" title="WEP"></a>WEP</h5><p>WEP加密过程：</p>
-<p><img src="https://s2.ax1x.com/2019/05/20/ExR0YQ.png" alt></p>
-<ol>
-<li>生成一个IV(24位)，与共享密钥SK(40位)连接在一起作为种子密钥，使用RC4算法生成密钥流</li>
-<li>使用数据冗余校验算法CRC32计算明文数据的ICV</li>
-<li>明文和ICV连接起来，与密钥流异或得到密文</li>
-</ol>
-<p>WEP解密过程：</p>
-<p><img src="/images/placeholder.png" alt data-src="https://s2.ax1x.com/2019/05/20/ExRBWj.png" class="lazyload"></p>
-<p>加密：明文+ICV ⊕ 密钥流 —&gt;密文 </p>
-<p>解密：密文⊕ 密钥流—&gt;明文+ICV </p>
-<p>通过CRC32算法计算收到的明文的ICV’，验证ICV是否与ICV’相同，验证数据的完整性</p>
-<p>IV：创建一个新密钥流，避免重复使用密钥</p>
-<p>存在的安全问题：</p>
-<ul>
-<li>RC4存在大量的弱密钥，256个密钥中就有一个弱密钥</li>
-<li>WEP没有抗重放机制，协议帧中没有序列号，无法确定协议帧的顺序</li>
-<li>SK的产生和分发的问题，没有密钥交换/管理机制</li>
-<li>IV空间太小，24bit的IV有2^24^种可能，结合生日攻击，发送的包超过2^12^=5000个时，IV就会开始重复，出现IV冲突</li>
-<li>CRC32是线性的，在k未知的情况下，可任意篡改未知明文的密文，且能保证ICV的正确性</li>
-</ul>
-<h6 id="WEP的认证机制"><a href="#WEP的认证机制" class="headerlink" title="WEP的认证机制"></a>WEP的认证机制</h6><ol>
-<li>开放系统认证：把密钥以明文的形式发送给认证方，认证方响应</li>
-<li>共享密钥认证：基于挑战/响应机制<ul>
-<li>客户端向AP发送认证请求</li>
-<li>AP向客户端发送明文挑战帧</li>
-<li>客户端用<strong>WEP密钥</strong>加密挑战，发送给AP</li>
-<li>AP发送认证响应</li>
-</ul>
-</li>
-</ol>
-<p>WEP的破解：Aircrack-ng</p>
-<h5 id="IEEE-802-11i"><a href="#IEEE-802-11i" class="headerlink" title="IEEE 802.11i"></a>IEEE 802.11i</h5><h6 id="TKIP"><a href="#TKIP" class="headerlink" title="TKIP"></a>TKIP</h6><p>暂时密钥完整性协议，使WEP设备通过软件升级来支持TKIP，包裹在WEP外面</p>
-<p>改进：</p>
-<ul>
-<li>IV：24bit—&gt;48bit</li>
-<li>WEP密钥SK：40bit—&gt;104bit</li>
-<li>4个新的算法：<ol>
-<li>单包密钥生成算法：防止弱密钥生成</li>
-<li>MIC：防止数据被非法篡改</li>
-<li>具有序列功能的IV：防止重放攻击</li>
-<li>Rekeying：防止IV重用</li>
-</ol>
-</li>
-</ul>
-<h6 id="认证密钥交换"><a href="#认证密钥交换" class="headerlink" title="认证密钥交换"></a>认证密钥交换</h6><p><img src="/images/placeholder.png" alt="1591879457665" data-src="C:%5CUsers%5C%E8%B4%BE%E5%AF%85%E9%B9%8F%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1591879457665.png" class="lazyload"></p>
-<h6 id="四步握手"><a href="#四步握手" class="headerlink" title="四步握手"></a>四步握手</h6><p>APnonce：AP生成的随机数</p>
-<p>Snonce：申请者生成的随机数</p>
-<p>MIC：消息认证码</p>
-<p>GTK：组瞬时密钥</p>
-<p>PTK：对瞬时密钥</p>
-<p><strong>握手过程</strong>：</p>
-<ol>
-<li>AP生成随机数APnonce发送给STA</li>
-<li>STA生成一个随机数Snonce，利用(APnonce，Snonce，PMK, APA, SA)生成对瞬时密钥PTK，将Snonce和MIC(由PTK中KCK生成)发送给AP，AP收到Snonce和MIC后，使用相同的方法生成PTK，利用PTK的KCK验证MIC，若验证失败，结束过程</li>
-<li>验证成功后，AP将APnonce和MIC发送给STA</li>
-<li>SFTA收到后，执行相同的检查工作，确认AP和自己有相同的PMK，确认成功后向AP回发一个MIC</li>
-</ol>
-<p><img src="/images/placeholder.png" alt data-src="./1.png" class="lazyload"></p>
-<h5 id="移动通信安全机制–GSM-3g-4g"><a href="#移动通信安全机制–GSM-3g-4g" class="headerlink" title="移动通信安全机制–GSM 3g ,4g"></a>移动通信安全机制–GSM 3g ,4g</h5><h6 id="GSM"><a href="#GSM" class="headerlink" title="GSM"></a>GSM</h6><p>安全目标：</p>
-<ol>
-<li>用户身份认证：保证网络不被未授权者使用</li>
-<li>数据机密性</li>
-<li>用户身份（IMSI）保密，IMSI：国际移动用户标识</li>
-</ol>
-<p><strong>GSM的鉴权机制</strong></p>
-<ol>
-<li>用户将自己的IMSI发送给基站（被访问网络），基站将其转发给运营商（宿主网络）</li>
-<li>宿主网络及那根据IMSI查找用户的K<del>i</del>，使用PRNG（伪随机数生成器）生成伪随机数RNAD。将伪随机数和K<del>i</del>作为A3和A8两个算法的输入，生成SRES（预期响应）和K<del>c</del>（会话密钥）</li>
-<li>宿主网络将三元组<code>{随机数RAND，预期响应SRES，会话密钥K~c~}</code>发送给基站，被访问网络将RAND发送给用户</li>
-<li>用户持有K<del>i</del>和RAND，使用相同的算法生成<code>SRES‘</code>和<code>K~c~</code>，并将<code>SRES’</code>发送给基站。基站比对<code>SRES</code>和<code>SRES&#39;</code>，若相同，则通过验证</li>
-<li>用户和网路使用K<del>c</del>作为会话密钥进行通信</li>
-</ol>
-<p><img src="/images/placeholder.png" alt data-src="https://s2.ax1x.com/2019/05/20/ExzoIe.png" class="lazyload"></p>
-<p>GSM的不足：</p>
-<ol>
-<li>认证：单向认证，且三元组可无限期使用</li>
-<li>加密：没有实现端到端的加密</li>
-</ol>
-
-		  	  
-	</div>
-
-
-
-	<div class="article-categories">
-	 
-	</div>
-	
-
-	<div class="article-tags">
-		
-	</div>
-
-	<div class="article-bottom">
-		<a class="readmore" href="/2020/06/11/interA&D/">阅读更多</a> 	
-	</div>	
-    
-</article>
-
-	
-	
-	
-	
-
-<article class="article">		
-	   
-	<div class="article-header">
-	    
 		<a class="title" href="/2020/01/04/Java-review/">Java复习</a>  
 	       
 		 
@@ -872,6 +365,56 @@
 
 	
 	
+	
+	
+
+<article class="article">		
+	   
+	<div class="article-header">
+	    
+		<a class="title" href="/2019/11/04/buuctfWebWP/">BUUCTFWebWP</a>  
+	       
+		 
+
+		<div class="meta">
+			<time>11月 04, 2019</time>			
+		</div>
+	</div>
+
+
+	
+
+    
+	<div class="typo article-excerpt">	
+		
+			<p>BuuCTF平台部分WebWP</p>
+		  	  
+	</div>
+
+
+
+	<div class="article-categories">
+	 
+	</div>
+	
+
+	<div class="article-tags">
+		
+			<i class="iconfont icon-tags" style="margin-right:4px"></i>
+			            
+				<a class="link" href="/tags/ctf-Writeup/">-ctf -Writeup</a>           
+			
+		
+	</div>
+
+	<div class="article-bottom">
+		<a class="readmore" href="/2019/11/04/buuctfWebWP/">阅读更多</a> 	
+	</div>	
+    
+</article>
+
+	
+	
 
 	
 	
@@ -930,7 +473,7 @@
      <div class="mobile-menu">      
 
       
-      <img class="mobile-menu-icon lazyload" src="/images/placeholder.png" data-src="/images/favicon.png">  
+      <img class="mobile-menu-icon" src="/images/favicon.png">  
       
 
          
