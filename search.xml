@@ -8,6 +8,14 @@
       <content type="html"><![CDATA[{{ post.content | noControlChars | safe }}]]></content>
       
       
+    </entry>
+    
+    <entry>
+      <title>{{ post.title }}</title>
+      <link href="{{ (url + post.path) | uriencode }}"/>
+      <content type="html"><![CDATA[{{ post.content | noControlChars | safe }}]]></content>
+      
+      
         <tags>
             
             <tag> {{ tag.name }} </tag>
